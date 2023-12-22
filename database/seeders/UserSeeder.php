@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['email' => 'romis.nesmelov@gmail.com', 'password' => bcrypt('apg192')],
-            ['email' => 'info@distron.ru', 'password' => bcrypt('distron')]
+            ['email' => 'romis@nesmelov.com', 'password' => bcrypt('apg192'), 'active' => 1],
+            ['email' => 'info@distron.ru', 'password' => bcrypt('distron'), 'active' => 1]
         ];
 
         foreach ($data as $user) {

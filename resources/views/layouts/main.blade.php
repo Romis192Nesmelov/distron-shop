@@ -31,8 +31,8 @@
     <script type="text/javascript" src="{{ asset('js/fancybox.min.js') }}"></script>
 
 {{--    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>--}}
-    <script type="text/javascript" src="{{ asset('js/feedback.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/ajax_form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/setbackground.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.maskedinput.js') }}"></script>
 </head>
@@ -44,13 +44,23 @@
         <div id="main-logo">
             <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('images/logo.svg') }}" />
             <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">Новая жизнь Вашего аккумулятора</h1>
-            @include('blocks.button_block',[
-                'primary' => true,
-                'addClass' => 'wow animate__animated animate__fadeIn',
-                'addAttr' => ['data-wow-delay' => '.3s'],
-                'dataTarget' => 'feedback-modal',
-                'buttonText' => trans('content.leave_request')
-            ])
+            @if (auth()->guest())
+                @include('blocks.button_block',[
+                    'id' => 'main-button',
+                    'primary' => true,
+                    'addClass' => 'wow animate__animated animate__fadeIn',
+                    'addAttr' => ['data-wow-delay' => '.3s'],
+                    'buttonText' => trans('auth.login_register')
+                ])
+            @else
+                @include('blocks.button_block',[
+                    'id' => 'main-button',
+                    'primary' => true,
+                    'addClass' => 'wow animate__animated animate__fadeIn',
+                    'addAttr' => ['data-wow-delay' => '.3s'],
+                    'buttonText' => trans('auth.account')
+                ])
+            @endif
         </div>
         <div class="wow animate__animated animate__fadeIn" data-wow-delay="0.5s" id="video" controls="controls" poster="{{ asset('images/distron.jpg') }}">
             <video controls="controls" poster="{{ asset('images/distron.jpg') }}">
@@ -84,7 +94,7 @@
             <div class="col-md-4 ml-auto">
                 <div class="mb-5">
                     <h2 class="footer-heading mb-4">{{ trans('content.feedback') }}</h2>
-                    <form action="{{ route('feedback_short') }}" method="post">
+                    <form id="form-feedback-short" action="{{ route('feedback_short') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
                             @include('blocks.error_block',['name' => 'phone'])
@@ -120,32 +130,165 @@
 </footer>
 
 <div id="on-top-button" data-scroll="home"><i class="icon-arrow-up12"></i></div>
-@include('blocks.message_modal_block')
-<x-modal id="feedback-modal" head="{{ trans('content.feedback') }}">
-    <form class="form" method="post" action="{{ route('feedback') }}">
+@if (auth()->guest())
+    <x-modal id="login-modal" head="{{ trans('auth.login') }}">
+        <form id="login-form" method="post" action="{{ route('login') }}">
+            @csrf
+            @include('blocks.input_block',[
+                'name' => 'email',
+                'type' => 'email',
+                'label' => trans('auth.email'),
+                'placeholder' => trans('auth.email'),
+                'ajax' => true,
+            ])
+            @include('blocks.input_block',[
+                'name' => 'password',
+                'type' => 'password',
+                'label' => trans('auth.password'),
+                'placeholder' => trans('auth.password'),
+                'ajax' => true,
+            ])
+            @include('blocks.checkbox_block',[
+                'checked' => false,
+                'name' => 'remember',
+                'label' => trans('auth.remember_me'),
+            ])
+            <div class="w-100 text-center mt-3">
+                <a href="#" id="register-href">{{ trans('auth.register') }}</a>
+            </div>
+            <div class="w-100 text-center mt-1">
+                <a href="#" id="forgot-password-href">{{ trans('auth.forgot_your_password') }}</a>
+            </div>
+            @include('blocks.buttons_pair_block',[
+                'submitDisabled' => false,
+                'submitText' => trans('auth.enter')
+            ])
+        </form>
+    </x-modal>
+    <x-modal id="register-modal" head="{{ trans('auth.register_head') }}">
+        <form id="register-form" method="post" action="{{ route('register') }}">
+            @csrf
+            @include('blocks.input_block',[
+                'name' => 'email',
+                'type' => 'email',
+                'label' => trans('auth.email'),
+                'placeholder' => trans('auth.email'),
+                'ajax' => true,
+            ])
+            @include('blocks.password_inputs_pair_block')
+            @include('blocks.checkbox_block',[
+                'checked' => false,
+                'name' => 'i_agree',
+                'label' => trans('content.i_agree'),
+            ])
+            @include('blocks.buttons_pair_block',[
+                'submitDisabled' => true,
+                'submitText' => trans('auth.register')
+            ])
+        </form>
+    </x-modal>
+    <x-modal id="reset-password-modal" head="{{ trans('auth.forgot_password_text') }}">
+        <form id="reset-password-form" method="post" action="{{ route('register') }}">
+            @csrf
+            @include('blocks.input_block',[
+                'name' => 'email',
+                'type' => 'email',
+                'placeholder' => trans('auth.enter_your_email'),
+                'ajax' => true,
+            ])
+            @include('blocks.buttons_pair_block',[
+                'submitDisabled' => false,
+                'submitText' => trans('auth.get_password')
+            ])
+        </form>
+    </x-modal>
+@endif
+
+<x-modal id="account-modal" head="{{ trans('auth.account') }}">
+    <form id="account-form" method="post" action="{{ route('edit_account') }}">
         @csrf
-        @include('blocks.request_block')
-        <div class="mt-3 d-flex justify-content-end">
-            @include('blocks.button_block',[
-                'addClass' => 'me-3',
-                'primary' => true,
-                'dataDismiss' => false,
-                'buttonType' => 'submit',
-                'buttonText' => trans('content.send'),
-                'disabled' => true
+        @include('blocks.input_block',[
+            'name' => 'email',
+            'type' => 'email',
+            'value' => auth()->check() ? auth()->user()->email : '',
+            'label' => trans('auth.email'),
+            'placeholder' => trans('auth.email'),
+            'ajax' => true,
+        ])
+        @include('blocks.input_block',[
+            'name' => 'phone',
+            'type' => 'text',
+            'value' => auth()->check() ? auth()->user()->phone : '',
+            'label' => trans('auth.phone'),
+            'placeholder' => '+7(___)___-__-__',
+            'ajax' => true,
+        ])
+        @include('blocks.input_block',[
+            'name' => 'address',
+            'value' => auth()->check() ? auth()->user()->address : '',
+            'type' => 'text',
+            'label' => trans('auth.address'),
+            'placeholder' => trans('auth.address'),
+            'ajax' => true,
+        ])
+        <div class="border border-secondary rounded-3 p-3 mb-3">
+            <p class="text-center">{{ trans('auth.keep_password') }}</p>
+            @include('blocks.input_block',[
+                'name' => 'old_password',
+                'type' => 'password',
+                'label' => trans('auth.old_password'),
+                'ajax' => true
             ])
-            @include('blocks.button_block',[
-                'primary' => false,
-                'dataDismiss' => true,
-                'buttonText' => trans('content.close')
-            ])
+            @include('blocks.password_inputs_pair_block')
         </div>
+        @include('blocks.checkbox_block',[
+            'checked' => false,
+            'name' => 'i_agree',
+            'label' => trans('content.i_agree'),
+        ])
+        @include('blocks.buttons_pair_block',[
+            'submitDisabled' => true,
+            'submitText' => trans('auth.register')
+        ])
     </form>
 </x-modal>
+@include('blocks.message_modal_block')
 
-{{--@foreach ($metrics as $metric)--}}
-{{--    {!! $metric->code !!}--}}
-{{--@endforeach--}}
+{{--<x-modal id="feedback-modal" head="{{ trans('content.feedback') }}">--}}
+{{--    <form class="form" method="post" action="{{ route('feedback') }}">--}}
+{{--        @csrf--}}
+{{--        @include('blocks.request_block')--}}
+{{--        <div class="mt-3 d-flex justify-content-end">--}}
+{{--            @include('blocks.button_block',[--}}
+{{--                'addClass' => 'me-3',--}}
+{{--                'primary' => true,--}}
+{{--                'dataDismiss' => false,--}}
+{{--                'buttonType' => 'submit',--}}
+{{--                'buttonText' => trans('content.send'),--}}
+{{--                'disabled' => true--}}
+{{--            ])--}}
+{{--            @include('blocks.button_block',[--}}
+{{--                'primary' => false,--}}
+{{--                'dataDismiss' => true,--}}
+{{--                'buttonText' => trans('content.close')--}}
+{{--            ])--}}
+{{--        </div>--}}
+{{--    </form>--}}
+{{--</x-modal>--}}
+
+@foreach ($metrics as $metric)
+    {!! $metric->code !!}
+@endforeach
+
+@if (session()->has('message'))
+    <script>window.showMessage = true;</script>
+@endif
+
+<script>
+    window.accountText = "{{ trans('auth.account') }}";
+    window.guest = parseInt("{{ auth()->guest() }}");
+    window.accountUrl = "{{ route('account') }}";
+</script>
 
 </body>
 </html>

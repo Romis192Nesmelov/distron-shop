@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Content;
 use App\Models\Icon;
+use App\Models\Metric;
 use App\Models\Question;
+use App\Models\Type;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -22,6 +24,7 @@ class BaseController extends Controller
         $this->data['icons'] = Icon::where('active',1)->get();
         $this->data['contacts'] = Contact::all();
         $this->data['faq'] = Question::where('active',1)->get();
+        $this->data['types'] = Type::all();
         return $this->showView('home');
     }
 
@@ -55,7 +58,8 @@ class BaseController extends Controller
                         'video/distron.mp4',
                         'video/distron.ogg',
                         'video/distron.webm'
-                    ]
+                    ],
+                    'metrics' => Metric::all()
                 ]
             )
         );

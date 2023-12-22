@@ -9,23 +9,15 @@ use Illuminate\Support\Facades\Mail;
 
 class FeedbackController extends Controller
 {
-    public function feedback(FeedbackRequest $request): JsonResponse
-    {
-        return $this->sendMessage('feedback', $request->validated());
-    }
+    use HelperTrait;
+
+//    public function feedback(FeedbackRequest $request): JsonResponse
+//    {
+//        return $this->sendMessage('feedback', env('MAIL_TO'), $request->validated());
+//    }
 
     public function feedbackShort(FeedbackShortRequest $request): JsonResponse
     {
-        return $this->sendMessage('feedback_short', $request->validated());
-    }
-
-    private function sendMessage(string $template, array $fields): JsonResponse
-    {
-        Mail::send('emails.'.$template, $fields, function($message) {
-            $message->subject('Сообщение с сайта '.env('APP_NAME'));
-            $message->to(env('MAIL_TO'));
-        });
-        $message = trans('content.we_will_contact_you');
-        return response()->json(['success' => true, 'message' => $message],200);
+        return $this->sendMessage('feedback_short', env('MAIL_TO'), $request->validated());
     }
 }

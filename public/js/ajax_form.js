@@ -1,5 +1,20 @@
 $(document).ready(function ($) {
+    processingForm($('#form-feedback-short'));
+    processingForm($('#login-form'), () => {
+        const mainButton = $('#main-button');
+        mainButton.find('span').html(window.accountText);
+        window.guest = false;
+        bindMainButton();
+        $('#login-modal').remove();
+        $('#register-modal').remove();
+        $('#reset-password-modal').remove();
+    });
+    processingForm($('#register-form'));
+    processingForm($('#reset-password-form'));
+    processingForm($('#account-form'));
+});
 
+const processingForm = (form, callback) => {
     const body = $('body'),
         agree = $('input[name=i_agree]');
 
@@ -9,10 +24,9 @@ $(document).ready(function ($) {
         else button.attr('disabled','disabled');
     });
 
-    $('form').on('submit', function(e) {
+    form.on('submit', function(e) {
         e.preventDefault();
-        let form = $(this),
-            formData = new FormData,
+        let formData = new FormData,
             inputError = form.find('input.error'),
             textError = form.find('.error');
 
@@ -46,16 +60,21 @@ $(document).ready(function ($) {
                 $('.modal').modal('hide');
                 $('.event-block .roll-up').css('height',0);
 
-                const messageModal = $('#message-modal');
-                messageModal.find('h4').html(data.message);
-                messageModal.modal('show');
+                if (data.message) {
+                    const messageModal = $('#message-modal');
+                    messageModal.find('h4').html(data.message);
+                    messageModal.modal('show');
+                }
+                if (callback) callback();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 let response = jQuery.parseJSON(jqXHR.responseText),
                     replaceErr = {
+                        'password':'«Пароль»',
                         'phone':'«Телефон»',
                         'email':'«E-mail»',
-                        'name':'«Имя»'
+                        'name':'«Имя»',
+                        'address': '«Адрес»'
                     };
 
                 $.each(response.errors, function (field, errorMsg) {
@@ -74,7 +93,7 @@ $(document).ready(function ($) {
             }
         });
     });
-});
+}
 
 const processingFields = (formData, inputObj) => {
     if (inputObj.length) {

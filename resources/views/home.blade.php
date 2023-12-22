@@ -24,8 +24,15 @@
         </x-row>
     </x-section>
     <x-section class="color color1" wow_delay=".1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
-        <x-row class="pb-4 pt-4 d-flex justify-content-center">
-
+        <x-row class="row pb-4 pt-5">
+            @foreach($types as $type)
+                <div class="col-lg-{{ 12/$types->count() }} col-sm-12 text-center">
+                    <a href="#">
+                        <img class="w-75" src="{{ asset($type->image) }}" />
+                    </a>
+                    <h3 class="text-white text-center mt-3">{{ $type->name }}</h3>
+                </div>
+            @endforeach
         </x-row>
     </x-section>
     <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">

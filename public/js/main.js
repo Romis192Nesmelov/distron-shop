@@ -95,17 +95,15 @@ $(document).ready(function() {
     setTimeout(function () {
         windowScroll();
         fixingMainMenu($(window).scrollTop());
-        maxHeightBlocks($('.news-entry-contents'));
     }, 1000);
-
-    $(window).resize(function () {
-        maxHeightBlocks($('.news-entry-contents'));
-    });
 
     if (window.scrollAnchor) {
         window.menuScrollFlag = true;
         gotoScroll(window.scrollAnchor);
     }
+
+    bindMainButton();
+    if (window.showMessage) $('#message-modal').modal('show');
 });
 
 const windowScroll = () => {
@@ -154,19 +152,44 @@ const fixingMainMenu = (windowScroll) => {
     } else mainMenu.removeClass('top-fix');
 }
 
-const maxHeightBlocks = (blocks) => {
-    let maxHeight = 0;
-    blocks.css({
-        'height':1,
-        'display':'table'
-    });
-    blocks.each(function () {
-        if ($(this).height() > maxHeight) maxHeight = $(this).height()+50;
-    });
-    blocks.css({
-        'height':maxHeight,
-        'display':'block'
-    });
+const bindMainButton = () => {
+    const mainButton = $('#main-button');
+    mainButton.unbind();
+    if (window.guest) {
+        const loginModal = $('#login-modal');
+
+        // Click to register href
+        $('#register-href').click(function (e) {
+            e.preventDefault();
+            loginModal.modal('hide');
+            $('#register-modal').modal('show');
+        });
+
+        // Click to restore password href
+        $('#forgot-password-href').click(function (e) {
+            e.preventDefault();
+            loginModal.modal('hide');
+            $('#reset-password-modal').modal('show');
+        });
+
+        mainButton.click(() => {
+            loginModal.modal('show');
+        });
+    } else {
+        const accountModal = $('#account-modal');
+        if (!accountModal.find('input[name=email]').html()) {
+            $.get(
+                window.accountUrl
+            ).done((data) => {
+                $.each(data, function (field, value) {
+                    accountModal.find('input[name='+ field +']').val(value);
+                });
+            });
+        }
+        mainButton.click(() => {
+            accountModal.modal('show');
+        });
+    }
 }
 
 // const getQueryParams = (qs) => {

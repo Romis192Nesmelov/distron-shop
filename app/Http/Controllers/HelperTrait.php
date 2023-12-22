@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
+
 trait HelperTrait
 {
     public string $validationPhone = 'regex:/^((\+)?(\d)(\s)?(\()?[0-9]{3}(\))?(\s)?([0-9]{3})(\-)?([0-9]{2})(\-)?([0-9]{2}))$/';
@@ -16,6 +19,14 @@ trait HelperTrait
     public string $validationPng = 'mimes:png|max:2000';
     public string $validationPdf = 'nullable|mimes:pdf|max:1000';
     public string $validationCsv = 'nullable|mimes:csv,txt|max:1000';
+
+    /**
+     * @return string
+     */
+    public function getValidationDate(): string
+    {
+        return $this->validationDate;
+    }
 
     private $metas = [
         'meta_description' => ['name' => 'description', 'property' => false],
@@ -38,8 +49,13 @@ trait HelperTrait
         session()->flash('message', trans('admin.save_complete'));
     }
 
-    public function getVideoHref(): string
+    public function sendMessage(string $template, string $mailTo, array $fields): JsonResponse
     {
-        return file_get_contents(base_path('public/video_href'));
+        Mail::send('emails.'.$template, $fields, function($message) use ($mailTo) {
+            $message->subject('Сообщение с сайта '.env('APP_NAME'));
+            $message->to($mailTo);
+        });
+        $message = trans('content.we_will_contact_you');
+        return response()->json(['success' => true, 'message' => $message],200);
     }
 }
