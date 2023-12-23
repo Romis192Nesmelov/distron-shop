@@ -15,9 +15,9 @@ class TypesSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['image' => 'images/placeholder.jpg', 'name' => 'АКБ'],
-            ['image' => 'images/placeholder.jpg', 'name' => 'Ячейки для АКБ'],
-            ['image' => 'images/placeholder.jpg', 'name' => 'Аксесуары'],
+            ['image' => 'images/types/type1.png', 'name' => 'АКБ'],
+            ['image' => 'images/types/type2.png', 'name' => 'Ячейки для АКБ'],
+            ['image' => 'images/types/type3.png', 'name' => 'Аксесуары'],
         ];
 
         foreach ($data as $item) {

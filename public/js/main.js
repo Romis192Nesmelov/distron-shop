@@ -5,14 +5,7 @@ $(document).ready(function() {
 
     $('input[name=phone]').mask("+7(999)999-99-99");
 
-    let wow = new WOW({
-        boxClass:     'wow',
-        animateClass: 'animated',
-        offset:       0,
-        mobile:       true,
-        live:         true,
-    });
-    wow.init();
+    new WOW().init();
 
     // $('.select').select2({
     //     minimumResultsForSearch: Infinity

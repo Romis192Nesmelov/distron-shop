@@ -12,7 +12,7 @@
         </x-row>
     </x-section>
     <hr>
-    <x-section class="icons" wow_delay=".1" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
+    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
         <x-row>
             @foreach($icons as $k => $icon)
                 @include('blocks.icon_block',[
@@ -23,10 +23,10 @@
             @endforeach
         </x-row>
     </x-section>
-    <x-section class="color color1" wow_delay=".1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
+    <x-section class="color color1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
         <x-row class="row pb-4 pt-5">
-            @foreach($types as $type)
-                <div class="col-lg-{{ 12/$types->count() }} col-sm-12 text-center">
+            @foreach($types as $k => $type)
+                <div class="col-lg-{{ 12/$types->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
                     <a href="#">
                         <img class="w-75" src="{{ asset($type->image) }}" />
                     </a>
@@ -35,7 +35,7 @@
             @endforeach
         </x-row>
     </x-section>
-    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
+    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
         <x-row>
             @include('blocks.white_section_image_content_block',[
                 'colImage' => 3,
@@ -51,7 +51,7 @@
         </x-row>
     </x-section>
     <hr>
-    <x-section wow_delay=".1" data-scroll-destination="{{ $menu['contacts']['scroll'] }}" head="{{ $menu['contacts']['name'] }}">
+    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ $menu['contacts']['scroll'] }}" head="{{ $menu['contacts']['name'] }}">
         <x-row>
             @include('blocks.contacts_block')
         </x-row>

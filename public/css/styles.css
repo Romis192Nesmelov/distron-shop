@@ -67,12 +67,6 @@ hr {
     margin: 0;
 }
 
-.wow {
-    visibility: hidden;
-    animation-iteration-count: 1;
-    animation-duration: 3s;
-}
-
 #on-top-button {
     width: 48px;
     height: 48px;
