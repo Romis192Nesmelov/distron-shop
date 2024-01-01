@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Basket;
 
-use App\Http\Controllers\HelperTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class CheckoutRequest extends FormRequest
 {
-    use HelperTrait;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,8 +22,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required|min:3|max:20'
+            'id' => 'required|array|exists:items,id',
+            'value' => 'required|array',
         ];
     }
 }

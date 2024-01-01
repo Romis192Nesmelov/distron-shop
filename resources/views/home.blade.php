@@ -27,7 +27,7 @@
         <x-row class="row pb-4 pt-5">
             @foreach($types as $k => $type)
                 <div class="col-lg-{{ 12/$types->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
-                    <a href="#">
+                    <a href="{{ route('get_items',['slug' => $type->slug]) }}">
                         <img class="w-75" src="{{ asset($type->image) }}" />
                     </a>
                     <h3 class="text-white text-center mt-3">{{ $type->name }}</h3>

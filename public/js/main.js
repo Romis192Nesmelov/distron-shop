@@ -1,11 +1,64 @@
 $(document).ready(function() {
-    $('a.fancybox').fancybox({
-        padding: 3
+    const loginModal = $('#login-modal'),
+        basketTotal = $('#basket-total span'),
+        basketTable = $('#basket-table');
+
+    window.tryCheckout = false;
+
+    $('.fancybox').fancybox({
+        'autoScale': true,
+        'touch': false,
+        'transitionIn': 'elastic',
+        'transitionOut': 'elastic',
+        'speedIn': 500,
+        'speedOut': 300,
+        'autoDimensions': true,
+        'centerOnScroll': true
     });
 
     $('input[name=phone]').mask("+7(999)999-99-99");
 
     new WOW().init();
+
+    // Increment basket counter
+    $('.counter').click(function () {
+        let parentContainer = getParentContainerInBasketCounter($(this)),
+            input = getBasketValue(parentContainer),
+            increment = $(this).hasClass('plus') ? 1 : -1,
+            inputVal = parseInt(input.val()),
+            price = getBasketPrice(parentContainer),
+            total = 0;
+
+        if ((increment === 1 && inputVal < input.attr('max')) || (increment === -1 && inputVal > input.attr('min'))) {
+            inputVal += increment;
+            input.val(inputVal);
+            price.html(tolocalstring(window.price * inputVal));
+            basketTable.find('tr').each(function () {
+                let currentVal = parseInt(getBasketValue($(this)).val()),
+                    currentPrice = parseInt(getBasketPrice($(this)).html().replace(' ','').replace("&nbsp;",''));
+                total += currentVal * currentPrice;
+            });
+            basketTotal.html(total);
+        }
+    });
+
+    $('input.basket-value').change(function () {
+        let parentContainer = getParentContainerInBasketCounter($(this)),
+            inputVal = parseInt($(this).val()),
+            price = getBasketPrice(parentContainer);
+
+        price.html(tolocalstring(window.price * inputVal));
+    });
+
+    // Submit checkout
+    $('#checkout').submit(function (e) {
+        if (window.guest) {
+            e.preventDefault();
+            $('#basket-modal').modal('hide');
+            loginModal.modal('show');
+            window.tryCheckout = true;
+        }
+    });
 
     // $('.select').select2({
     //     minimumResultsForSearch: Infinity
@@ -95,9 +148,21 @@ $(document).ready(function() {
         gotoScroll(window.scrollAnchor);
     }
 
-    bindMainButton();
+    bindMainButton(loginModal);
     if (window.showMessage) $('#message-modal').modal('show');
 });
+
+const getParentContainerInBasketCounter = (obj) => {
+    return obj.parents('tr').length ? obj.parents('tr') : obj.parents('form')
+}
+
+const getBasketPrice = (parentContainer) => {
+    return parentContainer.find('.basket-price span')
+}
+
+const getBasketValue = (parentContainer) => {
+    return parentContainer.find('input.basket-value');
+}
 
 const windowScroll = () => {
     let onTopButton = $('#on-top-button');
@@ -145,12 +210,10 @@ const fixingMainMenu = (windowScroll) => {
     } else mainMenu.removeClass('top-fix');
 }
 
-const bindMainButton = () => {
+const bindMainButton = (loginModal) => {
     const mainButton = $('#main-button');
     mainButton.unbind();
     if (window.guest) {
-        const loginModal = $('#login-modal');
-
         // Click to register href
         $('#register-href').click(function (e) {
             e.preventDefault();
@@ -183,6 +246,10 @@ const bindMainButton = () => {
             accountModal.modal('show');
         });
     }
+}
+
+const tolocalstring = (string) => {
+    return string.toLocaleString().replace(/\,/g, ' ');
 }
 
 // const getQueryParams = (qs) => {

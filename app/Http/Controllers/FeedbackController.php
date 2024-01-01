@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Feedback\FeedbackRequest;
 use App\Http\Requests\Feedback\FeedbackShortRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
 
 class FeedbackController extends Controller
 {

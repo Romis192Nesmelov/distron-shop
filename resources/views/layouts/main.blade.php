@@ -22,13 +22,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/icons/icomoon/styles.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/icons/fontawesome/styles.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/fancybox.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
 
 {{--    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
@@ -71,6 +72,14 @@
             <a href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>
         </div>
     </div>
+    <x-section>
+        <div id="breadcrumbs" class="ps-4 wow animate__animated animate__slideInLeft" data-wow-offset="10" data-wow-delay=".5s">
+            <div><a href="{{ route('home') }}"><i class="icon-home2"></i>{{ trans('menu.home') }}</a></div>
+            @foreach($breadcrumbs as $breadcrumb)
+                <div><i class="icon-arrow-right14"></i><a href="{{ $breadcrumb['route'] }}">{{ $breadcrumb['name'] }}</a></div>
+            @endforeach
+        </div>
+    </x-section>
     @yield('content')
 </div>
 
@@ -249,6 +258,76 @@
         @include('blocks.buttons_pair_block',[
             'submitDisabled' => true,
             'submitText' => trans('auth.register')
+        ])
+    </form>
+</x-modal>
+<x-modal id="basket-modal" head="{{ trans('content.basket') }}">
+    <h3 id="no-products" class="text-center {{ session()->has('basket') && count(session()->get('basket')) ? 'd-none' : '' }}">{{ trans('content.no_products_in_the_basket') }}</h3>
+    <form id="checkout" class="{{ !session()->has('basket') ? 'd-none' : '' }}" method="post" action="{{ route('checkout') }}">
+        @csrf
+        <table id="basket-table" class="table table-striped">
+            @if (session()->has('basket'))
+                @foreach(session()->get('basket') as $id => $position)
+                    @include('blocks.basket_item_block',[
+                        'id' => $id,
+                        'name' => $position['item']->name,
+                        'value' => $position['value'],
+                        'price' => $position['value'] * $position['item']->price
+                    ])
+                @endforeach
+            @else
+                @include('blocks.basket_item_block',[
+                    'id' => 1,
+                    'name' => '',
+                    'value' => 1,
+                    'price' => 1
+                ])
+            @endif
+        </table>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center pt-2">
+            @include('blocks.button_block', [
+                'id' => null,
+                'buttonType' => 'submit',
+                'primary' => true,
+                'icon' => 'icon-checkmark4',
+                'buttonText' => trans('content.checkout')
+            ])
+            <h3 id="basket-total" class="mb-0">{{ trans('content.total') }}<nobr><span>@include('blocks.price_block',['price' => $basketTotal])</span></nobr></h3>
+        </div>
+    </form>
+</x-modal>
+<x-modal id="new-order-modal" head="{{ trans('content.placing_an_order') }}">
+    <form id="new-order" method="post" action="{{ route('new_order') }}">
+        @csrf
+        @include('blocks.input_block',[
+            'name' => 'phone',
+            'type' => 'text',
+            'value' => auth()->check() ? auth()->user()->phone : '',
+            'label' => trans('auth.phone'),
+            'placeholder' => '+7(___)___-__-__',
+            'ajax' => true,
+        ])
+        @include('blocks.input_block',[
+            'name' => 'address',
+            'value' => auth()->check() ? auth()->user()->address : '',
+            'type' => 'text',
+            'label' => trans('auth.address'),
+            'placeholder' => trans('auth.address'),
+            'ajax' => true,
+        ])
+        @include('blocks.textarea_block',[
+            'name' => 'notes',
+            'label' => trans('content.notes'),
+            'max' => 3000,
+            'simple' => true
+        ])
+        @include('blocks.button_block', [
+            'id' => null,
+            'buttonType' => 'submit',
+            'primary' => true,
+            'icon' => 'icon-list-unordered',
+            'buttonText' => trans('content.checkout')
         ])
     </form>
 </x-modal>

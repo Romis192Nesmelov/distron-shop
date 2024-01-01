@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 trait HelperTrait
 {
@@ -57,5 +58,17 @@ trait HelperTrait
         });
         $message = trans('content.we_will_contact_you');
         return response()->json(['success' => true, 'message' => $message],200);
+    }
+
+    public function getBasketTotal(): int
+    {
+        $total = 0;
+        if (Session::has('basket')) {
+            $basket = Session::get('basket');
+            foreach ($basket as $id => $position) {
+                $total += $position['item']->price * $position['value'];
+            }
+        }
+        return $total;
     }
 }

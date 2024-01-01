@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \App\Models\Item;
+use \App\Models\Order;
 
 return new class extends Migration
 {
@@ -11,12 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('item_order', function (Blueprint $table) {
             $table->id();
-            $table->string('image',50);
-            $table->string('slug',50);
-            $table->string('name',50);
-            $table->text('text');
+            $table->smallInteger('value');
+            $table->foreignIdFor(Item::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(Order::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('item_order');
     }
 };

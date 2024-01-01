@@ -16,6 +16,7 @@ class BaseController extends Controller
     use HelperTrait;
 
     protected array $data = [];
+    protected array $breadcrumbs = [];
 
     public function index(): View
     {
@@ -35,7 +36,7 @@ class BaseController extends Controller
 //        return redirect()->back();
 //    }
 
-    private function showView($view): View
+    protected function showView($view): View
     {
         $settings = new SettingsController();
         $content = Content::all();
@@ -48,20 +49,23 @@ class BaseController extends Controller
         $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
+
         return view($view,array_merge(
-            $this->data, [
-                    'seo' => $settings->getSeoTags(),
-                    'metas' => $this->metas,
-                    'settings' => $settings->getSettings(),
-                    'menu' => $menu,
-                    'video' => [
-                        'video/distron.mp4',
-                        'video/distron.ogg',
-                        'video/distron.webm'
-                    ],
-                    'metrics' => Metric::all()
-                ]
-            )
+            $this->data,
+            [
+                'seo' => $settings->getSeoTags(),
+                'metas' => $this->metas,
+                'settings' => $settings->getSettings(),
+                'menu' => $menu,
+                'video' => [
+                    'video/distron.mp4',
+                    'video/distron.ogg',
+                    'video/distron.webm'
+                ],
+                'metrics' => Metric::all(),
+                'breadcrumbs' => $this->breadcrumbs,
+                'basketTotal' => $this->getBasketTotal()
+            ])
         );
     }
 }

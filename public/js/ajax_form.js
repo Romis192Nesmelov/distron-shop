@@ -1,20 +1,84 @@
 $(document).ready(function ($) {
-    processingForm($('#form-feedback-short'));
-    processingForm($('#login-form'), () => {
-        const mainButton = $('#main-button');
+    const noProducts = $('#no-products'),
+        basketCheckout = $('#checkout'),
+        basketTable = $('#basket-table'),
+        basketCir = $('#basket .cir'),
+        basketTotal = $('#basket-total span'),
+        mainButton = $('#main-button'),
+        newOrderModal = $('#new-order-modal'),
+        basketModal = $('#basket-modal');
+
+    processingForm($('#form-feedback-short'), true);
+    processingForm($('#login-form'), true, (data) => {
         mainButton.find('span').html(window.accountText);
         window.guest = false;
         bindMainButton();
         $('#login-modal').remove();
         $('#register-modal').remove();
         $('#reset-password-modal').remove();
+
+        newOrderModal.find('input[name=phone]').val(data.phone);
+        newOrderModal.find('input[name=address]').val(data.address);
+
+        if (window.tryCheckout) basketModal.modal('show');
     });
-    processingForm($('#register-form'));
-    processingForm($('#reset-password-form'));
-    processingForm($('#account-form'));
+    processingForm($('#register-form'), true);
+    processingForm($('#reset-password-form'), true);
+    processingForm($('#account-form'), false);
+    processingForm($('#add-to-basket'), false, (data) => {
+        let basketRow = $('#basket-row-' + data.id);
+
+        if (!basketRow.length) {
+            if (basketCheckout.hasClass('d-none')) {
+                noProducts.addClass('d-none');
+                basketCheckout.removeClass('d-none');
+                basketCir.removeClass('d-none');
+                basketRow = basketTable.find('tr');
+                basketRow.attr('id','basket-row-' + data.id);
+            } else {
+                basketRow = basketTable.find('tr').last().clone();
+                basketRow.attr('id','basket-row-' + data.id);
+                basketTable.append(basketRow);
+            }
+        }
+
+        basketRow.find('input.basket-id').val(data.id);
+        basketRow.find('.basket-name').html(data.name);
+        basketRow.find('input.basket-value').val(data.value);
+        basketRow.find('.basket-price span').html(data.price);
+        basketCir.html(basketTable.find('tr').length);
+        basketTotal.html(tolocalstring(data.total));
+    });
+
+    processingForm(basketCheckout, false, (data) => {
+        basketTable.find('tr').each(function () {
+            if (!parseInt($(this).find('input.basket-value').val())) $(this).remove();
+        });
+        if (basketTable.find('tr').length) {
+            basketCir.html(basketTable.find('tr').length);
+            basketTotal.html(tolocalstring(data.total));
+        } else {
+            noProducts.removeClass('d-none');
+            basketCheckout.addClass('d-none');
+            basketCir.addClass('d-none');
+            basketCir.html('0');
+            basketTotal.html('0');
+        }
+        newOrderModal.modal('show');
+    });
+
+    processingForm($('#new-order'), false, (data) => {
+        let basketRow = basketTable.find('tr').last().clone();
+        basketTable.empty();
+        basketTable.append(basketRow);
+        basketCheckout.addClass('d-none');
+        noProducts.removeClass('d-none');
+        basketCir.html('0');
+        basketCir.addClass('d-none');
+    });
 });
 
-const processingForm = (form, callback) => {
+const processingForm = (form, resetInputs, callback) => {
     const body = $('body'),
         agree = $('input[name=i_agree]');
 
@@ -54,7 +118,7 @@ const processingForm = (form, callback) => {
             success: function (data) {
                 // form.modal('hide');
                 unlockAll(body,form);
-                form.find('input, textarea').val('');
+                if (resetInputs) form.find('input, textarea').val('');
                 inputError.removeClass('error');
 
                 $('.modal').modal('hide');
@@ -65,7 +129,7 @@ const processingForm = (form, callback) => {
                     messageModal.find('h4').html(data.message);
                     messageModal.modal('show');
                 }
-                if (callback) callback();
+                if (callback) callback(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 let response = jQuery.parseJSON(jqXHR.responseText),
@@ -99,7 +163,6 @@ const processingFields = (formData, inputObj) => {
     if (inputObj.length) {
         $.each(inputObj, function (key, obj) {
             if (obj.type !== 'checkbox' && obj.type !== 'radio') {
-                // console.log(obj.name +' == '+ obj.value);
                 formData.append(obj.name,obj.value);
             }
         });

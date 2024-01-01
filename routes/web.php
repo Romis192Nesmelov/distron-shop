@@ -4,6 +4,9 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(BaseController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+});
+
+Route::controller(BasketController::class)->group(function () {
+    Route::post('/add-to-basket', 'addToBasket')->name('add_to_basket');
+    Route::post('/checkout', 'checkout')->name('checkout');
+});
+
+Route::controller(OrderController::class)->group(function () {
+    Route::post('/new-order', 'newOrder')->name('new_order');
 });
 
 Route::controller(FeedbackController::class)->group(function () {
@@ -37,3 +49,5 @@ Route::controller(AccountController::class)->middleware(['auth'])->group(functio
     Route::get('/account', 'account')->name('account');
     Route::post('/edit-account', 'editAccount')->name('edit_account');
 });
+
+Route::get('/{slug}', ItemController::class)->name('get_items');

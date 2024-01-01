@@ -21,7 +21,11 @@ class AuthController extends Controller
         $credentials['active'] = 1;
         if (Auth::attempt($credentials, $request->remember == 'on')) {
             $request->session()->regenerate();
-            return response()->json([],200);
+            return response()->json([
+                'success' => true,
+                'phone' => Auth::user()->phone,
+                'address' => Auth::user()->address,
+            ],200);
         } else return response()->json(['errors' => ['email' => [trans('auth.failed')], 'password' => [trans('auth.failed')]]], 401);
     }
 

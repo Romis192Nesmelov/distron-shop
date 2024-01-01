@@ -19,8 +19,4 @@
         <i class="{{ $icon }}"></i>
     @endif
     <span>{{ $buttonText }}</span>
-
-    @if (isset($arrowIcon) && $arrowIcon)
-        <img src="{{ asset('images/'.$arrowIcon) }}"
-    @endif
 </button>
