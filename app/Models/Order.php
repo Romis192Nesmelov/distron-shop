@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Order extends Model
 {
     protected $fillable = [
+        'number',
         'notes',
         'status',
         'user_id'

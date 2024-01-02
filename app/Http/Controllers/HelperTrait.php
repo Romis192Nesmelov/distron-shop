@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
+//use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendMessage;
 use Illuminate\Support\Facades\Session;
 
 trait HelperTrait
@@ -50,12 +51,9 @@ trait HelperTrait
         session()->flash('message', trans('admin.save_complete'));
     }
 
-    public function sendMessage(string $template, string $mailTo, array $fields): JsonResponse
+    public function sendMessage(string $template, string $mailTo, string|null $cc, array $fields, string|null $pathToFile=null): JsonResponse
     {
-        Mail::send('emails.'.$template, $fields, function($message) use ($mailTo) {
-            $message->subject('Сообщение с сайта '.env('APP_NAME'));
-            $message->to($mailTo);
-        });
+        dispatch(new SendMessage($template, $mailTo, $cc, $fields, $pathToFile));
         $message = trans('content.we_will_contact_you');
         return response()->json(['success' => true, 'message' => $message],200);
     }

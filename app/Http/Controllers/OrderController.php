@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -27,6 +28,7 @@ class OrderController extends Controller
             }
 
             $order = Order::create([
+                'number' => Str::random(6),
                 'notes' => $request->notes,
                 'status' => 0,
                 'user_id' => Auth::id()
@@ -38,6 +40,13 @@ class OrderController extends Controller
                 $sincArr[$id] = ['value' => $position['value']];
             }
             $order->items()->sync($sincArr);
+
+            $this->sendMessage('order', env('MAIL_TO'), Auth::user()->email, [
+                'email' => Auth::user()->email,
+                'address' => Auth::user()->address,
+                'order' => $order,
+                'total' => $this->getBasketTotal()
+            ]);
 
             Session::forget('basket');
 
