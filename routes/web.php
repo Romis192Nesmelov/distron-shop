@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(BaseController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/get-new-csrf', 'getNewCsrf')->name('get_new_csrf');
 });
 
 Route::controller(BasketController::class)->group(function () {

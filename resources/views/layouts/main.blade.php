@@ -308,14 +308,27 @@
             'placeholder' => '+7(___)___-__-__',
             'ajax' => true,
         ])
-        @include('blocks.input_block',[
-            'name' => 'address',
-            'value' => auth()->check() ? auth()->user()->address : '',
-            'type' => 'text',
-            'label' => trans('auth.address'),
-            'placeholder' => trans('auth.address'),
-            'ajax' => true,
+        @include('blocks.radio_buttons_block',[
+            'name' => 'delivery',
+            'buttons' => [
+                ['value' => 1, 'label' => trans('content.delivery')],
+                ['value' => 0, 'label' => trans('content.pickup')]
+            ],
+            'checked' => 1
         ])
+        <div class="delivery-block mt-1 mb-3">
+            @include('blocks.input_block',[
+                'name' => 'address',
+                'value' => auth()->check() ? auth()->user()->address : '',
+                'type' => 'text',
+                'label' => trans('auth.address'),
+                'placeholder' => trans('auth.address'),
+                'ajax' => true,
+            ])
+        </div>
+        <div class="delivery-block mt-3 mb-3 d-none">
+            {{ $pickup_address }}
+        </div>
         @include('blocks.textarea_block',[
             'name' => 'notes',
             'label' => trans('content.notes'),
@@ -365,7 +378,8 @@
 
 <script>
     window.accountText = "{{ trans('auth.account') }}";
-    window.guest = parseInt("{{ auth()->guest() }}");
+    window.guest = parseInt("{{ (int)auth()->guest() }}");
+    window.getNewCsrfUrl = "{{ route('get_new_csrf') }}";
     window.accountUrl = "{{ route('account') }}";
 </script>
 

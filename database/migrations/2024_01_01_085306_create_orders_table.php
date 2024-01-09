@@ -15,9 +15,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number',6);
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->smallInteger('status');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->boolean('delivery')->nullable();
             $table->timestamps();
         });
     }

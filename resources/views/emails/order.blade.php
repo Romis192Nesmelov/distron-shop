@@ -4,9 +4,14 @@
     <h1>{{ trans('mail.new_order_on_the_site').' '.env('APP_NAME') }}</h1>
     <h2>{{ trans('mail.order_number',['number' => $order->number]) }}</h2>
     <h4>E-mail: {{ $email }}</h4>
-    <h4>{{ trans('mail.delivery_address') }}</h4>
-    <p>{{ $address }}</p>
-    <h3>{{ trans('mail.notes') }}</h3>
+    @if ($order->delivery)
+        <h3>{{ trans('mail.delivery_address') }}</h3>
+        <p>{{ $address }}</p>
+    @else
+        <h3>{{ trans('mail.pickup') }}</h3>
+        <p>{{ $pickup_address }}</p>
+    @endif
+    <h3>{{ trans('mail.notes') }}:</h3>
     <p>{{ $order->notes }}</p>
     <h3>{{ trans('mail.order_list') }}</h3>
     <table border="0" width="100%">

@@ -60,6 +60,11 @@ $(document).ready(function() {
         }
     });
 
+    // Change delivery
+    $('input[name=delivery]').change(function () {
+        $('.delivery-block').toggleClass('d-none');
+    });
+
     // $('.select').select2({
     //     minimumResultsForSearch: Infinity
     // });

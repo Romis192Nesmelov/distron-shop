@@ -8,6 +8,7 @@ use App\Models\Icon;
 use App\Models\Metric;
 use App\Models\Question;
 use App\Models\Type;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -23,10 +24,15 @@ class BaseController extends Controller
         $this->data['scroll'] = request('scroll');
         $this->data['content'] = Content::all();
         $this->data['icons'] = Icon::where('active',1)->get();
-        $this->data['contacts'] = Contact::all();
+        $this->data['contacts'] = Contact::where('type','<=',4)->get();
         $this->data['faq'] = Question::where('active',1)->get();
         $this->data['types'] = Type::all();
         return $this->showView('home');
+    }
+
+    public function getNewCsrf(): JsonResponse
+    {
+        return response()->json(['token' => csrf_token()],200);
     }
 
 //    public function changeLang(Request $request)
@@ -64,7 +70,8 @@ class BaseController extends Controller
                 ],
                 'metrics' => Metric::all(),
                 'breadcrumbs' => $this->breadcrumbs,
-                'basketTotal' => $this->getBasketTotal()
+                'basketTotal' => $this->getBasketTotal(),
+                'pickup_address' => $this->getPickupAddress()
             ])
         );
     }

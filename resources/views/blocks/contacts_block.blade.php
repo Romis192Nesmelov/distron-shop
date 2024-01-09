@@ -3,7 +3,7 @@
         @foreach($contacts as $contact)
             <tr>
             @if ($contact->type == 4) @php $map = $contact->contact @endphp
-            @else
+            @elseif ($contact->type < 4)
                 @php
                     switch ($contact->type) {
                         case 1:

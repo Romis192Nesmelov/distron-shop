@@ -37,6 +37,8 @@ return [
     'total' => 'Итого: ',
     'notes' => 'Приммечания',
     'your_order_has_been_processed' => 'Ваш заказ поступил в обработку!',
+    'delivery' => 'Доставка',
+    'pickup' => 'Самовывоз',
 
 //    'in_russian' => ' по русски',
 //    'in_english' => ' по по английски',

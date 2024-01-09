@@ -14,5 +14,7 @@ return [
     'item_name' => 'Наименование',
     'item_value' => 'Количество',
     'item_price' => 'Стоимость',
-    'total_price' => 'Итого:'
+    'total_price' => 'Итого:',
+    'delivery' => 'Доставка по адресу:',
+    'pickup' => 'Самовывоз по адресу:',
 ];

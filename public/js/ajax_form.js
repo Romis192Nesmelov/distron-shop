@@ -8,10 +8,15 @@ $(document).ready(function ($) {
         newOrderModal = $('#new-order-modal'),
         basketModal = $('#basket-modal');
 
-    processingForm($('#form-feedback-short'), true);
-    processingForm($('#login-form'), true, (data) => {
+    processingForm($('#form-feedback-short'), true,false);
+    processingForm($('#login-form'), true, false, (data) => {
         mainButton.find('span').html(window.accountText);
         window.guest = false;
+
+        $.get(getNewCsrfUrl, (data) => {
+            $('input[name=_token]').val(data.token);
+        });
+
         bindMainButton();
         $('#login-modal').remove();
         $('#register-modal').remove();
@@ -22,10 +27,10 @@ $(document).ready(function ($) {
 
         if (window.tryCheckout) basketModal.modal('show');
     });
-    processingForm($('#register-form'), true);
-    processingForm($('#reset-password-form'), true);
-    processingForm($('#account-form'), false);
-    processingForm($('#add-to-basket'), false, (data) => {
+    processingForm($('#register-form'), true,false);
+    processingForm($('#reset-password-form'), true,false);
+    processingForm($('#account-form'), false, true);
+    processingForm($('#add-to-basket'), false,false, (data) => {
         let basketRow = $('#basket-row-' + data.id);
 
         if (!basketRow.length) {
@@ -50,7 +55,7 @@ $(document).ready(function ($) {
         basketTotal.html(tolocalstring(data.total));
     });
 
-    processingForm(basketCheckout, false, (data) => {
+    processingForm(basketCheckout, false,true, (data) => {
         basketTable.find('tr').each(function () {
             if (!parseInt($(this).find('input.basket-value').val())) $(this).remove();
         });
@@ -64,10 +69,10 @@ $(document).ready(function ($) {
             basketCir.html('0');
             basketTotal.html('0');
         }
-        newOrderModal.modal('show');
+        if (!window.guest) newOrderModal.modal('show');
     });
 
-    processingForm($('#new-order'), false, (data) => {
+    processingForm($('#new-order'), false,true, (data) => {
         let basketRow = basketTable.find('tr').last().clone();
         basketTable.empty();
         basketTable.append(basketRow);
@@ -78,7 +83,7 @@ $(document).ready(function ($) {
     });
 });
 
-const processingForm = (form, resetInputs, callback) => {
+const processingForm = (form, resetInputs, checkGuest, callback) => {
     const body = $('body'),
         agree = $('input[name=i_agree]');
 
@@ -90,72 +95,74 @@ const processingForm = (form, resetInputs, callback) => {
 
     form.on('submit', function(e) {
         e.preventDefault();
-        let formData = new FormData,
-            inputError = form.find('input.error'),
-            textError = form.find('.error');
+        if (!checkGuest || (checkGuest && !window.guest)) {
+            let formData = new FormData,
+                inputError = form.find('input.error'),
+                textError = form.find('.error');
 
-        // if (!agree.is(':checked')) return false;
+            // if (!agree.is(':checked')) return false;
 
-        form.find('input, textarea, select').each(function () {
-            let self = $(this);
-            if (self.attr('type') === 'file') formData.append(self.attr('name'),self[0].files[0]);
-            else if (self.attr('type') === 'checkbox' || self.attr('type') === 'radio') formData = processingCheckFields(formData,self);
-            else formData = processingFields(formData,self);
-        });
+            form.find('input, textarea, select').each(function () {
+                let self = $(this);
+                if (self.attr('type') === 'file') formData.append(self.attr('name'), self[0].files[0]);
+                else if (self.attr('type') === 'checkbox' || self.attr('type') === 'radio') formData = processingCheckFields(formData, self);
+                else formData = processingFields(formData, self);
+            });
 
-        $('div.error').css('display','none').html('');
-        inputError.removeClass('error');
-        textError.html('');
-        form.find('input, select, textarea, button').attr('disabled','disabled');
-        // addLoader();
+            $('div.error').css('display', 'none').html('');
+            inputError.removeClass('error');
+            textError.html('');
+            form.find('input, select, textarea, button').attr('disabled', 'disabled');
+            // addLoader();
 
-        $.ajax({
-            url: form.attr('action'),
-            data: formData,
-            processData: false,
-            contentType: false,
-            type: form.attr('method'),
-            success: function (data) {
-                // form.modal('hide');
-                unlockAll(body,form);
-                if (resetInputs) form.find('input, textarea').val('');
-                inputError.removeClass('error');
+            $.ajax({
+                url: form.attr('action'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: form.attr('method'),
+                success: function (data) {
+                    // form.modal('hide');
+                    unlockAll(body, form);
+                    if (resetInputs) form.find('input, textarea').val('');
+                    inputError.removeClass('error');
 
-                $('.modal').modal('hide');
-                $('.event-block .roll-up').css('height',0);
+                    $('.modal').modal('hide');
+                    $('.event-block .roll-up').css('height', 0);
 
-                if (data.message) {
-                    const messageModal = $('#message-modal');
-                    messageModal.find('h4').html(data.message);
-                    messageModal.modal('show');
-                }
-                if (callback) callback(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                let response = jQuery.parseJSON(jqXHR.responseText),
-                    replaceErr = {
-                        'password':'«Пароль»',
-                        'phone':'«Телефон»',
-                        'email':'«E-mail»',
-                        'name':'«Имя»',
-                        'address': '«Адрес»'
-                    };
+                    if (data.message) {
+                        const messageModal = $('#message-modal');
+                        messageModal.find('h4').html(data.message);
+                        messageModal.modal('show');
+                    }
+                    if (callback) callback(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    let response = jQuery.parseJSON(jqXHR.responseText),
+                        replaceErr = {
+                            'password': '«Пароль»',
+                            'phone': '«Телефон»',
+                            'email': '«E-mail»',
+                            'name': '«Имя»',
+                            'address': '«Адрес»'
+                        };
 
-                $.each(response.errors, function (field, errorMsg) {
-                    let errorBlock = form.find('.error.' + field),
-                        errorInput = form.find('input[name=' + field + ']');
+                    $.each(response.errors, function (field, errorMsg) {
+                        let errorBlock = form.find('.error.' + field),
+                            errorInput = form.find('input[name=' + field + ']');
 
-                    errorMsg = errorMsg[0];
-                    $.each(replaceErr, function (src,replace) {
-                        errorMsg = errorMsg.replace(src,replace);
+                        errorMsg = errorMsg[0];
+                        $.each(replaceErr, function (src, replace) {
+                            errorMsg = errorMsg.replace(src, replace);
+                        });
+
+                        errorBlock.css('display', 'block').html(errorMsg);
+                        errorInput.addClass('error');
                     });
-
-                    errorBlock.css('display','block').html(errorMsg);
-                    errorInput.addClass('error');
-                });
-                unlockAll(body,form);
-            }
-        });
+                    unlockAll(body, form);
+                }
+            });
+        }
     });
 }
 

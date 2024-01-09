@@ -26,7 +26,8 @@ class NewOrderRequest extends FormRequest
     {
         return [
             'phone' => $this->validationPhone,
-            'address' => $this->validationString,
+            'address' => 'nullable|min:3|max:255',
+            'delivery' => 'in:0,1',
             'notes' => $this->validationText
         ];
     }

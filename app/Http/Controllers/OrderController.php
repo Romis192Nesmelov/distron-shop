@@ -16,23 +16,28 @@ class OrderController extends Controller
     public function newOrder(NewOrderRequest $request): JsonResponse
     {
         if (Session::has('basket')) {
-            $user = User::find(Auth::id());
-            if ($user->phone != $request->phone) {
-                $user->phone = $request->phone;
-                $user->save();
+            if (Auth::user()->phone != $request->phone) {
+                Auth::user()->phone = $request->phone;
+                Auth::user()->save();
             }
 
-            if ($user->address != $request->address) {
-                $user->address = $request->address;
-                $user->save();
+            if ($request->address && !Auth::user()->address && Auth::user()->address != $request->address) {
+                Auth::user()->address = $request->address;
+                Auth::user()->save();
             }
 
-            $order = Order::create([
+            $delivery = $request->delivery;
+            if ($delivery && !$request->address) return response()->json(['errors' => ['address' => [trans('validation.address')]]], 401);
+
+            $fields = [
                 'number' => Str::random(6),
                 'notes' => $request->notes,
                 'status' => 0,
-                'user_id' => Auth::id()
-            ]);
+                'user_id' => Auth::id(),
+                'delivery' => $delivery
+            ];
+
+            $order = Order::create($fields);
 
             $basket = Session::get('basket');
             $sincArr = [];
@@ -44,6 +49,7 @@ class OrderController extends Controller
             $this->sendMessage('order', env('MAIL_TO'), Auth::user()->email, [
                 'email' => Auth::user()->email,
                 'address' => Auth::user()->address,
+                'pickup_address' => $this->getPickupAddress(),
                 'order' => $order,
                 'total' => $this->getBasketTotal()
             ]);

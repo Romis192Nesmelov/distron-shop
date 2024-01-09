@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 //use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendMessage;
@@ -68,5 +69,10 @@ trait HelperTrait
             }
         }
         return $total;
+    }
+
+    public function getPickupAddress(): string
+    {
+        return Contact::where('type',5)->pluck('contact')->first();
     }
 }
