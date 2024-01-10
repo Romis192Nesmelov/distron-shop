@@ -41,7 +41,7 @@
                     <div class="panel panel-flat">
                         <x-atitle>{{ trans('admin.items_order') }}</x-atitle>
                         <div class="panel-body">
-                            <table class="table table-striped">
+                            <table class="table datatable-basic table-striped table-items">
                                 <tr>
                                     <th class="text-center">{{ trans('mail.category') }}</th>
                                     <th class="text-center">{{ trans('mail.item_name') }}</th>
@@ -59,8 +59,10 @@
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="2"><h3 class="text-left">{{ trans('mail.total_price') }}</h3></td>
-                                    <td colspan="2"><h3 class="text-right">@include('blocks.price_block',['price' => $total])</h3></td>
+                                    <td class="text-left"><h3 class="text-left">{{ trans('mail.total_price') }}</h3></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><h3 class="text-right">@include('blocks.price_block',['price' => $total])</h3></td>
                                 </tr>
                             </table>
                         </div>
@@ -70,4 +72,5 @@
             </form>
         </div>
     </div>
+    <script>window.dtRows = 1;</script>
 @endsection
