@@ -63,8 +63,6 @@ Route::middleware(['auth'])->controller(AccountController::class)->middleware(['
     Route::post('/edit-account', 'editAccount')->name('edit_account');
 });
 
-Route::get('/{slug}', ItemController::class)->name('get_items');
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {return view('admin.login');})->name('login');
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
@@ -72,7 +70,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
     Route::controller(AdminBaseController::class)->group(function () {
-        Route::get('/home', 'home')->name('home');
+        Route::get('/', 'home')->name('home');
     });
 
     Route::controller(AdminUsersController::class)->group(function () {
@@ -132,3 +130,5 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::get('/delete-order', 'deleteOrder')->name('delete_order');
     });
 });
+
+Route::get('/{slug}', ItemController::class)->name('get_items');
