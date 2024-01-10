@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone',16)->nullable();
             $table->string('address')->nullable();
             $table->boolean('active')->nullable();
+            $table->boolean('is_admin')->nullable();
             $table->string('confirmation_token',30)->nullable();
             $table->rememberToken();
             $table->timestamps();

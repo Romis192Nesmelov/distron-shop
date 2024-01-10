@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\Order\NewOrderRequest;
 use App\Models\Order;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -30,7 +28,7 @@ class OrderController extends Controller
             if ($delivery && !$request->address) return response()->json(['errors' => ['address' => [trans('validation.address')]]], 401);
 
             $fields = [
-                'number' => Str::random(6),
+                'number' => date('dmy'),
                 'notes' => $request->notes,
                 'status' => 0,
                 'user_id' => Auth::id(),

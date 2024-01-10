@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
+            $table->string('image',50)->nullable();
             $table->string('head');
             $table->text('text');
             $table->timestamps();

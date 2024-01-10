@@ -24,6 +24,7 @@ class User extends Authenticatable
         'confirmation_token',
         'phone',
         'address',
+        'is_admin',
         'active'
     ];
 

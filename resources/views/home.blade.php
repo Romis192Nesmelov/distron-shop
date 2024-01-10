@@ -4,7 +4,7 @@
     <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
         <x-row>
             <div class="col-12 col-lg-4 image">
-                <img src="{{ asset($content[0]->images[0]->preview) }}" />
+                <img src="{{ asset($content[0]->image) }}" />
             </div>
             <div class="col-12 col-lg-8">
                 {!! $content[0]->text !!}
@@ -39,7 +39,7 @@
         <x-row>
             @include('blocks.white_section_image_content_block',[
                 'colImage' => 3,
-                'image' => asset($content[1]->images[0]->preview),
+                'image' => asset($content[1]->image),
                 'text' => $content[1]->text
             ])
         </x-row>
@@ -59,4 +59,5 @@
     @if ($scroll)
         <script>window.scrollAnchor = "{{ $scroll }}";</script>
     @endif
+    <script>window.showLogin = parseInt("{{ request()->has('login') }}");</script>
 @endsection

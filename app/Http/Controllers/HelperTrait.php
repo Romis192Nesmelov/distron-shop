@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
-//use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendMessage;
 use Illuminate\Support\Facades\Session;
 
@@ -74,5 +73,10 @@ trait HelperTrait
     public function getPickupAddress(): string
     {
         return Contact::where('type',5)->pluck('contact')->first();
+    }
+
+    public function deleteFile($path): void
+    {
+        if ($path && file_exists(base_path('public/'.$path))) unlink(base_path('public/'.$path));
     }
 }

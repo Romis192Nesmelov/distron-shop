@@ -15,18 +15,9 @@ class AuthController extends Controller
 {
     use HelperTrait;
 
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse|RedirectResponse
     {
-        $credentials = $request->validated();
-        $credentials['active'] = 1;
-        if (Auth::attempt($credentials, $request->remember == 'on')) {
-            $request->session()->regenerate();
-            return response()->json([
-                'success' => true,
-                'phone' => Auth::user()->phone,
-                'address' => Auth::user()->address,
-            ],200);
-        } else return response()->json(['errors' => ['email' => [trans('auth.failed')], 'password' => [trans('auth.failed')]]], 401);
+        return $this->auth($request, false);
     }
 
     public function register(RegisterRequest $request): JsonResponse
@@ -70,5 +61,20 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect(route('home'));
+    }
+
+    protected function auth(LoginRequest $request, bool $checkAdmin): JsonResponse|RedirectResponse
+    {
+        $credentials = $request->validated();
+        $credentials['active'] = 1;
+        if ($checkAdmin) $credentials['is_admin'] = 1;
+        if (Auth::attempt($credentials, $request->remember == 'on')) {
+            $request->session()->regenerate();
+            if ($checkAdmin) return redirect()->intended(route('admin.home'));
+            else return response()->json(['success' => true, 'phone' => Auth::user()->phone, 'address' => Auth::user()->address],200);
+        } else {
+            if ($checkAdmin) return back()->withErrors(['email' => trans('auth.failed')]);
+            else return response()->json(['errors' => ['email' => [trans('auth.failed')], 'password' => [trans('auth.failed')]]], 401);
+        }
     }
 }

@@ -18,6 +18,8 @@ $(document).ready(function() {
 
     $('input[name=phone]').mask("+7(999)999-99-99");
 
+    if (window.showLogin) loginModal.modal('show');
+
     new WOW().init();
 
     // Increment basket counter

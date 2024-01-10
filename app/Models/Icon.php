@@ -9,6 +9,7 @@ class Icon extends Model
     use HasFactory;
 
     protected $fillable = [
+        'image',
         'title',
         'active'
     ];
