@@ -26,7 +26,8 @@ class BaseController extends Controller
         $this->data['icons'] = Icon::where('active',1)->get();
         $this->data['contacts'] = Contact::where('type','<=',4)->get();
         $this->data['faq'] = Question::where('active',1)->get();
-        $this->data['types'] = Type::all();
+        $this->data['catalogue'] = Type::where('is_service',0)->get();
+        $this->data['services'] = Type::where('is_service',1)->first();
         return $this->showView('home');
     }
 
@@ -53,6 +54,7 @@ class BaseController extends Controller
             if (!$k) $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         }
         $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
+        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
 

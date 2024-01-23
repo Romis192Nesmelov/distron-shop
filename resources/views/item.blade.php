@@ -3,12 +3,12 @@
 @section('content')
     <x-section>
         <x-row>
-            <div class="col-lg-4 col-md-6 col-sm-12 wow animate__animated animate__slideInLeft" data-wow-offset="10">
-                <a class="fancybox" href="{{ asset($item->image) }}"><img id="item-image" class="w-100 mb-4" src="{{ asset($item->image) }}" /></a>
+            <div class="col-lg-3 col-md-6 col-sm-12 wow animate__animated animate__slideInLeft" data-wow-offset="10">
+                @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-100'])
             </div>
-            <div class="col-lg-8 col-md-6 col-sm-12 wow animate__animated animate__slideInRight" data-wow-offset="10">
-                <h2 class="text-left">{{ $item->name }}</h2>
-                {!! $item->long_description !!}
+            <div class="col-lg-9 col-md-6 col-sm-12 wow animate__animated animate__slideInRight" data-wow-offset="10">
+                <h2 class="text-left">@include('blocks.item_head_block')</h2>
+                @include('blocks.item_props_block', ['showDescription' => true])
                 <h1 class="price text-left mt-3 mb-3">
                     @include('blocks.price_block',['price' => $item->price])
                 </h1>
@@ -25,9 +25,9 @@
         <form id="add-to-basket" class="d-flex flex-column align-items-center" method="post" action="{{ route('add_to_basket') }}">
             @csrf
             <input type="hidden" name="id" value="{{ $item->id }}">
-            <img class="w-50" src="{{ asset($item->image) }}" />
-            <h3 class="mt-4 mb-1">{{ $item->name }}</h3>
-            <p class="text-center">{{ $item->short_description }}</p>
+            @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-50'])
+            <h3 class="mb-1">@include('blocks.item_head_block')</h3>
+            @include('blocks.item_props_block', ['addClass' => 'text-center', 'showDescription' => true])
             <h1 class="text-center basket-price">
                 @include('blocks.price_block',[
                     'price' => session()->has('basket') && isset(session()->get('basket')[$item->id]) ? (int)session()->get('basket')[$item->id]['value'] * $item->price : $item->price

@@ -10,6 +10,11 @@ a {
 
 p {
     font-size: 1rem;
+    margin-bottom: .5rem;
+}
+
+.image {
+    border: 3px solid #009671;
 }
 
 #loader {
@@ -96,17 +101,6 @@ hr {
     margin-top: 50px;
 }
 
-/*.image {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-
-.image a,
-.image img {
-    width: 100%;
-}
-
 .section {
     font-size: .8rem;
     padding: 2rem 0;
@@ -126,7 +120,7 @@ hr {
 
 #main-collage {
     width: 100%;
-    height: 600px;
+    height: 530px;
     background: url("../images/waves.jpg") left top no-repeat;
 }
 
@@ -165,10 +159,9 @@ hr {
 }
 
 #video {
-    width: 800px;
-    /*height: 450px;*/
+    width: 600px;
     right: 100px;
-    top: 100px;
+    top: 120px;
     position: absolute;
     font-weight: bold;
     font-size: 20px;
@@ -195,13 +188,17 @@ hr {
     width: 100%;
     position: absolute;
     z-index: 999;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: #108865;
+    border-bottom: 2px solid white;
     padding-left: 10px;
 }
 
 #main-nav.top-fix {
     width: 100%;
     height: 51px;
-    background: url("../images/waves.jpg") left top no-repeat;
+    /*background: url("../images/waves.jpg") left top no-repeat;*/
     position: fixed;
     top: -51px;
     z-index: 999;
@@ -296,7 +293,8 @@ hr {
     cursor: pointer;
     color: white !important;
     font-size: 15px;
-    /*text-shadow: 1px 1px 1px #000, 1px 1px 2px #000;*/
+    padding-left: 15px !important;
+    padding-right: 15px !important;
 }
 
 .dropdown-item {
@@ -432,21 +430,17 @@ td.basket-price {
     color: #000;
 }
 
-@media (max-width: 1600px)  {
+@media (max-width: 1400px)  {
     #video {
-        width: 711px;
-        right: 50px;
+        width: 500px;
+        top: 80px;
+        right: 30px;
     }
-}
 
-@media (max-width: 1440px)  {
-    #video {
-        width: 600px;
-        top: 220px;
+    #look-at {
+        color: white;
     }
-}
 
-@media (max-width: 1300px)  {
     #main-image {
         width: 400px;
         top: 250px;
@@ -454,6 +448,8 @@ td.basket-price {
 
     .nav-link {
         font-size: 13px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 
     .section.color {
@@ -469,21 +465,17 @@ td.basket-price {
     }
 }
 
-@media (max-width: 1000px)  {
-    #video {
-        width: 500px;
-        top: 280px;
-        left: 50%;
-        transform: translateX(-50%);
-        right: auto;
-    }
-
-    .section.color p:last-child {
-        margin-bottom: 80px;
+@media (max-width: 1200px) {
+    #main-logo h1 {
+        width: 70%;
     }
 }
 
 @media (max-width: 991px)  {
+    #main-collage {
+        height: 600px;
+    }
+
     .navbar-collapse {
         padding: 15px;
         background-color: white;
@@ -494,17 +486,25 @@ td.basket-price {
         font-weight: bold;
         text-shadow: none;
     }
+
+    #main-logo h1 {
+        width: 100%;
+    }
+
+    #video {
+        width: 450px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        top: 300px;
+    }
+
+    #look-at {
+        color: #009671;
+    }
 }
 
 @media (max-width: 768px)  {
-    /*.slider h3 {*/
-    /*    margin-top: 30px;*/
-    /*}*/
-
-    /*.section.color h2 {*/
-    /*    margin-top: 0;*/
-    /*}*/
-
     .section.color p:last-child {
         margin-bottom: 100px;
     }
@@ -527,13 +527,6 @@ td.basket-price {
     #main-image {
         width: 300px;
         top: 320px;
-    }
-}
-
-@media (max-width: 660px)  {
-    #video {
-        width: 450px;
-        top: 300px;
     }
 }
 
@@ -575,9 +568,12 @@ td.basket-price {
 }
 
 @media (max-width: 460px)  {
+    #main-collage {
+        height: 550px;
+    }
+
     #video {
         width: 350px;
-        top: 350px;
     }
 
     td.basket-name,
@@ -600,6 +596,10 @@ td.basket-price {
 }
 
 @media (max-width: 350px)  {
+    #main-collage {
+        height: 500px;
+    }
+
     #video {
         width: 300px;
         font-size: 15px;

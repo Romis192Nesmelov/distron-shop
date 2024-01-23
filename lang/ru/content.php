@@ -13,6 +13,8 @@ return [
     'your_phone' => 'Ваш телефон',
 
     'details' => 'Подробнее',
+    'filtered' => 'Применить фильтр',
+    'reset_filter' => 'Сбросить фильтр',
     'close' => 'Закрыть',
     'date' => 'Дата',
     'delete' => 'Удалить',
@@ -39,6 +41,13 @@ return [
     'your_order_has_been_processed' => 'Ваш заказ поступил в обработку!',
     'delivery' => 'Доставка',
     'pickup' => 'Самовывоз',
+    'price' => 'Цена',
+    'capacity' => 'Емкость',
+    'voltage' => 'Напряжение',
+    'plates' => 'Количество пластин',
+    'capacity_val' => '<b>Емкость:</b> :val <span>Ah</span>',
+    'voltage_val' => '<b>Напряжение:</b> :val <span>В</span>',
+    'plates_val' => '<b>Количество пластин:</b><br> :val <span>шт.</span>'
 
 //    'in_russian' => ' по русски',
 //    'in_english' => ' по по английски',

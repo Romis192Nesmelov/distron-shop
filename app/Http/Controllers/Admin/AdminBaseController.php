@@ -86,11 +86,17 @@ class AdminBaseController extends Controller
         return $this->showView('home');
     }
 
-    protected function getSomething(string $key, Model $model, string|null $slug=null, Model|null $parentModel=null, string|null $parentRelation=null): View
+    protected function getSomething(
+        string $key,
+        Model $model,
+        string|null $slug=null,
+        Model|null $parentModel=null,
+        string|null $parentRelation=null
+    ): View
     {
         if (request('parent_id')) {
             $parentItem = $parentModel->findOrFail(request('parent_id'));
-            $this->data['parents'] = $parentModel->all();
+            $this->data['parent'] = $parentModel->find(request('parent_id'));
 
             if ($parentRelation) {
                 $this->data['menu_key'] = $this->data['parent_key'];
@@ -168,24 +174,21 @@ class AdminBaseController extends Controller
         if ($request->has('id')) {
             $validationArr['id'] = 'required|integer|exists:'.$model->getTable().',id';
             if ($imageName) $validationArr['image'] = 'nullable|'.$validationArr['image'];
-
             $fields = $this->validate($request, $validationArr);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
-
             $model = $model->find($request->input('id'));
             $model->update($fields);
-            $this->processingFiles($request, $model, 'image', $pathToImages, $imageName);
+
             $this->processingPdf($request, $model);
         } else {
             if ($imageName) $validationArr['image'] = 'required|'.$validationArr['image'];
-
             $fields = $this->validate($request, $validationArr);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
-
             $model = $model->create($fields);
-            $this->processingFiles($request, $model, 'image', $pathToImages, $imageName);
             $this->processingPdf($request, $model);
         }
+
+        $this->processingFiles($request, $model, 'image', $pathToImages, $imageName.$model->id);
         $this->saveCompleteMessage();
         return $model;
     }

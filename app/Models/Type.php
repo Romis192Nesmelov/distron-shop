@@ -13,7 +13,9 @@ class Type extends Model
         'image',
         'slug',
         'name',
-        'text'
+        'singular',
+        'text',
+        'is_service'
     ];
 
     public function sluggable(): array

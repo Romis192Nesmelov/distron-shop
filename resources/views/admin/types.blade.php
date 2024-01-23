@@ -9,7 +9,7 @@
                 'columns' => ['image','name','text'],
                 'items' => $types,
                 'useEdit' => true,
-                'useDelete' => true
+                'useDelete' => false
             ])
         </div>
         @include('admin.blocks.add_button_block')

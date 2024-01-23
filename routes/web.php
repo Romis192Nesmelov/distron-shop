@@ -131,4 +131,4 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
     });
 });
 
-Route::get('/{slug}', ItemController::class)->name('get_items');
+Route::get('/{slug?}', ItemController::class)->name('get_items');

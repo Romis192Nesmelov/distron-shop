@@ -31,22 +31,24 @@ class AdminTypesController extends AdminBaseController
             $request,
             new Type(),
             ['image' => $this->validationJpgAndPng, 'name' => $this->validationString, 'text' => $this->validationText],
+            'images/types/',
+            'type'
         );
         $this->saveCompleteMessage();
         return redirect(route('admin.types'));
     }
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function deleteType(Request $request): JsonResponse
-    {
-        $type = Type::findOrFail($request->input('id'));
-        if ($type->items->count()) return response()->json(['message' => trans('admin.error_delete_type')],403);
-        else {
-            $this->deleteFile($type->image);
-            $type->delete();
-            return response()->json(['message' => trans('admin.delete_complete')],200);
-        }
-    }
+//    /**
+//     * @throws \Illuminate\Validation\ValidationException
+//     */
+//    public function deleteType(Request $request): JsonResponse
+//    {
+//        $type = Type::findOrFail($request->input('id'));
+//        if ($type->items->count()) return response()->json(['message' => trans('admin.error_delete_type')],403);
+//        else {
+//            $this->deleteFile($type->image);
+//            $type->delete();
+//            return response()->json(['message' => trans('admin.delete_complete')],200);
+//        }
+//    }
 }

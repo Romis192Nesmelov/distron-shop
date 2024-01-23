@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionsSeeder::class);
         $this->call(ContactsSeeder::class);
         $this->call(TypesSeeder::class);
-        Item::factory(100)->create();
+        $this->call(TechnologiesSeeder::class);
+        $this->call(ItemsSeeder::class);
 //        $this->call(MetricsSeeder::class);
     }
 }

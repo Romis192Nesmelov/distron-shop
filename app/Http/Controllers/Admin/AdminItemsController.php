@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\HelperTrait;
 use App\Models\Item;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +22,7 @@ class AdminItemsController extends AdminBaseController
     public function items($slug=null): View
     {
         $this->data['parent_key'] = 'types';
+        $this->data['technologies'] = Technology::all();
         return $this->getSomething('items', new Item(), $slug, new Type());
     }
 
@@ -34,12 +36,16 @@ class AdminItemsController extends AdminBaseController
             new Item(),
             [
                 'image' => $this->validationJpgAndPng,
-                'name' => $this->validationString,
-                'short_description' => $this->validationString,
-                'long_description' => $this->validationText,
+                'name' => 'nullable|max:50',
+                'description' => $this->validationString,
                 'price' => $this->validationInteger,
-                'type_id' => 'required|integer|exists:types,id'
+                'type_id' => 'required|integer|exists:types,id',
+                'capacity' => 'nullable|max:1000',
+                'voltage' => 'nullable|max:100',
+                'plates' => 'nullable|max:20'
             ],
+            'images/items/',
+            'item'
         );
         $this->saveCompleteMessage();
         return redirect(route('admin.types',['id' => $item->type_id]));

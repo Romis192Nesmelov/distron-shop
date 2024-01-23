@@ -48,7 +48,7 @@
             <div class="panel-body">
                 @if ($type->items->count())
                     @include('admin.blocks.data_table_block', [
-                        'columns' => ['image','name','short_description','price'],
+                        'columns' => ['image','name','description','price'],
                         'items' => $type->items,
                         'route' => 'items',
                         'parent_id' => $type->id,

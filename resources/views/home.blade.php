@@ -3,8 +3,8 @@
 @section('content')
     <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
         <x-row>
-            <div class="col-12 col-lg-4 image">
-                <img src="{{ asset($content[0]->image) }}" />
+            <div class="col-12 col-lg-4">
+                <img class="w-100" src="{{ asset($content[0]->image) }}" />
             </div>
             <div class="col-12 col-lg-8">
                 {!! $content[0]->text !!}
@@ -25,16 +25,25 @@
     </x-section>
     <x-section class="color color1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
         <x-row class="row pb-4 pt-5">
-            @foreach($types as $k => $type)
-                <div class="col-lg-{{ 12/$types->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
+            @foreach($catalogue as $k => $type)
+                <div class="col-lg-{{ 12/$catalogue->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
                     <a href="{{ route('get_items',['slug' => $type->slug]) }}">
-                        <img class="w-75" src="{{ asset($type->image) }}" />
+                        <img class="image w-75" src="{{ asset($type->image) }}" />
                     </a>
                     <h3 class="text-white text-center mt-3">{{ $type->name }}</h3>
                 </div>
             @endforeach
         </x-row>
     </x-section>
+    <x-section wow_delay=".1" wow_direction="Left" data-scroll-destination="services" head="{{ trans('menu.services') }}">
+        {!! $services->text !!}
+        <x-row class="d-flex justify-content-center pt-5">
+            @foreach($services->items as $k => $item)
+                @include('blocks.type_item_block',['col' => 4, 'addClass' => 'ms-lg-3 me-lg-3', 'showDescription' => true])
+            @endforeach
+        </x-row>
+    </x-section>
+    <hr>
     <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
         <x-row>
             @include('blocks.white_section_image_content_block',[

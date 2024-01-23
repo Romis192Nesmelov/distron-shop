@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/icons/icomoon/styles.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/icons/fontawesome/styles.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/range.sliders.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -30,6 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/ion_rangeslider.min.js') }}"></script>
 
 {{--    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
@@ -69,7 +71,7 @@
                     <source src="{{ asset($item) }}" type='video/{{ pathinfo($item)['extension'] }};'>
                 @endforeach
             </video>
-            <a href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>
+            <a id="look-at" href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>
         </div>
     </div>
     <x-section>
@@ -88,8 +90,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-6 image">
-                        <img src="{{ asset('images/distron_shim.png') }}" />
+                    <div class="col-md-6">
+                        <img class="w-100" src="{{ asset('images/distron_shim.png') }}" />
                     </div>
                     <div class="col-md-6 ml-auto">
                         <ul class="list-unstyled">

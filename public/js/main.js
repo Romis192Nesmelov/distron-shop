@@ -22,6 +22,64 @@ $(document).ready(function() {
 
     new WOW().init();
 
+    // Filters
+    const filtersForm = $('#filters');
+    $('#range-slider-price').ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: window.minPrice,
+        max: window.maxPrice,
+        from: window.minPriceVal,
+        to: window.maxPriceVal,
+        step: 100,
+        postfix: ' ₽'
+    }).change(function () {
+        filtersForm.find('input[name=min_price]').val($(this).data().from);
+        filtersForm.find('input[name=max_price]').val($(this).data().to);
+    });
+
+    $('#range-slider-voltage').ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: window.minVoltage,
+        max: window.maxVoltage,
+        from: window.minVoltageVal,
+        to: window.maxVoltageVal,
+        step: 1,
+        postfix: ' В'
+    }).change(function () {
+        filtersForm.find('input[name=min_voltage]').val($(this).data().from);
+        filtersForm.find('input[name=max_voltage]').val($(this).data().to);
+    });
+
+    $('#range-slider-capacity').ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: window.minCapacity,
+        max: window.maxCapacity,
+        from: window.minCapacityVal,
+        to: window.maxCapacityVal,
+        step: 100,
+        postfix: ' Ah'
+    }).change(function () {
+        filtersForm.find('input[name=min_capacity]').val($(this).data().from);
+        filtersForm.find('input[name=max_capacity]').val($(this).data().to);
+    });
+
+    $('#range-slider-plates').ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: window.minPlates,
+        max: window.maxPlates,
+        from: window.minPlatesVal,
+        to: window.maxPlatesVal,
+        step: 1,
+        postfix: ' шт'
+    }).change(function () {
+        filtersForm.find('input[name=min_plates]').val($(this).data().from);
+        filtersForm.find('input[name=max_plates]').val($(this).data().to);
+    });
+
     // Increment basket counter
     $('.counter').click(function () {
         let parentContainer = getParentContainerInBasketCounter($(this)),

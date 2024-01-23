@@ -1,0 +1,225 @@
+.irs {
+    position: relative;
+    display: block;
+    height: 49px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.irs-hidden-input {
+    position: absolute !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    z-index: -9999 !important;
+    background: none !important;
+    border-style: solid !important;
+    border-color: transparent !important;
+}
+.irs-line {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    outline: none;
+    height: 6px;
+    top: 36px;
+    background-color: #eeeeee;
+    border-radius: 100px;
+}
+.irs-line-left,
+.irs-line-mid,
+.irs-line-right {
+    position: absolute;
+    display: block;
+    top: 0;
+}
+.irs-line-left {
+    left: 0;
+    width: 11%;
+}
+.irs-line-mid {
+    left: 9%;
+    width: 82%;
+}
+.irs-line-right {
+    right: 0;
+    width: 11%;
+}
+.irs-bar {
+    position: absolute;
+    display: block;
+    top: 36px;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background-color: #009671;
+    border-radius: 100px;
+}
+.irs-bar-edge {
+    position: absolute;
+    display: block;
+    top: 25px;
+    left: 0;
+    height: 12px;
+    width: 9px;
+}
+.irs-shadow {
+    position: absolute;
+    display: none;
+    top: 36px;
+    left: 0;
+    width: 0;
+    height: 6px;
+    background-color: #333333;
+    border-radius: 100px;
+    opacity: 0.25;
+    filter: alpha(opacity=25);
+}
+.irs-slider {
+    position: absolute;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-color: #fcfcfc;
+    border: 1px solid #bbb;
+    top: 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    z-index: 1;
+}
+.irs-slider:after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -3px;
+    margin-left: -3px;
+    background-color: #666;
+    border-radius: 100px;
+}
+.irs-slider:hover,
+.irs-slider:focus {
+    background-color: #f7f7f7;
+}
+.irs-slider:active {
+    background-color: #fafafa;
+}
+.irs-slider.type_last {
+    z-index: 2;
+}
+.irs-min,
+.irs-max,
+.irs-from,
+.irs-to,
+.irs-single {
+    position: absolute;
+    display: block;
+    cursor: default;
+}
+.irs-min,
+.irs-max {
+    color: #999999;
+    font-size: 11px;
+    line-height: 1;
+    top: 0;
+    padding: 5px;
+    background-color: #eeeeee;
+    border-radius: 2px;
+}
+.irs-min {
+    left: 0;
+}
+.irs-max {
+    right: 0;
+}
+.irs-from,
+.irs-to,
+.irs-single {
+    left: 0;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 11px;
+    line-height: 1;
+    padding: 5px;
+    top: 0;
+    background-color: #333;
+    border-radius: 2px;
+}
+.irs-from:after,
+.irs-to:after,
+.irs-single:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -4px;
+    overflow: hidden;
+    border: 4px solid transparent;
+    border-top-color: #333;
+}
+.irs-grid {
+    position: absolute;
+    display: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+}
+.irs-with-grid {
+    height: 75px;
+}
+.irs-with-grid .irs-grid {
+    display: block;
+}
+.irs-grid-pol {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 8px;
+    background-color: #999999;
+}
+.irs-grid-pol.small {
+    height: 4px;
+}
+.irs-grid-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 11px;
+    color: #999999;
+    line-height: 1;
+    padding: 0 3px;
+}
+.irs-disable-mask {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: -1%;
+    width: 102%;
+    height: 100%;
+    cursor: default;
+    background: transparent;
+    z-index: 2;
+}
+.irs-disabled {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}

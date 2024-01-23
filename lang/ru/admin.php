@@ -10,6 +10,10 @@ return [
     'full' => 'Полный размер',
 
     'price' => 'Цена',
+    'capacity' => 'Емкость',
+    'voltage' => 'Напряжение',
+    'technology' => 'Технология',
+    'plates' => 'Количество пластин',
 
     'email' => 'E-mail',
     'phone' => 'Телефон',
@@ -120,8 +124,7 @@ return [
     'add_item' => 'Добавить товар',
     'adding_item' => 'Добавление товара',
     'do_you_really_want_delete_this_item' => 'Вы действительно хотите удалить этот товар?',
-    'short_description' => 'Краткое описание',
-    'long_description' => 'Развернутое описание',
+    'description' => 'Описание',
 
     'order' => 'Заказ',
     'customer' => 'Заказчик',

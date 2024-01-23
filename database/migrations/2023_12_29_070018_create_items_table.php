@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,12 +15,17 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('image',50);
-            $table->string('name',50);
-            $table->string('short_description',);
-            $table->text('long_description');
+            $table->string('image',50)->nullable();
+            $table->string('name',50)->nullable();
+            $table->string('description');
             $table->integer('price');
             $table->foreignIdFor(Type::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->smallInteger('capacity')->nullable();
+            $table->smallInteger('voltage')->nullable();
+            $table->foreignIdFor(Technology::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->tinyInteger('plates')->nullable();
+
             $table->timestamps();
         });
     }
