@@ -9,6 +9,7 @@ use App\Models\Metric;
 use App\Models\Question;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -57,6 +58,8 @@ class BaseController extends Controller
         $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
+
+        if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');
 
         return view($view,array_merge(
             $this->data,

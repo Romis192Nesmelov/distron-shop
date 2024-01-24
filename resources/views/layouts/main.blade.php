@@ -383,6 +383,7 @@
     window.guest = parseInt("{{ (int)auth()->guest() }}");
     window.getNewCsrfUrl = "{{ route('get_new_csrf') }}";
     window.accountUrl = "{{ route('account') }}";
+    window.changeBasketUrl = "{{ route('change_basket') }}";
 </script>
 
 </body>

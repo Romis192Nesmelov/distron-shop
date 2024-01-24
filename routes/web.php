@@ -40,6 +40,7 @@ Route::controller(BaseController::class)->group(function () {
 Route::controller(BasketController::class)->group(function () {
     Route::post('/add-to-basket', 'addToBasket')->name('add_to_basket');
     Route::post('/checkout', 'checkout')->name('checkout');
+    Route::get('/change-basket', 'changeBasket')->name('change_basket');
 });
 
 Route::middleware(['auth'])->controller(OrderController::class)->group(function () {

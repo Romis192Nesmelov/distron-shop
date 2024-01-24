@@ -1,7 +1,5 @@
 $(document).ready(function() {
-    const loginModal = $('#login-modal'),
-        basketTotal = $('#basket-total span'),
-        basketTable = $('#basket-table');
+    const loginModal = $('#login-modal');
 
     window.tryCheckout = false;
 
@@ -81,34 +79,7 @@ $(document).ready(function() {
     });
 
     // Increment basket counter
-    $('.counter').click(function () {
-        let parentContainer = getParentContainerInBasketCounter($(this)),
-            input = getBasketValue(parentContainer),
-            increment = $(this).hasClass('plus') ? 1 : -1,
-            inputVal = parseInt(input.val()),
-            price = getBasketPrice(parentContainer),
-            total = 0;
-
-        if ((increment === 1 && inputVal < input.attr('max')) || (increment === -1 && inputVal > input.attr('min'))) {
-            inputVal += increment;
-            input.val(inputVal);
-            price.html(tolocalstring(window.price * inputVal));
-            basketTable.find('tr').each(function () {
-                let currentVal = parseInt(getBasketValue($(this)).val()),
-                    currentPrice = parseInt(getBasketPrice($(this)).html().replace(' ','').replace("&nbsp;",''));
-                total += currentVal * currentPrice;
-            });
-            basketTotal.html(total);
-        }
-    });
-
-    $('input.basket-value').change(function () {
-        let parentContainer = getParentContainerInBasketCounter($(this)),
-            inputVal = parseInt($(this).val()),
-            price = getBasketPrice(parentContainer);
-
-        price.html(tolocalstring(window.price * inputVal));
-    });
+    bindCounterChange();
 
     // Submit checkout
     $('#checkout').submit(function (e) {
@@ -222,7 +193,7 @@ const getParentContainerInBasketCounter = (obj) => {
 }
 
 const getBasketPrice = (parentContainer) => {
-    return parentContainer.find('.basket-price span')
+    return parentContainer.find('.basket-price span');
 }
 
 const getBasketValue = (parentContainer) => {
@@ -310,6 +281,80 @@ const bindMainButton = (loginModal) => {
         mainButton.click(() => {
             accountModal.modal('show');
         });
+    }
+}
+
+const bindCounterChange = () => {
+    let counter = $('.counter'),
+        inputBasketValue = $('input.basket-value');
+
+    counter.unbind();
+    inputBasketValue.unbind();
+
+    counter.click(function () {
+        let
+            parentContainer = getParentContainerInBasketCounter($(this)),
+            input = getBasketValue(parentContainer),
+            increment = $(this).hasClass('plus') ? 1 : -1,
+            inputVal = parseInt(input.val());
+
+        if ((increment === 1 && inputVal < input.attr('max')) || (increment === -1 && inputVal > input.attr('min'))) {
+            inputVal += increment;
+
+            changeBasket(parentContainer, inputVal, parentContainer);
+            calculateBasket(input, inputVal, parentContainer);
+        }
+    });
+
+    inputBasketValue.change(function () {
+        let parentContainer = getParentContainerInBasketCounter($(this)),
+            inputVal = parseInt($(this).val());
+
+        changeBasket(parentContainer, inputVal, parentContainer);
+        calculateBasket($(this), inputVal, parentContainer);
+    });
+}
+
+const changeBasket = (parentContainer, value) => {
+    if (parentContainer.hasClass('basket-row')) {
+        let id = parseInt(parentContainer.attr('id').replace('basket-row-',''));
+        $.get(window.changeBasketUrl, {
+            'id': id,
+            'value': parseInt(value)
+        }).done((data) => {
+
+        });
+    }
+}
+
+const calculateBasket = (input, inputVal, parentContainer) => {
+    let basketTotal = $('#basket-total span'),
+        basketTable = $('#basket-table'),
+        basketCir = $('#basket .cir'),
+        cirNumber = parseInt(basketCir.html()),
+        price = getBasketPrice(parentContainer),
+        total = 0;
+
+    if (inputVal) {
+        input.val(inputVal);
+        price.html(tolocalstring(window.price * inputVal));
+    } else if (basketTable.find('tr').length) {
+        input.parents('tr').remove();
+        cirNumber--;
+        basketCir.html(cirNumber);
+    }
+
+    basketTable.find('tr').each(function () {
+        let currentVal = parseInt(getBasketValue($(this)).val()),
+            currentPrice = parseInt(getBasketPrice($(this)).html().replace(' ','').replace("&nbsp;",''));
+        total += currentVal * currentPrice;
+    });
+
+    if (total) basketTotal.html(total);
+    else {
+        basketCir.addClass('d-none').html(0);
+        $('#checkout').addClass('d-none');
+        $('#no-products').removeClass('d-none');
     }
 }
 

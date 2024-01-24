@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\Basket\AddToBasketRequest;
+use App\Http\Requests\Basket\ChangeBasketRequest;
 use App\Http\Requests\Basket\CheckoutRequest;
 use App\Models\Item;
 use Illuminate\Http\JsonResponse;
@@ -41,6 +42,18 @@ class BasketController extends Controller
         ],200);
     }
 
+    public function changeBasket(ChangeBasketRequest $request): JsonResponse
+    {
+        $basket = Session::get('basket');
+        if (!(int)$request->value) unset($basket[$request->id]);
+        else $basket[$request->id]['value'] = (int)$request->value;
+
+        if (!count($basket)) Session::forget('basket');
+        else Session::put('basket',$basket);
+
+        return response()->json(['success' => true, 'value' => (int)$request->value], 200);
+    }
+
     public function checkout(CheckoutRequest $request): JsonResponse
     {
         $fields = $request->validated();
@@ -54,10 +67,18 @@ class BasketController extends Controller
                 ];
             }
         }
-        Session::put('basket',$basket);
-        return response()->json([
-            'success' => true,
-            'total' => $this->getBasketTotal()
-        ],200);
+        if (count($basket)) {
+            Session::put('basket',$basket);
+            return response()->json([
+                'success' => true,
+                'total' => $this->getBasketTotal()
+            ],200);
+        } else {
+            Session::forget('basket');
+            return response()->json([
+                'success' => true,
+                'total' => 0
+            ],200);
+        }
     }
 }

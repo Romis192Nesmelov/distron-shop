@@ -43,6 +43,7 @@ $(document).ready(function ($) {
                 basketRow = basketTable.find('tr').last().clone();
                 basketRow.attr('id','basket-row-' + data.id);
                 basketTable.append(basketRow);
+                bindCounterChange();
             }
         }
 
@@ -50,7 +51,6 @@ $(document).ready(function ($) {
 
         basketRow.find('input.basket-id').val(data.id);
         basketRow.find('.basket-name').html(data.name);
-
 
         if (data.props) basketProps.removeClass('d-none').find('small').html(data.props);
         else basketProps.addClass('d-none').html('');
