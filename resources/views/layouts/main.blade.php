@@ -272,7 +272,7 @@
                 @foreach(session()->get('basket') as $id => $position)
                     @include('blocks.basket_item_block',[
                         'id' => $id,
-                        'name' => $position['item']->name,
+                        'item' => $position['item'],
                         'value' => $position['value'],
                         'price' => $position['value'] * $position['item']->price
                     ])
@@ -280,7 +280,7 @@
             @else
                 @include('blocks.basket_item_block',[
                     'id' => 1,
-                    'name' => '',
+                    'item' => null,
                     'value' => 1,
                     'price' => 1
                 ])

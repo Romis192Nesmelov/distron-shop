@@ -60,7 +60,10 @@
             </div>
             <div class="col-lg-9 col-sm-12 row">
                 @foreach($items as $k => $item)
-                    @include('blocks.type_item_block',['col' => 3, 'showDescription' => false])
+                    @include('blocks.type_item_block',[
+                        'col' => 3,
+                        'showDescription' => false
+                    ])
                 @endforeach
             </div>
         </x-row>

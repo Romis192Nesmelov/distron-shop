@@ -36,6 +36,7 @@ return [
     'no_products_in_the_basket' => 'Нет товаров в корзине',
     'checkout' => 'Оформить заказ',
     'placing_an_order' => 'Оформление заказа',
+    'clear_basket' => 'Очистить корзину',
     'total' => 'Итого: ',
     'notes' => 'Приммечания',
     'your_order_has_been_processed' => 'Ваш заказ поступил в обработку!',

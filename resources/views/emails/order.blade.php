@@ -23,8 +23,13 @@
         </tr>
         @foreach ($order->items as $item)
             <tr>
-                <td align="center"><b>{{ $item->type->name }}</b></td>
-                <td align="center">{{ $item->name }}</td>
+                <td align="center"><h4>{{ $item->type->name }}</h4></td>
+                <td align="center">
+                    <b>{{ getItemHead($item) }}</b><br>
+                    @if (getItemProps($item))
+                        <p class="lh-sm"><small>{!! getItemProps($item) !!}</small></p>
+                    @endif
+                </td>
                 <td align="center">{{ $item->pivot->value }}</td>
                 <td align="center"><b>{{ $item->pivot->value * $item->price }} ₽</b></td>
             </tr>

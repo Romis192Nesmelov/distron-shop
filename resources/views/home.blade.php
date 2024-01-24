@@ -39,7 +39,11 @@
         {!! $services->text !!}
         <x-row class="d-flex justify-content-center pt-5">
             @foreach($services->items as $k => $item)
-                @include('blocks.type_item_block',['col' => 4, 'addClass' => 'ms-lg-3 me-lg-3', 'showDescription' => true])
+                @include('blocks.type_item_block',[
+                    'col' => 4,
+                    'addClass' => 'ms-lg-3 me-lg-3',
+                    'showDescription' => true
+                ])
             @endforeach
         </x-row>
     </x-section>

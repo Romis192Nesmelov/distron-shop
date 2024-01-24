@@ -7,8 +7,11 @@
                 @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-100'])
             </div>
             <div class="col-lg-9 col-md-6 col-sm-12 wow animate__animated animate__slideInRight" data-wow-offset="10">
-                <h2 class="text-left">@include('blocks.item_head_block')</h2>
-                @include('blocks.item_props_block', ['showDescription' => true])
+                <h2 class="text-left">{{ getItemHead($item) }}</h2>
+                <p>{{ $item->description }}</p>
+                @if (getItemProps($item))
+                    <p>{!! getItemProps($item) !!}</p>
+                @endif
                 <h1 class="price text-left mt-3 mb-3">
                     @include('blocks.price_block',['price' => $item->price])
                 </h1>
@@ -26,8 +29,11 @@
             @csrf
             <input type="hidden" name="id" value="{{ $item->id }}">
             @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-50'])
-            <h3 class="mb-1">@include('blocks.item_head_block')</h3>
-            @include('blocks.item_props_block', ['addClass' => 'text-center', 'showDescription' => true])
+            <h3 class="mb-1">{{ getItemHead($item) }}</h3>
+            <p class="text-center">{{ $item->description }}</p>
+            @if (getItemProps($item))
+                <p class="text-center">{!! getItemProps($item) !!}</p>
+            @endif
             <h1 class="text-center basket-price">
                 @include('blocks.price_block',[
                     'price' => session()->has('basket') && isset(session()->get('basket')[$item->id]) ? (int)session()->get('basket')[$item->id]['value'] * $item->price : $item->price

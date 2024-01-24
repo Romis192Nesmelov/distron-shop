@@ -32,8 +32,9 @@ class BasketController extends Controller
         return response()->json([
             'success' => true,
             'message' => trans('content.item_successfully_added_to_basket'),
-            'id' => $item->id,
-            'name' => $item->name,
+            'id' => $request->id,
+            'name' => getItemHead($item),
+            'props' => getItemProps($item),
             'value' => $request->value,
             'price' => $request->value * $item->price,
             'total' => $this->getBasketTotal()

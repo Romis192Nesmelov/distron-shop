@@ -39,7 +39,6 @@ $(document).ready(function ($) {
                 basketCheckout.removeClass('d-none');
                 basketCir.removeClass('d-none');
                 basketRow = basketTable.find('tr');
-                basketRow.attr('id','basket-row-' + data.id);
             } else {
                 basketRow = basketTable.find('tr').last().clone();
                 basketRow.attr('id','basket-row-' + data.id);
@@ -47,8 +46,15 @@ $(document).ready(function ($) {
             }
         }
 
+        let basketProps = basketRow.find('.basket-props');
+
         basketRow.find('input.basket-id').val(data.id);
         basketRow.find('.basket-name').html(data.name);
+
+
+        if (data.props) basketProps.removeClass('d-none').find('small').html(data.props);
+        else basketProps.addClass('d-none').html('');
+
         basketRow.find('input.basket-value').val(data.value);
         basketRow.find('.basket-price span').html(data.price);
         basketCir.html(basketTable.find('tr').length);
