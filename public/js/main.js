@@ -176,7 +176,7 @@ $(document).ready(function() {
     // Scroll controls
     setTimeout(function () {
         windowScroll();
-        fixingMainMenu($(window).scrollTop());
+        // fixingMainMenu($(window).scrollTop());
     }, 1000);
 
     if (window.scrollAnchor) {
@@ -207,7 +207,7 @@ const windowScroll = () => {
         let windowScroll = $(window).scrollTop(),
             win = $(this);
 
-        fixingMainMenu(windowScroll);
+        // fixingMainMenu(windowScroll);
 
         window.menuScrollFlag = true;
         $('.section').each(function () {
@@ -238,13 +238,13 @@ const gotoScroll = (scroll) => {
     }, 1500, 'easeInOutQuint');
 }
 
-const fixingMainMenu = (windowScroll) => {
-    let mainMenu = $('#main-nav');
-
-    if (windowScroll > 20 && !parseInt(mainMenu.css('top')) && $(window).width() > 992) {
-        mainMenu.addClass('top-fix').animate({'top':0}, 'slow');
-    } else mainMenu.removeClass('top-fix');
-}
+// const fixingMainMenu = (windowScroll) => {
+//     let mainMenu = $('#main-nav');
+//
+//     if (windowScroll > 20 && !parseInt(mainMenu.css('top')) && $(window).width() > 992) {
+//         mainMenu.addClass('top-fix').animate({'top':0}, 'slow');
+//     } else mainMenu.removeClass('top-fix');
+// }
 
 const bindMainButton = (loginModal) => {
     const mainButton = $('#main-button');
