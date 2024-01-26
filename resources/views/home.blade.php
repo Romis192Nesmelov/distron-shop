@@ -35,7 +35,7 @@
             @endforeach
         </x-row>
     </x-section>
-    <x-section wow_delay=".1" wow_direction="Left" data-scroll-destination="services" head="{{ trans('menu.services') }}">
+    <x-section wow_delay=".1" wow_direction="Left" data-scroll-destination="services" head="{{ $services->name }}">
         <div class="row mb-4">
             @for ($i=1;$i<=4;$i++)
                 <div class="col-md-3 col-sm-4 wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($i + 1) * 0.2 }}s">
