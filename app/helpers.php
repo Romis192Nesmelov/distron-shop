@@ -3,7 +3,7 @@
 function getItemHead($item): string {
     if (!$item) return '';
 
-    if ($item->type_id == 1) {
+    if (!$item->name && $item->type_id == 1) {
         return $item->technology->name;
     } elseif ($item->name) {
         return $item->name;

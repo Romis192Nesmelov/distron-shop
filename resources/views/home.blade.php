@@ -24,18 +24,27 @@
         </x-row>
     </x-section>
     <x-section class="color color1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
-        <x-row class="row pb-4 pt-5">
+        <x-row class="catalogue row pb-4 pt-5">
             @foreach($catalogue as $k => $type)
                 <div class="col-lg-{{ 12/$catalogue->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
                     <a href="{{ route('get_items',['slug' => $type->slug]) }}">
                         <img class="image w-75" src="{{ asset($type->image) }}" />
+                        <h3 class="text-white text-center mt-3">{{ $type->name }}</h3>
                     </a>
-                    <h3 class="text-white text-center mt-3">{{ $type->name }}</h3>
                 </div>
             @endforeach
         </x-row>
     </x-section>
     <x-section wow_delay=".1" wow_direction="Left" data-scroll-destination="services" head="{{ trans('menu.services') }}">
+        <div class="row mb-4">
+            @for ($i=1;$i<=4;$i++)
+                <div class="col-md-3 col-sm-4 wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($i + 1) * 0.2 }}s">
+                    <a class="fancybox w-100" href="{{ asset('images/services/photo'.$i.'_full.jpg') }}">
+                        <img class="image w-100" src="{{ asset('images/services/photo'.$i.'_preview.jpg') }}" />
+                    </a>
+                </div>
+            @endfor
+        </div>
         {!! $services->text !!}
         <x-row class="d-flex justify-content-center pt-5">
             @foreach($services->items as $k => $item)

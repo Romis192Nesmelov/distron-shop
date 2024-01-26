@@ -38,9 +38,10 @@ class TypesSeeder extends Seeder
             ],
             [
                 'image' => 'images/placeholder.jpg',
-                'name' =>'Услуги',
+                'name' =>'Описание услуг',
                 'singular' => 'Услуга',
-                'text' => '<p>Sed sed diam justo. Cras maximus porttitor ligula mattis sollicitudin. Sed vel ligula sed ex pulvinar elementum non eu arcu. Vestibulum in varius ex, eu consectetur odio. Pellentesque semper ut augue semper fringilla. Sed et ex sapien. Vivamus porttitor, nisl at sodales venenatis, urna diam eleifend turpis, ac faucibus neque quam sed tortor. Nullam eget gravida enim. Quisque dictum orci feugiat faucibus sagittis. Morbi elit mi, feugiat sed mollis vel, pharetra tempor metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sem dolor, laoreet vel vulputate vitae, convallis eget nunc. Donec eu nisl accumsan, pharetra turpis eget, condimentum massa. Mauris molestie tincidunt cursus. Vivamus porta diam in libero imperdiet dictum. Mauris et augue tempus, eleifend felis eget, sollicitudin enim.</p>',
+                'text' => '<p>Процесс обслуживания АКБ проходит в несколько этапов.</p><p>Вначале проводится внешний осмотр АКБ на предмет наличия механических повреждений и других легко заметных факторов (протечка жидкости, состояние клемм и т.п.), указывающих на условия работы батареи, замеры остаточного напряжения и внутреннего сопротивления. Для кислотно-щелочных батарей проверяется уровень электролита и его плотность.</p><p>На втором этапе выполняется чистка батареи, замер весовых отклонений от заводских показателей. Проводится вскрытие АКБ и, при необходимости, добавление дистиллированной воды.</p><p>Далее выполняется предварительная зарядка элементов, после чего производится первый контрольный разряд АКБ, результаты которого достоверно показывают состояние АКБ и определяют программу восстановления рабочих характеристик.</p><p>Автоматизированный аппаратно-программный комплекс позволяет оптимизировать процессы заряда-разряда АКБ, помогает контролировать процессы нашим специалистам на каждом этапе работы с батареями.</p><p>Добавление запатентованной присадки BSI позволяет защитить проводящее покрытие на пластинах, предотвращает накопление отложений на пластинах и продлевает срок службы пластин, увеличивая срок службы аккумулятора в целом.</p>
+',
                 'is_service' => true
             ],
         ];

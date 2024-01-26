@@ -1,6 +1,6 @@
 <div class="col-lg-{{ $col }} col-md-6 col-sm-12 mb-5 d-flex flex-column justify-content-between wow animate__animated animate__fadeInUp {{ $addClass ?? '' }}" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.1 }}s">
-    <div>
-        @include('blocks.item_image_block',['addClass' => 'w-100'])
+    <div class="w-100 text-center">
+        @include('blocks.item_image_block',['addClass' => 'w-75'])
         <h5 class="w-100 text-center">{{ getItemHead($item) }}</h5>
         @if ($showDescription)
             <p class="text-center">{{ $item->description }}</p>
