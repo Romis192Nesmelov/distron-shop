@@ -1,29 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
-        <x-row>
-            <div class="col-12 col-lg-4">
-                <img class="w-100" src="{{ asset($content[0]->image) }}" />
-            </div>
-            <div class="col-12 col-lg-8">
-                {!! $content[0]->text !!}
-            </div>
-        </x-row>
-    </x-section>
-    <hr>
-    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
-        <x-row>
-            @foreach($icons as $k => $icon)
-                @include('blocks.icon_block',[
-                    'col' => 3,
-                    'delay' => $k,
-                    'icon' => $icon
-                ])
-            @endforeach
-        </x-row>
-    </x-section>
-    <x-section class="color color1" data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
+    <x-section data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">
         <x-row class="catalogue row pb-4 pt-5">
             @foreach($catalogue as $k => $type)
                 <div class="col-lg-{{ 12/$catalogue->count() }} col-sm-12 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.3 }}s">
@@ -35,6 +13,7 @@
             @endforeach
         </x-row>
     </x-section>
+    <hr>
     <x-section wow_delay=".1" wow_direction="Left" data-scroll-destination="services" head="{{ $services->name }}">
         <div class="row mb-4">
             @for ($i=1;$i<=4;$i++)
@@ -56,7 +35,16 @@
             @endforeach
         </x-row>
     </x-section>
-    <hr>
+    <x-section class="color color1" wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
+        <x-row>
+            <div class="col-12 col-lg-4">
+                <img class="w-100" src="{{ asset($content[0]->image) }}" />
+            </div>
+            <div class="col-12 col-lg-8">
+                {!! $content[0]->text !!}
+            </div>
+        </x-row>
+    </x-section>
     <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
         <x-row>
             @include('blocks.white_section_image_content_block',[
@@ -67,12 +55,22 @@
         </x-row>
     </x-section>
     <hr>
-    <x-section class="white" wow_delay=".1" data-scroll-destination="{{ $menu['faq']['scroll'] }}" head="{{ $menu['faq']['name'] }}">
+    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
         <x-row>
+            @foreach($icons as $k => $icon)
+                @include('blocks.icon_block',[
+                    'col' => 3,
+                    'delay' => $k,
+                    'icon' => $icon
+                ])
+            @endforeach
+        </x-row>
+    </x-section>
+    <x-section class="color color1" wow_delay=".1" data-scroll-destination="{{ $menu['faq']['scroll'] }}" head="{{ $menu['faq']['name'] }}">
+        <x-row class="pb-5">
             @include('blocks.faq_block')
         </x-row>
     </x-section>
-    <hr>
     <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ $menu['contacts']['scroll'] }}" head="{{ $menu['contacts']['name'] }}">
         <x-row>
             @include('blocks.contacts_block')

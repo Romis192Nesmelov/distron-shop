@@ -47,15 +47,17 @@ class BaseController extends Controller
     protected function showView($view): View
     {
         $settings = new SettingsController();
-        $content = Content::all();
+        $content = Content::select('head')->get();
+
         $menu = [];
+        $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
+        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
         foreach ($content as $k => $item) {
             $slug = Str::slug($item->head);
             $menu[$slug] = ['scroll' => $slug, 'name' => $item->head];
-            if (!$k) $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
+
         }
-        $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
-        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
+        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
 
