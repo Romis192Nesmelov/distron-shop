@@ -53,9 +53,9 @@ class AdminItemsController extends AdminBaseController
             $validationArr['length'] = 'nullable|integer|max:1000';
             $validationArr['rated_current'] = 'nullable|max:100';
         } else {
-            $validationArr['capacity'] = 'required|integer|min:1|max:1000';
+            $validationArr['capacity'] = 'nullable|integer|min:1|max:1000';
             $validationArr['file'] = $this->validationDoc;
-            $validationArr['description_file'] = $this->validationString;
+            $validationArr['description_file'] = 'nullable|min:3|max:255';
         }
 
         $item = $this->editSomething (
