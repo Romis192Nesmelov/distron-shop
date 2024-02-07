@@ -21,6 +21,7 @@ trait HelperTrait
     public string $validationPng = 'mimes:png|max:2000';
     public string $validationPdf = 'nullable|mimes:pdf|max:1000';
     public string $validationCsv = 'nullable|mimes:csv,txt|max:1000';
+    public string $validationDoc = 'mimes:doc,pdf,docx';
 
     /**
      * @return string

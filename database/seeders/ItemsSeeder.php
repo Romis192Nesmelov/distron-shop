@@ -21,11 +21,15 @@ class ItemsSeeder extends Seeder
                 'name' => 'Восстановление Тяговых АКБ',
                 'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
                 'price' => rand(5000,10000),
+                'capacity' => rand(100,1000),
+                'description_file' => 'Цены на услуги по восстановлению АКБ',
+                'file' => 'files/prices.docx',
                 'type_id' => 4
             ],
             [
                 'image' => 'images/placeholder.jpg',
                 'name' => 'Восстановление Телеком батарей',
+                'capacity' => rand(100,1000),
                 'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.',
                 'price' => rand(5000,10000),
                 'type_id' => 4
@@ -47,22 +51,50 @@ class ItemsSeeder extends Seeder
         for ($i=2;$i<=6;$i++) {
             Item::create([
                 'name' => 'Ячейка АКБ',
-                'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.',
+                'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis.',
                 'price' => rand(1000,3000),
+                'length' => rand(45,190),
+                'width' => rand(100,200),
+                'height' => rand(300,750),
                 'type_id' => 2,
                 'plates' => $i
             ]);
         }
 
-        $accessories = ['Перемычка','Система долива','Болт','Разъем'];
-        for ($i=0;$i<4;$i++) {
+        for ($i=0;$i<5;$i++) {
             Item::create([
-                'name' => $accessories[$i],
+                'name' => 'Перемычка',
+                'section' => rand(1,10),
+                'length' => rand(10,50),
                 'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
-                'price' => 100 * ($i + 1),
+                'price' => rand(100,1000),
                 'type_id' => 3,
             ]);
         }
+
+        for ($i=0;$i<8;$i++) {
+            Item::create([
+                'name' => 'Разъем',
+                'rated_current' => rand(50,100) * 0.01,
+                'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
+                'price' => rand(100,1000),
+                'type_id' => 3,
+            ]);
+        }
+
+        Item::create([
+            'name' => 'Система долива',
+            'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
+            'price' => rand(100,1000),
+            'type_id' => 3,
+        ]);
+
+        Item::create([
+            'name' => 'Болт',
+            'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
+            'price' => rand(100,1000),
+            'type_id' => 3,
+        ]);
 
         foreach ($dataServices as $item) {
             Item::create($item);

@@ -23,8 +23,18 @@ return new class extends Migration
 
             $table->smallInteger('capacity')->nullable();
             $table->smallInteger('voltage')->nullable();
+
+            $table->smallInteger('section')->nullable();
+            $table->smallInteger('length')->nullable();
+            $table->smallInteger('width')->nullable();
+            $table->smallInteger('height')->nullable();
+            $table->double('rated_current')->nullable();
+
             $table->foreignIdFor(Technology::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->tinyInteger('plates')->nullable();
+
+            $table->string('description_file')->nullable();
+            $table->string('file',50)->nullable();
 
             $table->timestamps();
         });

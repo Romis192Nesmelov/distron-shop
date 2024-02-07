@@ -17,8 +17,18 @@ class Item extends Model
 
         'capacity',
         'voltage',
+
+        'section',
+        'length',
+        'width',
+        'height',
+        'rated_current',
+
         'technology_id',
-        'plates'
+        'plates',
+
+        'description_file',
+        'file'
     ];
 
     public function type(): BelongsTo
@@ -52,6 +62,18 @@ class Item extends Model
 
         $query->when(request('min_plates') && request('max_plates'), function (Builder $q) {
             $q->whereBetween('plates',[request('min_plates'),request('max_plates')]);
+        });
+
+        $query->when(request('min_length') && request('max_length'), function (Builder $q) {
+            $q->whereBetween('length',[request('min_length'),request('max_length')]);
+        });
+
+        $query->when(request('min_width') && request('max_width'), function (Builder $q) {
+            $q->whereBetween('width',[request('min_width'),request('max_width')]);
+        });
+
+        $query->when(request('min_height') && request('max_height'), function (Builder $q) {
+            $q->whereBetween('height',[request('min_height'),request('max_height')]);
         });
     }
 }

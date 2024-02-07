@@ -27,86 +27,51 @@ class ItemController extends BaseController
             ];
         }
 
+        $this->data['filters'] = [];
         if (request()->has('id')) {
             $this->data['item'] = Item::findOrFail(request()->id);
             $this->breadcrumbs[] = [
                 'route' => route('get_items',['slug' => $slug, 'id' => $this->data['item']->id]),
-                'name' => $this->data['item']->name
+                'name' => getItemHead($this->data['item'])
             ];
             return $this->showView('item');
         } else {
             $this->data['items'] = Item::query()->where('type_id',$this->data['type']->id)->filtered()->orderBy('price')->get();
-
-            $this->data['min_price'] = Item::query()
-                ->where('type_id',$this->data['type']->id)
-                ->select('price')
-                ->orderBy('price')
-                ->first()
-                ->price;
-            $this->data['max_price'] = Item::query()
-                ->where('type_id',$this->data['type']->id)
-                ->select('price')
-                ->orderBy('price','desc')
-                ->first()
-                ->price;
-
-            $this->data['min_price_val'] = request()->min_price ? request()->min_price : $this->data['min_price'];
-            $this->data['max_price_val'] = request()->max_price ? request()->max_price : $this->data['max_price'];
+            $this->getMinMax('price',100,'₽');
 
             if ($this->data['type']->id == 1) {
-                $this->data['min_voltage'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('voltage')
-                    ->orderBy('voltage')
-                    ->first()
-                    ->voltage;
-
-                $this->data['max_voltage'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('voltage')
-                    ->orderBy('voltage','desc')
-                    ->first()
-                    ->voltage;
-
-                $this->data['min_voltage_val'] = request()->min_voltage ? request()->min_voltage : $this->data['min_voltage'];
-                $this->data['max_voltage_val'] = request()->max_voltage ? request()->max_voltage : $this->data['max_voltage'];
-
-                $this->data['min_capacity'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('capacity')
-                    ->orderBy('capacity')
-                    ->first()
-                    ->capacity;
-
-                $this->data['max_capacity'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('capacity')
-                    ->orderBy('capacity','desc')
-                    ->first()
-                    ->capacity;
-
-                $this->data['min_capacity_val'] = request()->min_capacity ? request()->min_capacity : $this->data['min_capacity'];
-                $this->data['max_capacity_val'] = request()->max_capacity ? request()->max_capacity : $this->data['max_capacity'];
+                $this->getMinMax('voltage',1,'В');
+                $this->getMinMax('capacity', 100, 'Ah');
             } else if ($this->data['type']->id == 2) {
-                $this->data['min_plates'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('plates')
-                    ->orderBy('plates')
-                    ->first()
-                    ->plates;
-
-                $this->data['max_plates'] = Item::query()
-                    ->where('type_id',$this->data['type']->id)
-                    ->select('plates')
-                    ->orderBy('plates','desc')
-                    ->first()
-                    ->plates;
-
-                $this->data['min_plates_val'] = request()->min_plates ? request()->min_plates : $this->data['min_plates'];
-                $this->data['max_plates_val'] = request()->max_plates ? request()->max_plates : $this->data['max_plates'];
+                $this->getMinMax('plates', 1, trans('content.things'));
+                $this->getMinMax('length', 10, trans('content.mm'));
+                $this->getMinMax('width', 10, trans('content.mm'));
+                $this->getMinMax('height', 10, trans('content.mm'));
             }
-
             return $this->showView('type');
         }
+    }
+
+    private function getMinMax(string $name, int $step, string $postfix): void
+    {
+        $this->data['filters'][$name]['step'] = $step;
+        $this->data['filters'][$name]['postfix'] = $postfix;
+
+        $this->data['filters'][$name]['min'] = Item::query()
+            ->where('type_id',$this->data['type']->id)
+            ->select($name)
+            ->orderBy($name)
+            ->first()
+            ->$name;
+
+        $this->data['filters'][$name]['max'] = Item::query()
+            ->where('type_id',$this->data['type']->id)
+            ->select($name)
+            ->orderBy($name,'desc')
+            ->first()
+            ->$name;
+
+        $this->data['filters'][$name]['min_val'] = request()['min_'.$name] ? request()['min_'.$name] : $this->data['filters'][$name]['min'];
+        $this->data['filters'][$name]['max_val'] = request()['max_'.$name] ? request()['max_'.$name] : $this->data['filters'][$name]['max'];
     }
 }

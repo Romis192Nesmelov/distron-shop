@@ -8,7 +8,7 @@ a {
     color: #009671;
 }
 
-.catalogue a {
+a.href-block {
     text-decoration: none;
 }
 
@@ -18,7 +18,29 @@ p {
 }
 
 .image {
+    width: 250px;
+    margin: auto;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     border: 3px solid #009671;
+}
+
+.items .image {
+    width: 80%;
+}
+
+.items.items-type-1 .item {
+    max-height: 360px;
+}
+
+.items.items-type-2 .item {
+    max-height: 500px;
+}
+
+.items.items-type-3 .item {
+    max-height: 400px;
+    border: 1px solid red;
 }
 
 #loader {
@@ -46,7 +68,7 @@ p {
 
 a:hover,
 a:focus {
-    color: #7EE068;
+    color: #009671;
 }
 
 h2 {
@@ -107,7 +129,7 @@ hr {
 
 .section {
     font-size: .8rem;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .section.color {
@@ -587,6 +609,10 @@ td.basket-price {
         width: 33px;
         height: 33px;
         font-size: 12px;
+    }
+
+    .image {
+        width: 100%;
     }
 
 }

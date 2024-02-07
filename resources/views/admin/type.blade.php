@@ -63,6 +63,6 @@
                 ])
             </div>
         </div>
-        <script>window.dtRows = 4;</script>
+        <script>window.dtRows = 5;</script>
     @endif
 @endsection

@@ -15,18 +15,23 @@ $(document).ready(function () {
         fileButtonHtml: '<i class="icon-file-plus"></i>'
     });
 
-    // Single picker
-    $('.daterange-single').daterangepicker({
-        singleDatePicker: true,
-        locale: {
-            format: 'DD/MM/YYYY',
-            monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-            daysOfWeek : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
-            week: moment.locale('en', {
-                week: { dow: 1 }
-            })
-        }
+    $(window).resize(function () {
+        divImage();
     });
+    divImage();
+
+    // Single picker
+    // $('.daterange-single').daterangepicker({
+    //     singleDatePicker: true,
+    //     locale: {
+    //         format: 'DD/MM/YYYY',
+    //         monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    //         daysOfWeek : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+    //         week: moment.locale('en', {
+    //             week: { dow: 1 }
+    //         })
+    //     }
+    // });
 
     // Table setup
     // ------------------------------
@@ -35,7 +40,7 @@ $(document).ready(function () {
     $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
         columnDefs: [{
-            targets: [window.dtRows + 2]
+            targets: [window.dtRows + 1]
         }],
         order: [],
         dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
@@ -77,20 +82,19 @@ $(document).ready(function () {
     $('input[type=file]').change(function () {
         let input = $(this)[0],
             parent = $(this).parents('.edit-image-preview'),
-            imagePreview = parent.find('img');
+            imagePreview = parent.find('div.image[img]');
 
         if (input.files[0].type.match('image.*')) {
             let reader = new FileReader();
             reader.onload = function (e) {
-                imagePreview.attr('src', e.target.result);
+                imagePreview.attr('img', e.target.result);
+                divImage();
                 if (!imagePreview.is(':visible')) imagePreview.fadeIn();
             };
             reader.readAsDataURL(input.files[0]);
-        } else if (parent.hasClass('file-advanced')) {
-            imagePreview.attr('src', '');
-            imagePreview.fadeOut();
         } else {
-            imagePreview.attr('src', '/images/placeholder.jpg');
+            imagePreview.attr('img','/images/placeholder.jpg');
+            divImage();
         }
     });
 
@@ -176,5 +180,14 @@ const bindFancybox = () => {
         'speedOut': 300,
         'autoDimensions': true,
         'centerOnScroll': true
+    });
+}
+
+const divImage = () => {
+    $('div.image[img]').each(function () {
+        $(this).css({
+            'height': $(this).width(),
+            'background-image': 'url('+ $(this).attr('img') +')'
+        });
     });
 }

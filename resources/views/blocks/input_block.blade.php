@@ -12,6 +12,7 @@
         placeholder="{{ isset($placeholder) && $placeholder ? $placeholder : '' }}"
         {{ isset($min) ? (!isset($type) || $type == 'text' ? 'minlength=' : 'min=').$min : '' }}
         {{ isset($max) ? (!isset($type) || $type == 'text' ? 'maxlength=' : 'max=').$max : '' }}
+        {{ isset($step) ? 'step='.$step : '' }}
         {{ isset($disabled) && $disabled ? 'disabled=disabled' : '' }}
     >
 </x-incover>

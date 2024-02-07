@@ -45,6 +45,7 @@
                                 'value' => isset($item) ? $item->description : '',
                                 'simple' => true
                             ])
+
                             @if ($parent->id == 1)
                                 <div class="col-md-4 col-sm-12">
                                     @include('admin.blocks.select_block',[
@@ -61,7 +62,7 @@
                                         'name' => 'capacity',
                                         'type' => 'number',
                                         'placeholder' => trans('admin.capacity'),
-                                        'min' => 100,
+                                        'min' => 1,
                                         'max' => 1000,
                                         'value' => isset($item) ? $item->capacity : 100
                                     ])
@@ -78,14 +79,100 @@
                                     ])
                                 </div>
                             @elseif ($parent->id == 2)
+                                <div class="col-md-3 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.length'),
+                                        'name' => 'length',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.length'),
+                                        'min' => 45,
+                                        'max' => 190,
+                                        'value' => isset($item) ? $item->length : 45
+                                    ])
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.width'),
+                                        'name' => 'width',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.width'),
+                                        'min' => 100,
+                                        'max' => 200,
+                                        'value' => isset($item) ? $item->width : 100
+                                    ])
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.height'),
+                                        'name' => 'height',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.height'),
+                                        'min' => 300,
+                                        'max' => 750,
+                                        'value' => isset($item) ? $item->height : 300
+                                    ])
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.plates'),
+                                        'name' => 'plates',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.plates'),
+                                        'min' => 2,
+                                        'max' => 6,
+                                        'value' => isset($item) ? $item->plates : 2
+                                    ])
+                                </div>
+                            @elseif ($parent->id == 3)
+                                <div class="col-md-4 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.section'),
+                                        'name' => 'section',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.section'),
+                                        'max' => 100,
+                                        'value' => isset($item) ? $item->section : 10
+                                    ])
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.length'),
+                                        'name' => 'length',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.length'),
+                                        'min' => 1,
+                                        'max' => 200,
+                                        'value' => isset($item) ? $item->length : 45
+                                    ])
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    @include('blocks.input_block', [
+                                        'label' => trans('admin.rated_current'),
+                                        'name' => 'rated_current',
+                                        'type' => 'number',
+                                        'placeholder' => trans('admin.rated_current'),
+                                        'step' => 0.01,
+                                        'value' => isset($item) ? $item->rated_current : 1
+                                    ])
+                                </div>
+                            @else
                                 @include('blocks.input_block', [
-                                    'label' => trans('admin.plates'),
-                                    'name' => 'plates',
+                                    'label' => trans('admin.capacity'),
+                                    'name' => 'capacity',
                                     'type' => 'number',
-                                    'placeholder' => trans('admin.plates'),
+                                    'placeholder' => trans('admin.capacity'),
                                     'min' => 1,
-                                    'max' => 20,
-                                    'value' => isset($item) ? $item->plates : 2
+                                    'max' => 1000,
+                                    'value' => isset($item) ? $item->capacity : 100
+                                ])
+                                @include('admin.blocks.input_file_block', ['name' => 'file'])
+                                @include('blocks.input_block', [
+                                    'label' => trans('admin.description_file'),
+                                    'name' => 'description_file',
+                                    'type' => 'text',
+                                    'placeholder' => trans('admin.description_file'),
+                                    'max' => 255,
+                                    'value' => isset($item) ? $item->description_file : ''
                                 ])
                             @endif
                         </div>

@@ -178,14 +178,13 @@ class AdminBaseController extends Controller
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->find($request->input('id'));
             $model->update($fields);
-
-            $this->processingPdf($request, $model);
+            $this->processingDoc($request, $model);
         } else {
             if ($imageName) $validationArr['image'] = 'required|'.$validationArr['image'];
             $fields = $this->validate($request, $validationArr);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->create($fields);
-            $this->processingPdf($request, $model);
+            $this->processingDoc($request, $model);
         }
 
         $this->processingFiles($request, $model, 'image', $pathToImages, $imageName.$model->id);
@@ -234,10 +233,10 @@ class AdminBaseController extends Controller
         $this->data['singular_key'] = substr($key, 0, -1);
     }
 
-    protected function processingPdf(Request $request, Model $model): void
+    protected function processingDoc(Request $request, Model $model): void
     {
-        if (in_array('pdf',$model->getFillable())) {
-            $this->processingFiles($request, $model, 'pdf', 'pdfs/', 'pdf'.$model->getTable().'_');
+        if (in_array('file',$model->getFillable())) {
+            $this->processingFiles($request, $model, 'file', 'files/', 'doc'.$model->getTable().'_');
         }
     }
 

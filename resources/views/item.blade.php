@@ -15,6 +15,11 @@
                 <h1 class="price text-left mt-3 mb-3">
                     @include('blocks.price_block',['price' => $item->price])
                 </h1>
+                @if ($item->file)
+                    <p class="mb-4">
+                        <a href="{{ asset($item->file) }}" {{ $item->description_file ? 'title='.$item->description_file : '' }} target="_blank">{{ $item->description_file ? $item->description_file : pathinfo($item->file)['basename'] }}</a>
+                    </p>
+                @endif
                 @include('blocks.button_block', [
                     'dataTarget' => 'add-to-basket-modal',
                     'primary' => true,
@@ -28,7 +33,7 @@
         <form id="add-to-basket" class="d-flex flex-column align-items-center" method="post" action="{{ route('add_to_basket') }}">
             @csrf
             <input type="hidden" name="id" value="{{ $item->id }}">
-            @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-50'])
+            @include('blocks.item_image_block')
             <h3 class="mb-1">{{ getItemHead($item) }}</h3>
             <p class="text-center">{{ $item->description }}</p>
             @if (getItemProps($item))

@@ -32,8 +32,8 @@
 
     <script type="text/javascript" src="{{ asset('js/admin/datatables.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('js/admin/moment.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/admin/daterangepicker.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('js/admin/moment.min.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('js/admin/daterangepicker.js') }}"></script>--}}
 
     <script type="text/javascript" src="{{ asset('js/admin/styling/uniform.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/admin/styling/switchery.min.js') }}"></script>

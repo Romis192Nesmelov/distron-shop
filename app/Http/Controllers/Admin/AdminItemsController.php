@@ -31,19 +31,37 @@ class AdminItemsController extends AdminBaseController
      */
     public function editItem(Request $request): RedirectResponse
     {
+        $validationArr = [
+            'image' => $this->validationJpgAndPng,
+            'name' => 'nullable|max:50',
+            'description' => $this->validationString,
+            'price' => $this->validationInteger,
+            'type_id' => 'required|integer|exists:types,id',
+        ];
+
+        if ($request->type_id == 1) {
+            $validationArr['capacity'] = 'required|integer|min:1|max:1000';
+            $validationArr['voltage'] = 'required|integer|min:10|max:100';
+            $validationArr['technology_id'] = 'required|integer|exists:technologies,id';
+        } elseif ($request->type_id == 2) {
+            $validationArr['length'] = 'required|integer|min:45|max:190';
+            $validationArr['width'] = 'required|integer|min:100|max:200';
+            $validationArr['height'] = 'required|integer|min:300|max:750';
+            $validationArr['plates'] = 'required|integer|min:2|max:6';
+        } elseif ($request->type_id == 3) {
+            $validationArr['section'] = 'nullable|integer|max:100';
+            $validationArr['length'] = 'nullable|integer|max:1000';
+            $validationArr['rated_current'] = 'nullable|max:100';
+        } else {
+            $validationArr['capacity'] = 'required|integer|min:1|max:1000';
+            $validationArr['file'] = $this->validationDoc;
+            $validationArr['description_file'] = $this->validationString;
+        }
+
         $item = $this->editSomething (
             $request,
             new Item(),
-            [
-                'image' => $this->validationJpgAndPng,
-                'name' => 'nullable|max:50',
-                'description' => $this->validationString,
-                'price' => $this->validationInteger,
-                'type_id' => 'required|integer|exists:types,id',
-                'capacity' => 'nullable|max:1000',
-                'voltage' => 'nullable|max:100',
-                'plates' => 'nullable|max:20'
-            ],
+            $validationArr,
             'images/items/',
             'item'
         );

@@ -7,7 +7,7 @@
     <div class="panel-body edit-image-preview">
         @if (isset($image) && $image)
             <a class="fancybox" href="{{ asset($image) }}">
-                <img src="{{ asset($image) }}?{{ md5(rand(1,100000)*time()) }}" />
+                <div class="image" img="{{ asset($image) }}?{{ md5(rand(1,100000)*time()) }}"></div>
             </a>
         @else
             <img src="{{ asset('images/placeholder.jpg') }}" />

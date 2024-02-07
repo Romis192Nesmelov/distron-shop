@@ -14,6 +14,15 @@ $(document).ready(function() {
         'centerOnScroll': true
     });
 
+    $(window).resize(function () {
+        divImage();
+    });
+    divImage();
+
+    // $('#add-to-basket-modal').on('show.bs.modal', () => {
+    //     divImage();
+    // });
+
     $('input[name=phone]').mask("+7(999)999-99-99");
 
     if (window.showLogin) loginModal.modal('show');
@@ -22,60 +31,8 @@ $(document).ready(function() {
 
     // Filters
     const filtersForm = $('#filters');
-    $('#range-slider-price').ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: window.minPrice,
-        max: window.maxPrice,
-        from: window.minPriceVal,
-        to: window.maxPriceVal,
-        step: 100,
-        postfix: ' ₽'
-    }).change(function () {
-        filtersForm.find('input[name=min_price]').val($(this).data().from);
-        filtersForm.find('input[name=max_price]').val($(this).data().to);
-    });
-
-    $('#range-slider-voltage').ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: window.minVoltage,
-        max: window.maxVoltage,
-        from: window.minVoltageVal,
-        to: window.maxVoltageVal,
-        step: 1,
-        postfix: ' В'
-    }).change(function () {
-        filtersForm.find('input[name=min_voltage]').val($(this).data().from);
-        filtersForm.find('input[name=max_voltage]').val($(this).data().to);
-    });
-
-    $('#range-slider-capacity').ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: window.minCapacity,
-        max: window.maxCapacity,
-        from: window.minCapacityVal,
-        to: window.maxCapacityVal,
-        step: 100,
-        postfix: ' Ah'
-    }).change(function () {
-        filtersForm.find('input[name=min_capacity]').val($(this).data().from);
-        filtersForm.find('input[name=max_capacity]').val($(this).data().to);
-    });
-
-    $('#range-slider-plates').ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: window.minPlates,
-        max: window.maxPlates,
-        from: window.minPlatesVal,
-        to: window.maxPlatesVal,
-        step: 1,
-        postfix: ' шт'
-    }).change(function () {
-        filtersForm.find('input[name=min_plates]').val($(this).data().from);
-        filtersForm.find('input[name=max_plates]').val($(this).data().to);
+    $.each(window.filters, function (name,params) {
+        initSlider(filtersForm,name, params.min, params.max, params.min_val, params.max_val, params.step, params.postfix);
     });
 
     // Increment basket counter
@@ -95,28 +52,6 @@ $(document).ready(function() {
     $('input[name=delivery]').change(function () {
         $('.delivery-block').toggleClass('d-none');
     });
-
-    // $('.select').select2({
-    //     minimumResultsForSearch: Infinity
-    // });
-
-    // $('#slider-voltage').ionRangeSlider({
-    //     grid: true,
-    //     min: 5,
-    //     max: 12,
-    //     from: 9,
-    //     step: 1,
-    //     prettify_enabled: false
-    // });
-    //
-    // $('#slider-resistance').ionRangeSlider({
-    //     grid: true,
-    //     min: 1,
-    //     max: 6,
-    //     from: 3,
-    //     step: 1,
-    //     prettify_enabled: false
-    // });
 
     // $('.owl-carousel.news').owlCarousel({
     //     margin: 10,
@@ -321,9 +256,7 @@ const changeBasket = (parentContainer, value) => {
         $.get(window.changeBasketUrl, {
             'id': id,
             'value': parseInt(value)
-        }).done((data) => {
-
-        });
+        }).done((data) => {});
     }
 }
 
@@ -360,6 +293,31 @@ const calculateBasket = (input, inputVal, parentContainer) => {
 
 const tolocalstring = (string) => {
     return string.toLocaleString().replace(/\,/g, ' ');
+}
+
+const divImage = () => {
+    $('div.image[img]').each(function () {
+        $(this).css({
+            'height': $(this).width(),
+            'background-image': 'url('+ $(this).attr('img') +')'
+        });
+    });
+}
+
+const initSlider = (filtersForm, name, min, max, from, to, step, postfix) => {
+    $('#range-slider-' + name).ionRangeSlider({
+        type: "double",
+        grid: true,
+        min: min,
+        max: max,
+        from: from,
+        to: to,
+        step: step,
+        postfix: ' ' + postfix
+    }).change(function () {
+        filtersForm.find('input[name=min_'+name+']').val($(this).data().from);
+        filtersForm.find('input[name=max_'+name+']').val($(this).data().to);
+    });
 }
 
 // const getQueryParams = (qs) => {
