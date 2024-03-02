@@ -8,6 +8,7 @@ $(document).ready(function ($) {
         newOrderModal = $('#new-order-modal'),
         basketModal = $('#basket-modal');
 
+    processingForm($('#form-feedback-full'), true,false);
     processingForm($('#form-feedback-short'), true,false);
     processingForm($('#login-form'), true, false, (data) => {
         mainButton.find('span').html(window.accountText);

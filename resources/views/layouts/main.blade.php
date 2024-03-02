@@ -47,23 +47,32 @@
         <div id="main-logo">
             <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('images/logo.svg') }}" />
             <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">Новая жизнь Вашего аккумулятора</h1>
-            @if (auth()->guest())
+            <div class="d-flex">
+                @if (auth()->guest())
+                    @include('blocks.button_block',[
+                        'id' => 'main-button',
+                        'primary' => true,
+                        'addClass' => 'wow animate__animated animate__fadeIn',
+                        'addAttr' => ['data-wow-delay' => '.3s'],
+                        'buttonText' => trans('auth.login_register')
+                    ])
+                @else
+                    @include('blocks.button_block',[
+                        'id' => 'main-button',
+                        'primary' => true,
+                        'addClass' => 'wow animate__animated animate__fadeIn',
+                        'addAttr' => ['data-wow-delay' => '.3s'],
+                        'buttonText' => trans('auth.account')
+                    ])
+                @endif
                 @include('blocks.button_block',[
-                    'id' => 'main-button',
                     'primary' => true,
                     'addClass' => 'wow animate__animated animate__fadeIn',
                     'addAttr' => ['data-wow-delay' => '.3s'],
-                    'buttonText' => trans('auth.login_register')
+                    'dataTarget' => 'feedback-modal',
+                    'buttonText' => trans('content.leave_request')
                 ])
-            @else
-                @include('blocks.button_block',[
-                    'id' => 'main-button',
-                    'primary' => true,
-                    'addClass' => 'wow animate__animated animate__fadeIn',
-                    'addAttr' => ['data-wow-delay' => '.3s'],
-                    'buttonText' => trans('auth.account')
-                ])
-            @endif
+            </div>
         </div>
         <div class="wow animate__animated animate__fadeIn" data-wow-delay="0.5s" id="video" controls="controls" poster="{{ asset('images/distron.jpg') }}">
             <video controls="controls" poster="{{ asset('images/distron.jpg') }}">
@@ -348,27 +357,29 @@
 </x-modal>
 @include('blocks.message_modal_block')
 
-{{--<x-modal id="feedback-modal" head="{{ trans('content.feedback') }}">--}}
-{{--    <form class="form" method="post" action="{{ route('feedback') }}">--}}
-{{--        @csrf--}}
-{{--        @include('blocks.request_block')--}}
-{{--        <div class="mt-3 d-flex justify-content-end">--}}
-{{--            @include('blocks.button_block',[--}}
-{{--                'addClass' => 'me-3',--}}
-{{--                'primary' => true,--}}
-{{--                'dataDismiss' => false,--}}
-{{--                'buttonType' => 'submit',--}}
-{{--                'buttonText' => trans('content.send'),--}}
-{{--                'disabled' => true--}}
-{{--            ])--}}
-{{--            @include('blocks.button_block',[--}}
-{{--                'primary' => false,--}}
-{{--                'dataDismiss' => true,--}}
-{{--                'buttonText' => trans('content.close')--}}
-{{--            ])--}}
-{{--        </div>--}}
-{{--    </form>--}}
-{{--</x-modal>--}}
+<x-modal id="feedback-modal" head="{{ trans('content.feedback') }}">
+    <form id="form-feedback-full" class="form" method="post" action="{{ route('feedback') }}">
+        @csrf
+        @include('blocks.request_block')
+        <div class="mt-3 d-flex justify-content-end">
+            @include('blocks.button_block',[
+                'addClass' => 'me-3',
+                'primary' => true,
+                'dataDismiss' => false,
+                'buttonType' => 'submit',
+                'buttonText' => trans('content.send'),
+                'disabled' => true
+            ])
+            @include('blocks.button_block',[
+                'primary' => true,
+                'addClass' => 'wow animate__animated animate__fadeIn',
+                'addAttr' => ['data-wow-delay' => '.3s'],
+                'dataTarget' => 'request-modal',
+                'buttonText' => trans('content.leave_request')
+            ])
+        </div>
+    </form>
+</x-modal>
 
 @foreach ($metrics as $metric)
     {!! $metric->code !!}

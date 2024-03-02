@@ -49,7 +49,7 @@ Route::middleware(['auth'])->controller(OrderController::class)->group(function 
 });
 
 Route::controller(FeedbackController::class)->group(function () {
-//    Route::post('/feedback', 'feedback')->name('feedback');
+    Route::post('/feedback', 'feedback')->name('feedback');
     Route::post('/feedback-short', 'feedbackShort')->name('feedback_short');
 });
 

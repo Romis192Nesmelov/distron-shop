@@ -300,6 +300,10 @@ hr {
     margin-top: 10px;
 }
 
+#main-logo .btn.btn-primary:last-child {
+    margin-left: 5px;
+}
+
 #breadcrumbs {
     color: #009671;
     display: flex;

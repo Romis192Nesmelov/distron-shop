@@ -1,5 +1,5 @@
 <div class="col-md-3 col-sm-6 col-xs-12 contacts">
-    <table>
+    <table class="mb-4">
         @foreach($contacts as $contact)
             <tr>
             @if ($contact->type == 4) @php $map = $contact->contact @endphp
@@ -26,6 +26,13 @@
             </tr>
         @endforeach
     </table>
+    @include('blocks.button_block',[
+        'primary' => true,
+        'addClass' => 'wow animate__animated animate__fadeIn',
+        'addAttr' => ['data-wow-delay' => '.3s'],
+        'dataTarget' => 'feedback-modal',
+        'buttonText' => trans('content.leave_request')
+    ])
 </div>
 <div class="col-md-9 col-sm-6 col-xs-12">
     @if (isset($map))
