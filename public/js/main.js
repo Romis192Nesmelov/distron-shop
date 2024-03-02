@@ -14,6 +14,17 @@ $(document).ready(function() {
         'centerOnScroll': true
     });
 
+    const mainNav = $('#main-nav'),
+        searchForm = mainNav.find('form');
+
+    mainNav.find('i').click(function () {
+        searchForm.submit();
+    });
+
+    searchForm.on('submit', function (e) {
+        if (!$(this).find('input').val()) e.preventDefault();
+    });
+
     $(window).resize(function () {
         divImage();
     });
@@ -172,14 +183,6 @@ const gotoScroll = (scroll) => {
         scrollTop: $('div[data-scroll-destination="' + scroll + '"]').offset().top - 51
     }, 1500, 'easeInOutQuint');
 }
-
-// const fixingMainMenu = (windowScroll) => {
-//     let mainMenu = $('#main-nav');
-//
-//     if (windowScroll > 20 && !parseInt(mainMenu.css('top')) && $(window).width() > 992) {
-//         mainMenu.addClass('top-fix').animate({'top':0}, 'slow');
-//     } else mainMenu.removeClass('top-fix');
-// }
 
 const bindMainButton = (loginModal) => {
     const mainButton = $('#main-button');

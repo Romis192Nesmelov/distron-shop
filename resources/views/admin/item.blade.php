@@ -178,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+                @include('admin.blocks.seo_block',['seo' => isset($item) ? $item->seo : null])
                 @include('admin.blocks.save_button_block')
             </form>
         </div>

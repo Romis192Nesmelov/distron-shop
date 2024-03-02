@@ -28,7 +28,9 @@ class Item extends Model
         'plates',
 
         'description_file',
-        'file'
+        'file',
+
+        'seo_id',
     ];
 
     public function type(): BelongsTo
@@ -44,6 +46,25 @@ class Item extends Model
     public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Order::class)->withTimestamps()->withPivot(['value']);
+    }
+
+    public function seo(): BelongsTo
+    {
+        return $this->belongsTo(Seo::class);
+    }
+
+    public function scopeSearched(Builder $query): void
+    {
+        $searched = request('find');
+        $technologyIds = Technology::query()->where('name', 'LIKE', "%{$searched}%")->pluck('id')->toArray();
+
+        $query->when($searched, function (Builder $q) use ($searched, $technologyIds) {
+            $q
+                ->where('name', 'LIKE', "%{$searched}%")
+                ->orWhere('description', 'LIKE', "%{$searched}%")
+                ->orWhere('capacity', 'LIKE', "%{$searched}%")
+                ->orWhereIn('id', $technologyIds);
+        });
     }
 
     public function scopeFiltered(Builder $query): void
@@ -74,6 +95,10 @@ class Item extends Model
 
         $query->when(request('min_height') && request('max_height'), function (Builder $q) {
             $q->whereBetween('height',[request('min_height'),request('max_height')]);
+        });
+
+        $query->when(request('min_section') && request('max_section'), function (Builder $q) {
+            $q->whereBetween('section',[request('min_section'),request('max_section')]);
         });
     }
 }

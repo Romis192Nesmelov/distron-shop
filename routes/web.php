@@ -19,6 +19,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,8 @@ Route::controller(FeedbackController::class)->group(function () {
 //    Route::post('/feedback', 'feedback')->name('feedback');
     Route::post('/feedback-short', 'feedbackShort')->name('feedback_short');
 });
+
+Route::get('/search', SearchController::class)->name('search');
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');

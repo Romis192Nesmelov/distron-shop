@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\HelperTrait;
 use App\Http\Controllers\Controller;
+use App\Models\Seo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -175,6 +176,7 @@ class AdminBaseController extends Controller
             $validationArr['id'] = 'required|integer|exists:'.$model->getTable().',id';
             if ($imageName) $validationArr['image'] = 'nullable|'.$validationArr['image'];
             $fields = $this->validate($request, $validationArr);
+            $seoFields = $this->getSeo($request, $model);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->find($request->input('id'));
             $model->update($fields);
@@ -182,9 +184,19 @@ class AdminBaseController extends Controller
         } else {
             if ($imageName) $validationArr['image'] = 'required|'.$validationArr['image'];
             $fields = $this->validate($request, $validationArr);
+            $seoFields = $this->getSeo($request, $model);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->create($fields);
             $this->processingDoc($request, $model);
+        }
+
+        if (count($seoFields)) {
+            if (!isset($model->seo)) {
+                $seo = Seo::create($seoFields);
+                $model->update(['seo_id' => $seo->id]);
+            } else {
+                $model->seo->update($seoFields);
+            }
         }
 
         $this->processingFiles($request, $model, 'image', $pathToImages, $imageName.$model->id);
@@ -220,6 +232,26 @@ class AdminBaseController extends Controller
         if (in_array('date',$model->getFillable()) && array_key_exists('date',$validationArr)) $fields['date'] = $this->convertTimestamp(request('date'));
         if (in_array('video',$model->getFillable()) && array_key_exists('video',$validationArr)) $fields['video'] = preg_replace('/(\swidth=\"(\d{3})\" height=\"(\d{3})\")/', '', $fields['video']);
         return $fields;
+    }
+
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function getSeo(Request $request, Model $model): array
+    {
+        $seoFields = [];
+        if (in_array('seo_id',$model->getFillable())) {
+            $seoFields = $this->validate($request, $this->getValidationSeo());
+            $seoExistFlag = false;
+            foreach ($seoFields as $field => $val) {
+                if ($val) {
+                    $seoExistFlag = true;
+                    break;
+                }
+            }
+            if (!$seoExistFlag) $seoFields = [];
+        }
+        return $seoFields;
     }
 
     protected function convertTimestamp($time): int

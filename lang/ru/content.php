@@ -7,6 +7,9 @@ return [
     'phone' => 'Телефон',
     'address' => 'Адрес',
     'map' => 'Карта',
+    'search' => 'Поиск',
+    'search_result' => 'Результаты поиска по запросу «:string»',
+    'found_nothing' => 'Ничего не найдено!',
 
     'your_name' => 'Ваше имя',
     'your_email' => 'Ваш E-mail',
@@ -49,6 +52,7 @@ return [
     'length' => 'Длина',
     'width' => 'Ширина',
     'height' => 'Высота',
+    'section' => 'Сечение',
     'capacity_val' => '<b>Емкость:</b> :val<span>Ah</span>',
     'voltage_val' => '<b>Напряжение:</b> :val<span>В</span>',
     'plates_val' => '<b>Количество пластин:</b><br> :val<span>шт.</span>',

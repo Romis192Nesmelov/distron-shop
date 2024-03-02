@@ -26,6 +26,27 @@ p {
     border: 3px solid #009671;
 }
 
+.pagination {
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(0, 65, 50, 0.25) !important;
+    --bs-pagination-active-bg: #009671 !important;
+    --bs-pagination-active-border-color: #009671 !important;
+    --bs-pagination-disabled-color: #6c757d !important;
+}
+
+.active>.page-link,
+.page-link.active {
+    background-color: #009671;
+    border-color: #009671;
+}
+
+.page-link {
+    color: #009671;
+}
+
+span.marked {
+    background-color: #d3f7a5;
+}
+
 .items .image {
     width: 80%;
 }
@@ -80,6 +101,15 @@ h3 {
     font-size: 1.5em;
     text-align: center;
     margin-bottom: 20px;
+}
+
+.search-result h3 {
+    font-size: 1.8em;
+    text-align: left;
+}
+
+.search-result button {
+    width: 150px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -220,6 +250,26 @@ hr {
     border-bottom: 2px solid white;
     padding-left: 10px;
     z-index: 999;
+}
+
+#main-nav form {
+    width: 300px;
+    position: absolute;
+    right: 70px;
+}
+
+#main-nav form input {
+    width: 100%;
+    padding-right: 30px;
+    border-radius: 5px;
+}
+
+#main-nav form i {
+    position: absolute;
+    margin-top: 8px;
+    right: 10px;
+    color: grey;
+    cursor: pointer;
 }
 
 #main-logo {
@@ -447,6 +497,14 @@ td.basket-price {
     color: #000;
 }
 
+@media (max-width: 1500px)  {
+    .nav-link {
+        font-size: 13px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
 @media (max-width: 1400px)  {
     #video {
         width: 500px;
@@ -463,12 +521,6 @@ td.basket-price {
         top: 250px;
     }
 
-    .nav-link {
-        font-size: 13px;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-
     .section.color {
         background-size: 120% 100%;
     }
@@ -482,9 +534,21 @@ td.basket-price {
     }
 }
 
+@media (max-width: 1300px) {
+    #main-nav form {
+        width: 200px;
+    }
+}
+
 @media (max-width: 1200px) {
     #main-logo h1 {
         width: 70%;
+    }
+
+    .nav-link {
+        font-size: 11px;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
 }
 
@@ -518,6 +582,10 @@ td.basket-price {
 
     #look-at {
         color: #009671;
+    }
+
+    #main-nav form {
+        width: 300px;
     }
 }
 
@@ -581,6 +649,10 @@ td.basket-price {
     .section.contacts td .line,
     .section.contacts td .dot {
         display: none;
+    }
+
+    #main-nav form {
+        width: calc(100% - 140px);
     }
 }
 

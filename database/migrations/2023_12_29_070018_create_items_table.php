@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Seo;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Database\Migrations\Migration;
@@ -35,6 +36,8 @@ return new class extends Migration
 
             $table->string('description_file')->nullable();
             $table->string('file',50)->nullable();
+
+            $table->foreignIdFor(Seo::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();
         });

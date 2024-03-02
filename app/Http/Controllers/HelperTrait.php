@@ -31,7 +31,7 @@ trait HelperTrait
         return $this->validationDate;
     }
 
-    private $metas = [
+    public $metas = [
         'meta_description' => ['name' => 'description', 'property' => false],
         'meta_keywords' => ['name' => 'keywords', 'property' => false],
         'meta_twitter_card' => ['name' => 'twitter:card', 'property' => false],
@@ -46,6 +46,15 @@ trait HelperTrait
         'meta_googlebot' => ['name' => 'googlebot', 'property' => false],
         'meta_google_site_verification' => ['name' => 'google-site-verification', 'property' => false],
     ];
+
+    public function getValidationSeo(): array
+    {
+        $validationArr = ['title' => 'nullable|max:255'];
+        foreach ($this->metas as $meta => $params) {
+            $validationArr[$meta] = 'nullable|max:255';
+        }
+        return $validationArr;
+    }
 
     public function saveCompleteMessage()
     {

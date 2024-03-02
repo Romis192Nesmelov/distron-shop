@@ -34,9 +34,11 @@ class ItemController extends BaseController
                 'route' => route('get_items',['slug' => $slug, 'id' => $this->data['item']->id]),
                 'name' => getItemHead($this->data['item'])
             ];
+            $this->getSeo('item');
             return $this->showView('item');
         } else {
             $this->data['items'] = Item::query()->where('type_id',$this->data['type']->id)->filtered()->orderBy('price')->get();
+
             $this->getMinMax('price',100,'₽');
 
             if ($this->data['type']->id == 1) {
@@ -47,9 +49,18 @@ class ItemController extends BaseController
                 $this->getMinMax('length', 10, trans('content.mm'));
                 $this->getMinMax('width', 10, trans('content.mm'));
                 $this->getMinMax('height', 10, trans('content.mm'));
+            } else if ($this->data['type']->id == 3) {
+                $this->getMinMax('section', 1, trans('content.mm'));
             }
+
+            $this->getSeo('type');
             return $this->showView('type');
         }
+    }
+
+    private function getSeo($name): void
+    {
+        if (isset($this->data[$name]->seo)) $this->data['seo'] = $this->data[$name]->seo;
     }
 
     private function getMinMax(string $name, int $step, string $postfix): void
@@ -63,6 +74,8 @@ class ItemController extends BaseController
             ->orderBy($name)
             ->first()
             ->$name;
+
+        if ($this->data['filters'][$name]['min'] === null) $this->data['filters'][$name]['min'] = 0;
 
         $this->data['filters'][$name]['max'] = Item::query()
             ->where('type_id',$this->data['type']->id)

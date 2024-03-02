@@ -38,10 +38,12 @@
                         </div>
                     </div>
                 </div>
+                @include('admin.blocks.seo_block',['seo' => isset($type) ? $type->seo : null])
                 @include('admin.blocks.save_button_block')
             </form>
         </div>
     </div>
+
     @if (isset($type))
         <div class="panel panel-flat">
             <x-atitle>{{ trans('admin.items') }}</x-atitle>

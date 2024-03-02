@@ -19,6 +19,7 @@ class AdminTypesController extends AdminBaseController
 
     public function types($slug=null): View
     {
+        $this->data['metas'] = $this->metas;
         return $this->getSomething('types', new Type(), $slug);
     }
 
@@ -27,7 +28,7 @@ class AdminTypesController extends AdminBaseController
      */
     public function editType(Request $request): RedirectResponse
     {
-        $this->editSomething (
+         $this->editSomething (
             $request,
             new Type(),
             ['image' => $this->validationJpgAndPng, 'name' => $this->validationString, 'text' => $this->validationText],

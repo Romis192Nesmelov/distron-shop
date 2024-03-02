@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use PhpParser\Node\Expr\Cast\Object_;
-
 class SettingsController extends Controller
 {
     use HelperTrait;
@@ -17,17 +15,6 @@ class SettingsController extends Controller
         $this->xml = simplexml_load_file($this->pathToXML);
     }
 
-    // Seo
-    public function getSeoTags(): array
-    {
-        $seo = (array)$this->xml->seo;
-        $tags = ['title' => $seo['title']];
-        foreach ($this->metas as $meta => $params) {
-            $tags[$meta] = (string)$this->xml->seo->$meta;
-        }
-        return $tags;
-    }
-
     // Settings
     public function getSettings(): array
     {
@@ -37,10 +24,6 @@ class SettingsController extends Controller
     public function saveSettings(array $fields): void
     {
         $this->xml->settings->video = $fields['video'];
-        $this->xml->seo->title = $fields['title'];
-        foreach ($this->metas as $meta => $params) {
-            $this->xml->seo->$meta = $fields[$meta];
-        }
         $this->xml->asXML($this->pathToXML);
     }
 }

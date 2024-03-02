@@ -7,6 +7,7 @@ use App\Models\Content;
 use App\Models\Icon;
 use App\Models\Metric;
 use App\Models\Question;
+use App\Models\Seo;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
@@ -66,7 +67,7 @@ class BaseController extends Controller
         return view($view,array_merge(
             $this->data,
             [
-                'seo' => $settings->getSeoTags(),
+                'seo' => $this->data['seo'] ?? Seo::find(1),
                 'metas' => $this->metas,
                 'settings' => $settings->getSettings(),
                 'menu' => $menu,

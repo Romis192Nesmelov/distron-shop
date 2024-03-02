@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\HelperTrait;
 use App\Http\Controllers\SettingsController;
+use App\Models\Seo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,9 +21,11 @@ class AdminSettingsController extends AdminBaseController
     {
         $this->data['menu_key'] = 'settings';
         $settings = new SettingsController();
-        $this->data['seo'] = $settings->getSeoTags();
-        $this->data['metas'] = $this->metas;
         $this->data['settings'] = $settings->getSettings();
+
+        $this->data['metas'] = $this->metas;
+        $this->data['seo'] = Seo::find(1);
+
         return $this->showView('settings');
     }
 
@@ -31,13 +34,14 @@ class AdminSettingsController extends AdminBaseController
      */
     public function editSettings(Request $request): RedirectResponse
     {
-        $validationArr = ['video' => $this->validationString, 'title' => $this->validationString];
-        foreach ($this->metas as $meta => $params) {
-            $validationArr[$meta] = 'nullable|min:3|max:255';
-        }
-        $fields = $this->validate($request, $validationArr);
+        $fields = $this->validate($request, ['video' => $this->validationString]);
+        $seoFields = $this->validate($request, $this->getValidationSeo());
+
         $settings = new SettingsController();
         $settings->saveSettings($fields);
+
+        Seo::where('id',1)->update($seoFields);
+
         $this->saveCompleteMessage();
         return redirect(route('admin.settings'));
     }

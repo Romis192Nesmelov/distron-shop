@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>{{ $seo['title'] }}</title>
+    <title>{{ $seo['title'] ?? 'Distron-shop' }}</title>
     @foreach($metas as $meta => $params)
         @if ($seo[$meta])
             <meta {{ $params['name'] ? 'name='.$params['name'] : 'property='.$params['property'] }} content="{{ $seo[$meta] }}">

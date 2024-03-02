@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <seo>
-        <title>Distron-shop</title>
-        <meta_description></meta_description>
-        <meta_keywords/>
-        <meta_twitter_card/>
-        <meta_twitter_size/>
-        <meta_twitter_creator/>
-        <meta_og_url/>
-        <meta_og_type/>
-        <meta_og_title/>
-        <meta_og_description/>
-        <meta_og_image/>
-        <meta_robots/>
-        <meta_googlebot/>
-        <meta_google_site_verification/>
-    </seo>
     <settings>
         <video>https://rutube.ru/video/e0074ea9c0132c75168f9938b3709d48/?r=wd</video>
     </settings>
