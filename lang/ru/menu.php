@@ -6,5 +6,6 @@ return [
     'catalogue' => 'Каталог',
     'services' => 'Услуги',
     'faq' => 'Ответы на вопросы',
+    'articles' => 'Статьи',
     'contacts' => 'Контакты'
 ];

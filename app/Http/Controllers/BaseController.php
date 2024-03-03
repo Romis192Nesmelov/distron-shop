@@ -61,6 +61,7 @@ class BaseController extends Controller
         $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
+        $menu['articles'] = ['href' => 'articles', 'name' => trans('menu.articles')];
 
         if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');
 
@@ -82,5 +83,10 @@ class BaseController extends Controller
                 'pickup_address' => $this->getPickupAddress()
             ])
         );
+    }
+
+    protected function getSeo($name): void
+    {
+        if (isset($this->data[$name]->seo)) $this->data['seo'] = $this->data[$name]->seo;
     }
 }

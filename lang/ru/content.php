@@ -63,6 +63,7 @@ return [
     'dimensions' => '<b>Размеры:</b><br>:dimensions мм',
     'things' => 'шт',
     'mm' => 'мм',
+    'no_articles' => 'Пока статей нет. Но они скоро будут!'
 
 //    'in_russian' => ' по русски',
 //    'in_english' => ' по по английски',

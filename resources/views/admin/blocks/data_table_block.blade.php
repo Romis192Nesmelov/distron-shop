@@ -5,8 +5,6 @@
             @if (!$column) <th class="text-center"></th>
             @elseif ($column == 'active')
                 <th class="text-center">{{ trans('admin.status') }}</th>
-            @elseif ($column == 'komrex')
-                <th class="text-center">{{ trans('admin.komrex_technic') }}</th>
             @else
                 <th class="text-center">
                     {{ trans('admin.'.$column) }}
@@ -31,6 +29,10 @@
             @foreach ($columns as $column)
                 @if ($column == 'image')
                     @include('admin.blocks.datatable_image_block')
+                @elseif ($column == 'path')
+                    <td class="text-center image-path">{{ asset($item->image) }}</td>
+                @elseif ($column == 'copy_path')
+                    <td class="text-center cb-copy"><i class="icon-copy3"></i></td>
                 @elseif ($column == 'pdf')
                     <td>
                         <i class="icon-file-pdf"></i>

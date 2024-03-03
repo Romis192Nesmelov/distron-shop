@@ -58,11 +58,6 @@ class ItemController extends BaseController
         }
     }
 
-    private function getSeo($name): void
-    {
-        if (isset($this->data[$name]->seo)) $this->data['seo'] = $this->data[$name]->seo;
-    }
-
     private function getMinMax(string $name, int $step, string $postfix): void
     {
         $this->data['filters'][$name]['step'] = $step;

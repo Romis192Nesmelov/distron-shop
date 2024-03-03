@@ -14,7 +14,8 @@ class SeoSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['title' => 'Distron-shop']
+            ['title' => 'Distron-shop'],
+            ['title' => 'Distron-shop. Статьи'],
         ];
 
         foreach ($data as $item) {

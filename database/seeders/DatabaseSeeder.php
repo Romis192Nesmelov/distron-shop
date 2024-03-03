@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Article;
 use App\Models\Item;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TechnologiesSeeder::class);
         $this->call(ItemsSeeder::class);
         $this->call(SeoSeeder::class);
+        Article::factory(10)->create();
 //        $this->call(MetricsSeeder::class);
     }
 }

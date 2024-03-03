@@ -82,13 +82,17 @@ $(document).ready(function () {
     $('input[type=file]').change(function () {
         let input = $(this)[0],
             parent = $(this).parents('.edit-image-preview'),
-            imagePreview = parent.find('div.image[img]');
+            imagePreview = parent.find('div.image[img]'),
+            imageFull = parent.find('a.fancybox');
+
+        console.log(imageFull.length);
 
         if (input.files[0].type.match('image.*')) {
             let reader = new FileReader();
             reader.onload = function (e) {
                 imagePreview.attr('img', e.target.result);
                 divImage();
+                imageFull.attr('href', e.target.result);
                 if (!imagePreview.is(':visible')) imagePreview.fadeIn();
             };
             reader.readAsDataURL(input.files[0]);
@@ -134,6 +138,15 @@ $(document).ready(function () {
             removeLoader();
             window.messageModal.modal('show');
         });
+    });
+
+    // Copy to clipboard image path
+    $('.table-items td.cb-copy > i').click(function () {
+        let path = $(this).parents('tr').find('td.image-path').html();
+        navigator.clipboard.writeText(path)
+            .then(() => {
+                alert('Путь скопирован!');
+            });
     });
 });
 

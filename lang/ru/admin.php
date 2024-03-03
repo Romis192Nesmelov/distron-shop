@@ -29,10 +29,13 @@ return [
     'close' => 'Закрыть',
     'date' => 'Дата',
     'delete' => 'Удалить',
+    'delete_complete' => 'Удаление произведено',
     'edit' => 'Редактировать',
     'created_at' => 'Создан',
     'return_back' => 'Вернуться назад',
     'is_admin' => 'Админ',
+    'path' => 'Путь до картинки',
+    'copy_path' => 'Копировать путь',
 
     'enter' => 'Вход',
     'admin_page' => 'Админка',
@@ -149,4 +152,16 @@ return [
     'delivery' => 'Доставка',
     'delivery_address' => 'Доставка по адресу: :address',
     'pickup' => 'Самовывоз',
+
+    'article' => 'Статья',
+    'short_text' => 'Тизер',
+    'edit_article' => 'Редактирование статьи',
+    'add_article' => 'Добавить статью',
+    'adding_article' => 'Добавление статьи',
+    'do_you_really_want_delete_this_article' => 'Вы действительно хотите удалить эту статью?',
+
+    'edit_image' => 'Редактирование картинки',
+    'add_image' => 'Добавить картинку',
+    'adding_image' => 'Добавление картинки',
+    'do_you_really_want_delete_this_image' => 'Вы действительно хотите удалить эту картинку?',
 ];

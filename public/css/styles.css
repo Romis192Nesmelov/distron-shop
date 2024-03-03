@@ -510,6 +510,10 @@ td.basket-price {
 }
 
 @media (max-width: 1400px)  {
+    #main-nav form {
+        width: 200px;
+    }
+
     #video {
         width: 500px;
         top: 80px;
@@ -538,15 +542,14 @@ td.basket-price {
     }
 }
 
-@media (max-width: 1300px) {
-    #main-nav form {
-        width: 200px;
-    }
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
     #main-logo h1 {
         width: 70%;
+    }
+
+    #main-nav form {
+        width: 150px;
+        right: 60px;
     }
 
     .nav-link {
