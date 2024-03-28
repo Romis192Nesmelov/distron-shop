@@ -26,9 +26,9 @@ class BaseController extends Controller
         $this->data['scroll'] = request('scroll');
         $this->data['content'] = Content::all();
         $this->data['icons'] = Icon::where('active',1)->get();
-        $this->data['faq'] = Question::where('active',1)->get();
-        $this->data['catalogue'] = Type::where('is_service',0)->get();
-        $this->data['services'] = Type::where('is_service',1)->first();
+//        $this->data['faq'] = Question::where('active',1)->get();
+//        $this->data['catalogue'] = Type::where('is_service',0)->get();
+//        $this->data['services'] = Type::where('is_service',1)->first();
         return $this->showView('home');
     }
 

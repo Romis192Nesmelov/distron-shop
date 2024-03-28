@@ -50,7 +50,6 @@
             @include('blocks.button_block',[
                 'primary' => true,
                 'addClass' => 'wow animate__animated animate__fadeIn',
-                'addAttr' => ['data-wow-delay' => '.3s'],
                 'dataTarget' => 'feedback-modal',
                 'buttonText' => trans('content.leave_request')
             ])
@@ -355,7 +354,6 @@
             @include('blocks.button_block',[
                 'primary' => true,
                 'addClass' => 'wow animate__animated animate__fadeIn',
-                'addAttr' => ['data-wow-delay' => '.3s'],
                 'dataTarget' => 'request-modal',
                 'buttonText' => trans('content.leave_request')
             ])

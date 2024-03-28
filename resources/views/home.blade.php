@@ -1,6 +1,25 @@
 @extends('layouts.main')
 
 @section('content')
+    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
+        <x-row>
+            <div class="col-12 col-lg-4">
+                <img class="w-100" src="{{ asset($content[0]->image) }}" />
+            </div>
+            <div class="col-12 col-lg-8">
+                {!! $content[0]->text !!}
+            </div>
+            <div class="col-12">
+                @include('blocks.button_block',[
+                    'primary' => true,
+                    'addClass' => 'pull-right wow animate__animated animate__fadeIn',
+                    'dataTarget' => 'feedback-modal',
+                    'buttonText' => trans('content.details')
+                ])
+            </div>
+        </x-row>
+    </x-section>
+    <hr>
     <x-section head="{{ trans('content.home_block_head') }}">
         <x-row>
             <div class="col-lg-6 col-md-12 wow animate__animated animate__slideInLeft" data-wow-offset="10">
@@ -45,6 +64,37 @@
             </div>
         </x-row>
     </x-section>
+    <hr>
+    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
+        <x-row>
+            @foreach($icons as $k => $icon)
+                @include('blocks.icon_block',[
+                    'col' => 3,
+                    'delay' => $k,
+                    'icon' => $icon
+                ])
+            @endforeach
+        </x-row>
+    </x-section>
+    <hr>
+    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
+        <x-row>
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                {!! $content[1]->text !!}
+                <div class="w-100">
+                    @include('blocks.button_block',[
+                        'primary' => true,
+                        'addClass' => 'mt-3 wow animate__animated animate__fadeIn',
+                        'dataTarget' => 'feedback-modal',
+                        'buttonText' => trans('content.details')
+                    ])
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <img class="w-100" src="{{ asset($content[1]->image) }}" />
+            </div>
+        </x-row>
+    </x-section>
 {{--    <x-section data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">--}}
 {{--        <x-row class="catalogue row">--}}
 {{--            @foreach($catalogue as $k => $type)--}}
@@ -79,37 +129,7 @@
 {{--        </div>--}}
 {{--        {!! $services->text !!}--}}
 {{--    </x-section>--}}
-{{--    <x-section class="color color1" wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">--}}
-{{--        <x-row>--}}
-{{--            <div class="col-12 col-lg-4">--}}
-{{--                <img class="w-100" src="{{ asset($content[0]->image) }}" />--}}
-{{--            </div>--}}
-{{--            <div class="col-12 col-lg-8">--}}
-{{--                {!! $content[0]->text !!}--}}
-{{--            </div>--}}
-{{--        </x-row>--}}
-{{--    </x-section>--}}
-{{--    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">--}}
-{{--        <x-row>--}}
-{{--            @include('blocks.white_section_image_content_block',[--}}
-{{--                'colImage' => 3,--}}
-{{--                'image' => asset($content[1]->image),--}}
-{{--                'text' => $content[1]->text--}}
-{{--            ])--}}
-{{--        </x-row>--}}
-{{--    </x-section>--}}
-{{--    <hr>--}}
-{{--    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">--}}
-{{--        <x-row>--}}
-{{--            @foreach($icons as $k => $icon)--}}
-{{--                @include('blocks.icon_block',[--}}
-{{--                    'col' => 3,--}}
-{{--                    'delay' => $k,--}}
-{{--                    'icon' => $icon--}}
-{{--                ])--}}
-{{--            @endforeach--}}
-{{--        </x-row>--}}
-{{--    </x-section>--}}
+
 {{--    <x-section class="color color1" wow_delay=".1" data-scroll-destination="{{ $menu['faq']['scroll'] }}" head="{{ $menu['faq']['name'] }}">--}}
 {{--        <x-row class="pb-5">--}}
 {{--            @include('blocks.faq_block')--}}

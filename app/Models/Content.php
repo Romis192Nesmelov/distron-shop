@@ -9,6 +9,7 @@ class Content extends Model
     protected $fillable = [
         'image',
         'head',
+        'short',
         'text'
     ];
 }
