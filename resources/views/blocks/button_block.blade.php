@@ -1,5 +1,10 @@
-<button {{ isset($id) && $id ? 'id='.$id : '' }} type="{{ isset($buttonType) && $buttonType ? $buttonType : 'button' }}"
-    class="btn btn-{{ isset($primary) && $primary ? 'primary' : 'secondary' }} {{ isset($arrowIcon) && $arrowIcon ? 'withArrow' : '' }} {{ isset($addClass) && $addClass ? $addClass : '' }}"
+<button
+    {{ isset($id) && $id ? 'id='.$id : '' }}
+    type="{{ isset($buttonType) && $buttonType ? $buttonType : 'button' }}"
+    class="btn btn-{{ isset($primary) && $primary ? 'primary' : 'secondary' }}
+    {{ isset($arrowIcon) && $arrowIcon ? 'withArrow' : '' }}
+    {{ isset($addClass) && $addClass ? $addClass : '' }}"
+
     @if (isset($dataScroll) && $dataScroll)
         data-scroll="{{ $dataScroll }}"
     @endif
@@ -18,5 +23,5 @@
     @if (isset($icon))
         <i class="{{ $icon }}"></i>
     @endif
-    <span>{{ $buttonText }}</span>
+    <span><nobr>{{ $buttonText }}</nobr></span>
 </button>

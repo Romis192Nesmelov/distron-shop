@@ -3,8 +3,9 @@
 return [
     'home' => 'Главная',
     'advantages' => 'Преимущества',
-    'catalogue' => 'Каталог',
+    'catalogue' => 'Товары',
     'services' => 'Услуги',
+    'actions' => 'Акции',
     'faq' => 'Ответы на вопросы',
     'articles' => 'Статьи',
     'contacts' => 'Контакты'

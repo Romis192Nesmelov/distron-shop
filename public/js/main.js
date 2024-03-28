@@ -122,7 +122,6 @@ $(document).ready(function() {
     // Scroll controls
     setTimeout(function () {
         windowScroll();
-        // fixingMainMenu($(window).scrollTop());
     }, 1000);
 
     if (window.scrollAnchor) {
@@ -153,8 +152,6 @@ const windowScroll = () => {
         let windowScroll = $(window).scrollTop(),
             win = $(this);
 
-        // fixingMainMenu(windowScroll);
-
         window.menuScrollFlag = true;
         $('.section').each(function () {
             let scrollData = $(this).attr('data-scroll-destination');
@@ -180,7 +177,7 @@ const resetColorHrefsMenu = () => {
 
 const gotoScroll = (scroll) => {
     $('html,body').animate({
-        scrollTop: $('div[data-scroll-destination="' + scroll + '"]').offset().top - 51
+        scrollTop: $('div[data-scroll-destination="' + scroll + '"]').offset().top - 110
     }, 1500, 'easeInOutQuint');
 }
 

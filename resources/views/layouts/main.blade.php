@@ -42,46 +42,28 @@
 
 <body>
 <div id="main" data-scroll-destination="home">
+    @include('blocks.main_nav_block')
     <div id="main-collage">
-        @include('blocks.main_nav_block', ['mainId' => 'main-nav', 'collapseId' => 'main-nav-bar'])
         <div id="main-logo">
             <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('images/logo.svg') }}" />
-            <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">Новая жизнь Вашего аккумулятора</h1>
-            <div class="d-flex">
-                @if (auth()->guest())
-                    @include('blocks.button_block',[
-                        'id' => 'main-button',
-                        'primary' => true,
-                        'addClass' => 'wow animate__animated animate__fadeIn',
-                        'addAttr' => ['data-wow-delay' => '.3s'],
-                        'buttonText' => trans('auth.login_register')
-                    ])
-                @else
-                    @include('blocks.button_block',[
-                        'id' => 'main-button',
-                        'primary' => true,
-                        'addClass' => 'wow animate__animated animate__fadeIn',
-                        'addAttr' => ['data-wow-delay' => '.3s'],
-                        'buttonText' => trans('auth.account')
-                    ])
-                @endif
-                @include('blocks.button_block',[
-                    'primary' => true,
-                    'addClass' => 'wow animate__animated animate__fadeIn',
-                    'addAttr' => ['data-wow-delay' => '.3s'],
-                    'dataTarget' => 'feedback-modal',
-                    'buttonText' => trans('content.leave_request')
-                ])
-            </div>
+            <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.tagline') }}</h1>
+            @include('blocks.button_block',[
+                'primary' => true,
+                'addClass' => 'wow animate__animated animate__fadeIn',
+                'addAttr' => ['data-wow-delay' => '.3s'],
+                'dataTarget' => 'feedback-modal',
+                'buttonText' => trans('content.leave_request')
+            ])
         </div>
-        <div class="wow animate__animated animate__fadeIn" data-wow-delay="0.5s" id="video" controls="controls" poster="{{ asset('images/distron.jpg') }}">
-            <video controls="controls" poster="{{ asset('images/distron.jpg') }}">
-                @foreach ($video as $item)
-                    <source src="{{ asset($item) }}" type='video/{{ pathinfo($item)['extension'] }};'>
-                @endforeach
-            </video>
-            <a id="look-at" href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>
-        </div>
+        <img id="main-image" src="{{ asset('images/battery.png') }}" />
+{{--        <div class="wow animate__animated animate__fadeIn" data-wow-delay="0.5s" id="video" controls="controls" poster="{{ asset('images/distron.jpg') }}">--}}
+{{--            <video controls="controls" poster="{{ asset('images/distron.jpg') }}">--}}
+{{--                @foreach ($video as $item)--}}
+{{--                    <source src="{{ asset($item) }}" type='video/{{ pathinfo($item)['extension'] }};'>--}}
+{{--                @endforeach--}}
+{{--            </video>--}}
+{{--            <a id="look-at" href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>--}}
+{{--        </div>--}}
     </div>
     <x-section>
         <div id="breadcrumbs" class="ps-4 wow animate__animated animate__slideInLeft" data-wow-offset="10" data-wow-delay=".5s">

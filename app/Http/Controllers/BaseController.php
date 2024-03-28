@@ -26,7 +26,6 @@ class BaseController extends Controller
         $this->data['scroll'] = request('scroll');
         $this->data['content'] = Content::all();
         $this->data['icons'] = Icon::where('active',1)->get();
-        $this->data['contacts'] = Contact::where('type','<=',4)->get();
         $this->data['faq'] = Question::where('active',1)->get();
         $this->data['catalogue'] = Type::where('is_service',0)->get();
         $this->data['services'] = Type::where('is_service',1)->first();
@@ -51,17 +50,19 @@ class BaseController extends Controller
         $content = Content::select('head')->get();
 
         $menu = [];
-        $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
-        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
         foreach ($content as $k => $item) {
             $slug = Str::slug($item->head);
             $menu[$slug] = ['scroll' => $slug, 'name' => $item->head];
 
         }
+
+        $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
+        $menu['actions'] = ['scroll' => 'services', 'name' => trans('menu.actions')];
+        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
         $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
-        $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
         $menu['articles'] = ['href' => 'articles', 'name' => trans('menu.articles')];
+        $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
 
         if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');
 
@@ -80,7 +81,8 @@ class BaseController extends Controller
                 'metrics' => Metric::all(),
                 'breadcrumbs' => $this->breadcrumbs,
                 'basketTotal' => $this->getBasketTotal(),
-                'pickup_address' => $this->getPickupAddress()
+                'pickup_address' => $this->getPickupAddress(),
+                'contacts' => Contact::where('id','<',4)->get()
             ])
         );
     }

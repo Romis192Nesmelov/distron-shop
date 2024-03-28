@@ -4,15 +4,19 @@ body {
     background-color: white;
 }
 
-a {
+a, strong, th {
     color: #009671;
+}
+
+th {
+    color: #009671 !important;
 }
 
 a.href-block {
     text-decoration: none;
 }
 
-p {
+p, ul, ol {
     font-size: 1rem;
     margin-bottom: .5rem;
 }
@@ -152,6 +156,11 @@ hr {
     font-size: 20px;
 }
 
+#two-batteries {
+    width: 40%;
+    float: right;
+}
+
 .photos-block {
     margin-top: 50px;
 }
@@ -173,22 +182,78 @@ hr {
     color: white;
 }
 
-#main-collage {
+#top-block {
     width: 100%;
-    height: 530px;
-    background: url("../images/waves.jpg") left top no-repeat;
+    position: fixed;
+    top: 0;
+    z-index: 999;
 }
 
-#basket {
-    position: absolute;
-    top: 9px;
-    right: 20px;
+#top-line {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-image: linear-gradient(90deg, #7EE068, #009671);
+    border-bottom: 1px solid white;
+}
+
+#top-line .contacts {
+    font-size: 14px;
     color: white;
+}
+
+#top-line .contacts a {
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+
+#top-line .contacts span {
+    margin-right: 15px;
+}
+
+#top-line form {
+    position: relative;
+    margin-right: 10px;
+}
+
+#top-line form input {
+    width: 100%;
+    height: 38px;
+    padding-right: 30px;
+    border-radius: 5px;
+    border: 1px solid #009671;
+}
+
+#top-line form i {
+    position: absolute;
+    margin-top: 12px;
+    right: 10px;
+    color: grey;
     cursor: pointer;
 }
 
+#main-nav {
+    width: 100%;
+    height: 40px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-image: linear-gradient(90deg, #7EE068, #009671);
+    padding-left: 10px;
+    z-index: 999;
+}
+
+#basket {
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
 #basket i {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #basket .cir {
@@ -206,6 +271,13 @@ hr {
     z-index: 999;
 }
 
+#main-collage {
+    width: 100%;
+    height: 530px;
+    margin-top: 110px;
+    background: url("../images/waves.jpg") left top no-repeat;
+}
+
 #main-image {
     width: 600px;
     right: 100px;
@@ -213,69 +285,9 @@ hr {
     position: absolute;
 }
 
-#video {
-    width: 600px;
-    right: 100px;
-    top: 120px;
-    position: absolute;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    overflow: hidden;
-}
-
-#video img {
-    width: 100px;
-    margin-left: 10px;
-}
-
-#video video {
-    width: 100%;
-    /*height: 100%;*/
-    border: 2px solid #009671;
-    -webkit-filter: drop-shadow( 0px 0px 7px #000000);
-    filter: drop-shadow( 0rem 0px 7px #000000);
-    margin-bottom: 10px;
-}
-
-#main-nav {
-    width: 100%;
-    height: 51px;
-    position: fixed;
-    top: 0;
-    font-weight: bolder;
-    text-transform: uppercase;
-    background: #108865;
-    border-bottom: 2px solid white;
-    padding-left: 10px;
-    z-index: 999;
-}
-
-#main-nav form {
-    width: 300px;
-    position: absolute;
-    right: 70px;
-}
-
-#main-nav form input {
-    width: 100%;
-    padding-right: 30px;
-    border-radius: 5px;
-}
-
-#main-nav form i {
-    position: absolute;
-    margin-top: 8px;
-    right: 10px;
-    color: grey;
-    cursor: pointer;
-}
-
 #main-logo {
-    position: absolute;
-    top: 80px;
-    left: 50px;
+    padding-top: 30px;
+    padding-left: 50px;
     /*display: flex;*/
     /*align-items: center;*/
 }
@@ -288,7 +300,6 @@ hr {
 
 #main-logo h1 {
     color: white;
-    /*margin-top: 15px;*/
     font-size: 1.4em;
     padding-left: 100px;
     text-transform: uppercase;
@@ -296,12 +307,8 @@ hr {
 }
 
 #main-logo .btn.btn-primary {
-    margin-left: 100px;
     margin-top: 10px;
-}
-
-#main-logo .btn.btn-primary:last-child {
-    margin-left: 5px;
+    margin-left: 100px;
 }
 
 #breadcrumbs {
@@ -356,16 +363,17 @@ hr {
     color: white;
 }
 
-.nav-item.active {
-    border-bottom: 2px solid white;
+.nav-item.active,
+.nav-link:hover {
+    color: #2ebd9a !important;
 }
 
 .nav-link {
     cursor: pointer;
     color: white !important;
     font-size: 15px;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
 
 .dropdown-item {
@@ -501,32 +509,30 @@ td.basket-price {
     color: #000;
 }
 
-@media (max-width: 1500px)  {
-    .nav-link {
-        font-size: 13px;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-    }
-}
-
 @media (max-width: 1400px)  {
-    #main-nav form {
-        width: 200px;
+    #top-line .contacts,
+    #top-line .contacts a {
+        font-size: 12px;
     }
 
-    #video {
-        width: 500px;
-        top: 80px;
-        right: 30px;
+    .nav-link {
+        font-size: 11px;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
 
-    #look-at {
-        color: white;
+    #main-logo h1 {
+        font-size: 1em;
     }
 
     #main-image {
         width: 400px;
-        top: 250px;
+        top: 150px;
+        right: 50px;
+    }
+
+    #look-at {
+        color: white;
     }
 
     .section.color {
@@ -542,24 +548,11 @@ td.basket-price {
     }
 }
 
-@media (max-width: 1260px) {
-    #main-logo h1 {
-        width: 70%;
+@media (max-width: 991px) {
+    #top-line .contacts {
+        width: 300px;
     }
 
-    #main-nav form {
-        width: 150px;
-        right: 60px;
-    }
-
-    .nav-link {
-        font-size: 11px;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-}
-
-@media (max-width: 991px)  {
     #main-collage {
         height: 600px;
     }
@@ -577,26 +570,23 @@ td.basket-price {
 
     #main-logo h1 {
         width: 100%;
+        font-size: 1.4em;
     }
 
-    #video {
-        width: 450px;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        top: 300px;
+    #main-image {
+        display: none;
     }
 
     #look-at {
         color: #009671;
     }
-
-    #main-nav form {
-        width: 300px;
-    }
 }
 
 @media (max-width: 768px)  {
+    #top-line .contacts {
+        display: none;
+    }
+
     .section.color p:last-child {
         margin-bottom: 100px;
     }
@@ -613,20 +603,20 @@ td.basket-price {
     #basket-total {
         font-size: 16px;
     }
-}
 
-@media (max-width: 700px)  {
-    #main-image {
-        width: 300px;
-        top: 320px;
+    #two-batteries {
+        display: none;
     }
 }
 
 @media (max-width: 500px)  {
+    #top-line form,
+    #main-logo h1 {
+        display: none;
+    }
+
     #main-logo {
         width: 85%;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     #main-logo img.logo {
@@ -637,11 +627,8 @@ td.basket-price {
         font-size: 1em;
     }
 
-    #main-image {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 320px;
+    #main-logo .btn.btn-primary {
+        margin-left: 30%;
     }
 
     .section.contacts table {
@@ -657,19 +644,11 @@ td.basket-price {
     .section.contacts td .dot {
         display: none;
     }
-
-    #main-nav form {
-        width: calc(100% - 140px);
-    }
 }
 
 @media (max-width: 460px)  {
     #main-collage {
         height: 550px;
-    }
-
-    #video {
-        width: 350px;
     }
 
     td.basket-name,
@@ -699,41 +678,11 @@ td.basket-price {
     #main-collage {
         height: 500px;
     }
-
-    #video {
-        width: 300px;
-        font-size: 15px;
-    }
-
-    #video img {
-        width: 70px;
-        margin-left: 5px;
-    }
 }
 
 @media (max-width: 325px)  {
     #main-logo h1 {
         font-size: .8em;
         padding-left: 85px;
-    }
-
-    #main-logo .btn.btn-primary {
-        margin-left: 85px;
-    }
-
-    #video {
-        width: 270px;
-    }
-}
-
-@media (max-width: 300px)  {
-    #video {
-        width: 250px;
-    }
-}
-
-@media (max-width: 260px)  {
-    #video {
-        width: 200px;
     }
 }

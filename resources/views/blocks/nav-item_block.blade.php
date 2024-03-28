@@ -1,4 +1,10 @@
-<li {{ isset($id) && $id ? 'id='.$id : '' }} class="nav-item {{ isset($active) && $active ? 'active' : '' }} {{ isset($addClass) && $addClass ? $addClass : '' }} {{ isset($dropdown) && is_array($dropdown) ? 'dropdown' : '' }}" {{ isset($stylesStr) ? 'style='.$stylesStr : '' }}>
+<li
+    {{ isset($id) && $id ? 'id='.$id : '' }}
+    class="nav-item {{ isset($active) && $active ? 'active' : '' }}
+    {{ isset($addClass) && $addClass ? $addClass : '' }}
+    {{ isset($dropdown) && is_array($dropdown) ? 'dropdown' : '' }}"
+
+>
     @if (isset($dropdown) && is_array($dropdown))
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown{{ $menuItemKey }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{!! $name !!}</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $menuItemKey }}">
