@@ -10,51 +10,55 @@ class ItemController extends BaseController
 {
     use HelperTrait;
 
-    public function __invoke($slug): View
+    public function __invoke($slug=null): View
     {
-        $this->data['type'] = Type::where('slug',$slug)->select(['id','slug','name','text'])->first();
-        if (!$this->data['type']) abort(404);
+        if ($slug) {
+            $this->data['type'] = Type::where('slug',$slug)->select(['id','slug','name','text'])->first();
+            if (!$this->data['type']) abort(404);
 
-        if ($this->data['type']->id == 4) {
-            $this->breadcrumbs[] = [
-                'route' => route('get_items',['scroll' => 'services']),
-                'name' => $this->data['type']->name
-            ];
-        } else {
-            $this->breadcrumbs[] = [
-                'route' => route('get_items',['slug' => $slug]),
-                'name' => $this->data['type']->name
-            ];
-        }
-
-        $this->data['filters'] = [];
-        if (request()->has('id')) {
-            $this->data['item'] = Item::findOrFail(request()->id);
-            $this->breadcrumbs[] = [
-                'route' => route('get_items',['slug' => $slug, 'id' => $this->data['item']->id]),
-                'name' => getItemHead($this->data['item'])
-            ];
-            $this->getSeo('item');
-            return $this->showView('item');
-        } else {
-            $this->data['items'] = Item::query()->where('type_id',$this->data['type']->id)->filtered()->orderBy('price')->get();
-
-            $this->getMinMax('price',100,'₽');
-
-            if ($this->data['type']->id == 1) {
-                $this->getMinMax('voltage',1,'В');
-                $this->getMinMax('capacity', 100, 'Ah');
-            } else if ($this->data['type']->id == 2) {
-                $this->getMinMax('plates', 1, trans('content.things'));
-                $this->getMinMax('length', 10, trans('content.mm'));
-                $this->getMinMax('width', 10, trans('content.mm'));
-                $this->getMinMax('height', 10, trans('content.mm'));
-            } else if ($this->data['type']->id == 3) {
-                $this->getMinMax('section', 1, trans('content.mm'));
+            if ($this->data['type']->id == 4) {
+                $this->breadcrumbs[] = [
+                    'route' => route('get_items',['scroll' => 'services']),
+                    'name' => $this->data['type']->name
+                ];
+            } else {
+                $this->breadcrumbs[] = [
+                    'route' => route('get_items',['slug' => $slug]),
+                    'name' => $this->data['type']->name
+                ];
             }
 
-            $this->getSeo('type');
-            return $this->showView('type');
+            $this->data['filters'] = [];
+            if (request()->has('id')) {
+                $this->data['item'] = Item::findOrFail(request()->id);
+                $this->breadcrumbs[] = [
+                    'route' => route('get_items',['slug' => $slug, 'id' => $this->data['item']->id]),
+                    'name' => getItemHead($this->data['item'])
+                ];
+                $this->getSeo('item');
+                return $this->showView('item');
+            } else {
+                $this->data['items'] = Item::query()->where('type_id',$this->data['type']->id)->filtered()->orderBy('price')->get();
+
+                $this->getMinMax('price',100,'₽');
+
+                if ($this->data['type']->id == 1) {
+                    $this->getMinMax('voltage',1,'В');
+                    $this->getMinMax('capacity', 100, 'Ah');
+                } else if ($this->data['type']->id == 2) {
+                    $this->getMinMax('plates', 1, trans('content.things'));
+                    $this->getMinMax('length', 10, trans('content.mm'));
+                    $this->getMinMax('width', 10, trans('content.mm'));
+                    $this->getMinMax('height', 10, trans('content.mm'));
+                } else if ($this->data['type']->id == 3) {
+                    $this->getMinMax('section', 1, trans('content.mm'));
+                }
+
+                $this->getSeo('type');
+                return $this->showView('type');
+            }
+        } else {
+            dd(111);
         }
     }
 

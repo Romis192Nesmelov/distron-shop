@@ -47,7 +47,7 @@ class BaseController extends Controller
     protected function showView($view): View
     {
         $settings = new SettingsController();
-        $contents = Content::select(['slug','head'])->get();
+        $contents = Content::where('id','!=',1)->select(['slug','head'])->get();
 
         $menu = [];
         foreach ($contents as $content) {
@@ -55,7 +55,7 @@ class BaseController extends Controller
         }
 
         $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
-        $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
+        $menu['catalogue'] = ['href' => 'items', 'name' => trans('menu.catalogue')];
         $menu['actions'] = ['scroll' => 'services', 'name' => trans('menu.actions')];
         $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
 

@@ -42,6 +42,8 @@ Route::controller(BaseController::class)->group(function () {
     Route::get('/get-new-csrf', 'getNewCsrf')->name('get_new_csrf');
 });
 
+Route::get('/search', SearchController::class)->name('search');
+Route::get('/items/{slug?}', ItemController::class)->name('items');
 Route::get('/articles/{slug?}', ArticlesController::class)->name('articles');
 
 Route::controller(BasketController::class)->group(function () {
@@ -58,9 +60,6 @@ Route::controller(FeedbackController::class)->group(function () {
     Route::post('/feedback', 'feedback')->name('feedback');
     Route::post('/feedback-short', 'feedbackShort')->name('feedback_short');
 });
-
-Route::get('/search', SearchController::class)->name('search');
-Route::get('/items/{slug?}', ItemController::class)->name('items');
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');

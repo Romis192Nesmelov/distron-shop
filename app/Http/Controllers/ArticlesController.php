@@ -27,7 +27,7 @@ class ArticlesController extends BaseController
             return $this->showView('article');
         } else {
             $this->data['articles'] = Article::select(['image','name','slug','short'])->paginate(8);
-            $this->data['seo'] = Seo::find(2);
+            $this->data['seo'] = Seo::find(3);
             return $this->showView('articles');
         }
     }

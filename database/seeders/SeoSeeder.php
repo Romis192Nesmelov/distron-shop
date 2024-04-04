@@ -15,6 +15,7 @@ class SeoSeeder extends Seeder
     {
         $data = [
             ['title' => 'Distron-shop'],
+            ['title' => 'Distron-shop. Товары'],
             ['title' => 'Distron-shop. Статьи'],
         ];
 

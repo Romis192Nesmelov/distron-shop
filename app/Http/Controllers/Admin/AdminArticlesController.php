@@ -21,7 +21,7 @@ class AdminArticlesController extends AdminBaseController
     public function articles($slug=null): View
     {
         $this->data['metas'] = $this->metas;
-        $this->data['seo'] = Seo::find(2);
+        $this->data['seo'] = Seo::find(3);
         return $this->getSomething('articles', new Article(), $slug);
     }
 
@@ -31,7 +31,7 @@ class AdminArticlesController extends AdminBaseController
     public function editArticleSeo(Request $request): RedirectResponse
     {
         $seoFields = $this->validate($request, $this->getValidationSeo());
-        Seo::where('id',2)->update($seoFields);
+        Seo::where('id',3)->update($seoFields);
         $this->saveCompleteMessage();
         return redirect(route('admin.articles'));
     }
