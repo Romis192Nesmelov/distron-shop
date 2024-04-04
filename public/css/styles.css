@@ -30,6 +30,14 @@ p, ul, ol {
     border: 3px solid #009671;
 }
 
+.w-30 {
+    width: 30%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
 .pagination {
     --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(0, 65, 50, 0.25) !important;
     --bs-pagination-active-bg: #009671 !important;
@@ -103,8 +111,6 @@ h2 {
 
 h3 {
     font-size: 1.5em;
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .search-result h3 {
@@ -117,6 +123,10 @@ h3 {
 }
 
 h1, h2, h3, h4, h5, h6 {
+    color: #009671;
+}
+
+li::marker {
     color: #009671;
 }
 
@@ -150,11 +160,6 @@ h1, h2, h3, h4, h5, h6 {
 #on-top-button i {
     margin-top: 15px;
     font-size: 20px;
-}
-
-#two-batteries {
-    width: 40%;
-    float: right;
 }
 
 .photos-block {
@@ -598,10 +603,6 @@ td.basket-price {
 
     #basket-total {
         font-size: 16px;
-    }
-
-    #two-batteries {
-        display: none;
     }
 }
 

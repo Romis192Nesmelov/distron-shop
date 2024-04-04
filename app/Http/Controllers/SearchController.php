@@ -25,7 +25,7 @@ class SearchController extends BaseController
                 'image' => $item->image,
                 'head' => $this->markFound($item->name),
                 'description' => $this->markFound($item->text),
-                'href' => route('get_items',['slug' => $item->slug])
+                'href' => route('items',['slug' => $item->slug])
             ]);
         }
 
@@ -35,7 +35,7 @@ class SearchController extends BaseController
                 'image' => $item->image ?: $item->type->image,
                 'head' => $this->markFound(getItemHead($item)),
                 'description' => $this->markFound($item->description),
-                'href' => route('get_items',['slug' => $item->type->slug, 'id' => $item->id])
+                'href' => route('items',['slug' => $item->type->slug, 'id' => $item->id])
             ]);
         }
 

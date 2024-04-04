@@ -24,7 +24,7 @@ class ArticleFactory extends Factory
         return [
             'image' => 'images/placeholder.jpg',
             'name' => fake()->text(rand(10,50)),
-            'short_text' => fake()->text(255),
+            'short' => fake()->text(255),
             'text' => $text
         ];
     }

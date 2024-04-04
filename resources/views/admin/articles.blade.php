@@ -17,7 +17,7 @@
         @include('admin.blocks.title_block')
         <div class="panel-body">
             @include('admin.blocks.data_table_block', [
-                'columns' => ['image','name','short_text'],
+                'columns' => ['image','name','short'],
                 'items' => $articles,
                 'useEdit' => true,
                 'useDelete' => true

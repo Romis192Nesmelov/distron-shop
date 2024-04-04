@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminTypesController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
@@ -59,6 +60,7 @@ Route::controller(FeedbackController::class)->group(function () {
 });
 
 Route::get('/search', SearchController::class)->name('search');
+Route::get('/items/{slug?}', ItemController::class)->name('items');
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
@@ -76,6 +78,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {return view('admin.login');})->name('login');
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
 });
+
 
 Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
     Route::controller(AdminBaseController::class)->group(function () {
@@ -151,5 +154,4 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::post('/delete-image', 'deleteImage')->name('delete_image');
     });
 });
-
-Route::get('/{slug?}', ItemController::class)->name('get_items');
+Route::get('/{slug?}', ContentController::class)->name('content');

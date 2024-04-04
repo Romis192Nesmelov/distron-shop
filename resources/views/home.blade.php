@@ -1,100 +1,85 @@
 @extends('layouts.main')
 
 @section('content')
-    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">
-        <x-row>
-            <div class="col-12 col-lg-4">
-                <img class="w-100" src="{{ asset($content[0]->image) }}" />
-            </div>
-            <div class="col-12 col-lg-8">
-                {!! $content[0]->text !!}
-            </div>
-            <div class="col-12">
-                @include('blocks.button_block',[
-                    'primary' => true,
-                    'addClass' => 'pull-right wow animate__animated animate__fadeIn',
-                    'dataTarget' => 'feedback-modal',
-                    'buttonText' => trans('content.details')
-                ])
-            </div>
-        </x-row>
+{{--    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">--}}
+{{--        <x-row>--}}
+{{--            <div class="col-12 col-lg-4">--}}
+{{--                <img class="w-100" src="{{ asset($content[0]->image) }}" />--}}
+{{--            </div>--}}
+{{--            <div class="col-12 col-lg-8">--}}
+{{--                {!! $content[0]->text !!}--}}
+{{--            </div>--}}
+{{--            <div class="col-12">--}}
+{{--                @include('blocks.button_block',[--}}
+{{--                    'primary' => true,--}}
+{{--                    'addClass' => 'pull-right wow animate__animated animate__fadeIn',--}}
+{{--                    'dataTarget' => 'feedback-modal',--}}
+{{--                    'buttonText' => trans('content.details')--}}
+{{--                ])--}}
+{{--            </div>--}}
+{{--        </x-row>--}}
+{{--    </x-section>--}}
+{{--    <hr>--}}
+    <x-section class="mb-5" head="{{ $content->head }}">
+        {!! $content->text !!}
+{{--                <h5 class="w-100 text-center">{{ trans('content.home_block_table_head') }}</h5>--}}
+{{--                <table class="w-100 table table-striped">--}}
+{{--                    <tr>--}}
+{{--                        <th></th>--}}
+{{--                        <th class="text-uppercase text-center">{{ trans('content.repair') }}</th>--}}
+{{--                        <th class="text-uppercase text-center">{{ trans('content.buy_new') }}</th>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery1') }}</strong></td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 30]) }}</td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 95]) }}</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery2') }}</strong></td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 50]) }}</td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 150]) }}</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery3') }}</strong></td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 60]) }}</td>--}}
+{{--                        <td class="text-center">{{ trans('content.compare_price', ['val' => 220]) }}</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="text-uppercase"><strong>{{ trans('content.warranty') }}</strong></td>--}}
+{{--                        <td class="text-center">{{ trans('content.warranty_years', ['val' => 2]) }}</td>--}}
+{{--                        <td class="text-center">{{ trans('content.warranty_years', ['val' => 2]) }}</td>--}}
+{{--                    </tr>--}}
+{{--                </table>--}}
     </x-section>
-    <hr>
-    <x-section head="{{ trans('content.home_block_head') }}">
-        <x-row>
-            <div class="col-lg-6 col-md-12 wow animate__animated animate__slideInLeft" data-wow-offset="10">
-                <img class="w-100" src="{{ asset('images/loader.jpg') }}" />
-            </div>
-            <div class="col-lg-6 col-md-12 row wow animate__animated animate__slideInRight" data-wow-offset="10">
-                <div>
-                    <img id="two-batteries" src="{{ asset('images/two_batteries.jpg') }}" />
-                    <h4 class="mb-2">{!! trans('content.home_block_sub_head') !!}</h4>
-                    {!! trans('content.home_block_text') !!}
-                </div>
-            </div>
-            <div class="col-12 wow animate__animated animate__fadeIn">
-                <h5 class="w-100 text-center">{{ trans('content.home_block_table_head') }}</h5>
-                <table class="w-100 table table-striped">
-                    <tr>
-                        <th></th>
-                        <th class="text-uppercase text-center">{{ trans('content.repair') }}</th>
-                        <th class="text-uppercase text-center">{{ trans('content.buy_new') }}</th>
-                    </tr>
-                    <tr>
-                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery1') }}</strong></td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 30]) }}</td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 95]) }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery2') }}</strong></td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 50]) }}</td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 150]) }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-uppercase"><strong>{{ trans('content.compare_battery3') }}</strong></td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 60]) }}</td>
-                        <td class="text-center">{{ trans('content.compare_price', ['val' => 220]) }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-uppercase"><strong>{{ trans('content.warranty') }}</strong></td>
-                        <td class="text-center">{{ trans('content.warranty_years', ['val' => 2]) }}</td>
-                        <td class="text-center">{{ trans('content.warranty_years', ['val' => 2]) }}</td>
-                    </tr>
-                </table>
-            </div>
-        </x-row>
-    </x-section>
-    <hr>
-    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">
-        <x-row>
-            @foreach($icons as $k => $icon)
-                @include('blocks.icon_block',[
-                    'col' => 3,
-                    'delay' => $k,
-                    'icon' => $icon
-                ])
-            @endforeach
-        </x-row>
-    </x-section>
-    <hr>
-    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">
-        <x-row>
-            <div class="col-md-8 col-sm-6 col-xs-12">
-                {!! $content[1]->text !!}
-                <div class="w-100">
-                    @include('blocks.button_block',[
-                        'primary' => true,
-                        'addClass' => 'mt-3 wow animate__animated animate__fadeIn',
-                        'dataTarget' => 'feedback-modal',
-                        'buttonText' => trans('content.details')
-                    ])
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <img class="w-100" src="{{ asset($content[1]->image) }}" />
-            </div>
-        </x-row>
-    </x-section>
+{{--    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">--}}
+{{--        <x-row>--}}
+{{--            @foreach($icons as $k => $icon)--}}
+{{--                @include('blocks.icon_block',[--}}
+{{--                    'col' => 3,--}}
+{{--                    'delay' => $k,--}}
+{{--                    'icon' => $icon--}}
+{{--                ])--}}
+{{--            @endforeach--}}
+{{--        </x-row>--}}
+{{--    </x-section>--}}
+{{--    <x-section wow_delay=".1" wow_direction="Right" data-scroll-destination="{{ str()->slug($content[1]->head) }}" head="{{ $content[1]->head }}">--}}
+{{--        <x-row>--}}
+{{--            <div class="col-md-8 col-sm-6 col-xs-12">--}}
+{{--                {!! $content[1]->text !!}--}}
+{{--                <div class="w-100">--}}
+{{--                    @include('blocks.button_block',[--}}
+{{--                        'primary' => true,--}}
+{{--                        'addClass' => 'mt-3 wow animate__animated animate__fadeIn',--}}
+{{--                        'dataTarget' => 'feedback-modal',--}}
+{{--                        'buttonText' => trans('content.details')--}}
+{{--                    ])--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3 col-sm-6 col-xs-12">--}}
+{{--                <img class="w-100" src="{{ asset($content[1]->image) }}" />--}}
+{{--            </div>--}}
+{{--        </x-row>--}}
+{{--    </x-section>--}}
 {{--    <x-section data-scroll-destination="catalogue" head="{{ trans('menu.catalogue') }}">--}}
 {{--        <x-row class="catalogue row">--}}
 {{--            @foreach($catalogue as $k => $type)--}}

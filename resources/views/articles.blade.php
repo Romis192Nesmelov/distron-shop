@@ -10,7 +10,7 @@
                             <a class="href-block" href="{{ route('articles',['slug' => $article->slug]) }}">
                                 <div class="image w-100 mb-3" img="{{ asset($article->image) }}"></div>
                                 <h4 class="w-100 text-center">{{ $article->name }}</h4>
-                                <p>{{ $article->short_text }}</p>
+                                <p>{{ $article->short }}</p>
                             </a>
                         </div>
                         <a class="href-block" href="{{ route('articles',['slug' => $article->slug]) }}">

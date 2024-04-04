@@ -18,6 +18,7 @@ class AdminContentsController extends AdminBaseController
 
     public function contents(): View
     {
+        $this->data['metas'] = $this->metas;
         return $this->getSomething('contents', new Content());
     }
 
@@ -29,9 +30,7 @@ class AdminContentsController extends AdminBaseController
         $this->editSomething (
             $request,
             new Content(),
-            ['image' => $this->validationJpgAndPng, 'head' => $this->validationString, 'text' => $this->validationText],
-            'images/contents/',
-            'content',
+            ['head' => $this->validationString, 'text' => $this->validationText]
         );
         $this->saveCompleteMessage();
         return redirect(route('admin.contents'));

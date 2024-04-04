@@ -27,12 +27,12 @@
                                 'value' => isset($article) ? $article->name : ''
                             ])
                             @include('blocks.input_block', [
-                                'label' => trans('admin.short_text'),
-                                'name' => 'short_text',
+                                'label' => trans('admin.short'),
+                                'name' => 'short',
                                 'type' => 'text',
                                 'max' => 255,
-                                'placeholder' => trans('admin.short_text'),
-                                'value' => isset($article) ? $article->short_text : ''
+                                'placeholder' => trans('admin.short'),
+                                'value' => isset($article) ? $article->short : ''
                             ])
                             @include('blocks.textarea_block',[
                                 'label' => trans('admin.text'),

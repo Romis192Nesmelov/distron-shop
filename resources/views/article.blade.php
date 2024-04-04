@@ -7,7 +7,7 @@
                 <div class="image w-100" img="{{ asset($article->image) }}"></div>
             </a>
         </div>
-        <p class="fst-italic fw-bold fs-6 mb-3">{{ $article->short_text }}</p>
+        <p class="fst-italic fw-bold fs-6 mb-3">{{ $article->short }}</p>
         {!! $article->text !!}
     </x-section>
 @endsection

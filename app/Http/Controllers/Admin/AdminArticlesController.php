@@ -44,7 +44,7 @@ class AdminArticlesController extends AdminBaseController
         $validationArr = [
             'image' => $this->validationJpgAndPng,
             'name' => 'nullable|max:50',
-            'short_text' => $this->validationString,
+            'short' => $this->validationString,
             'text' => $this->validationLongText
         ];
 

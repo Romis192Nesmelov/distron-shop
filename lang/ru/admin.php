@@ -154,7 +154,7 @@ return [
     'pickup' => 'Самовывоз',
 
     'article' => 'Статья',
-    'short_text' => 'Тизер',
+    'short' => 'Вступление',
     'edit_article' => 'Редактирование статьи',
     'add_article' => 'Добавить статью',
     'adding_article' => 'Добавление статьи',

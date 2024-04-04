@@ -16,7 +16,7 @@ class Article extends Model
         'image',
         'slug',
         'name',
-        'short_text',
+        'short',
         'text',
         'seo_id',
     ];

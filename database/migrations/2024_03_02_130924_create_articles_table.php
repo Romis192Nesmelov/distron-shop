@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image',50)->nullable();
             $table->string('slug',50);
             $table->string('name',50);
-            $table->string('short_text');
+            $table->string('short');
             $table->longText('text');
             $table->foreignIdFor(Seo::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

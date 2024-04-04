@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/icons/fontawesome/styles.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.fancybox.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/range.sliders.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -33,7 +34,7 @@
     <script type="text/javascript" src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/ion_rangeslider.min.js') }}"></script>
 
-{{--    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/ajax_form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/setbackground.js') }}"></script>

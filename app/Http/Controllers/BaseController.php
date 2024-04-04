@@ -24,8 +24,8 @@ class BaseController extends Controller
     public function index(): View
     {
         $this->data['scroll'] = request('scroll');
-        $this->data['content'] = Content::all();
-        $this->data['icons'] = Icon::where('active',1)->get();
+        $this->data['content'] = Content::find(1);
+//        $this->data['icons'] = Icon::where('active',1)->get();
 //        $this->data['faq'] = Question::where('active',1)->get();
 //        $this->data['catalogue'] = Type::where('is_service',0)->get();
 //        $this->data['services'] = Type::where('is_service',1)->first();
@@ -47,21 +47,20 @@ class BaseController extends Controller
     protected function showView($view): View
     {
         $settings = new SettingsController();
-        $content = Content::select('head')->get();
+        $contents = Content::select(['slug','head'])->get();
 
         $menu = [];
-        foreach ($content as $k => $item) {
-            $slug = Str::slug($item->head);
-            $menu[$slug] = ['scroll' => $slug, 'name' => $item->head];
-
+        foreach ($contents as $content) {
+            $menu[$content->slug] = ['href' => route('content',['slug' => $content->slug]), 'name' => $content->head];
         }
 
+        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         $menu['catalogue'] = ['scroll' => 'catalogue', 'name' => trans('menu.catalogue')];
         $menu['actions'] = ['scroll' => 'services', 'name' => trans('menu.actions')];
         $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
-        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
+
         $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
-        $menu['articles'] = ['href' => 'articles', 'name' => trans('menu.articles')];
+        $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
         $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
 
         if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');

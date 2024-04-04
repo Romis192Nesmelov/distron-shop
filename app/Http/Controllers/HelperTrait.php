@@ -14,7 +14,7 @@ trait HelperTrait
     public string $validationPassword = 'required|confirmed|min:3|max:50';
     public string $validationInteger = 'required|integer';
     public string $validationString = 'required|min:3|max:255';
-    public string $validationText = 'nullable|min:5|max:3000';
+    public string $validationText = 'nullable|min:5|max:50000';
     public string $validationLongText = 'nullable|min:5|max:100000';
     public string $validationSvg = 'mimes:svg|max:10';
     public string $validationJpgAndPng = 'nullable|mimes:jpeg,png|max:2000';
