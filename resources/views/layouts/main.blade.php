@@ -56,14 +56,6 @@
             ])
         </div>
         <img id="main-image" src="{{ asset('images/battery.png') }}" />
-{{--        <div class="wow animate__animated animate__fadeIn" data-wow-delay="0.5s" id="video" controls="controls" poster="{{ asset('images/distron.jpg') }}">--}}
-{{--            <video controls="controls" poster="{{ asset('images/distron.jpg') }}">--}}
-{{--                @foreach ($video as $item)--}}
-{{--                    <source src="{{ asset($item) }}" type='video/{{ pathinfo($item)['extension'] }};'>--}}
-{{--                @endforeach--}}
-{{--            </video>--}}
-{{--            <a id="look-at" href="{!! $settings['video'] !!}" target="_blank"><span>{{ trans('content.look_at') }}</span><img src="{{ asset('images/ru_tube.png') }}" /></a>--}}
-{{--        </div>--}}
     </div>
     <x-section>
         <div id="breadcrumbs" class="ps-4 wow animate__animated animate__slideInLeft" data-wow-offset="10" data-wow-delay=".5s">

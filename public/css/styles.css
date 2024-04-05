@@ -30,6 +30,7 @@ p, ul, ol {
     border: 3px solid #009671;
 }
 
+
 .w-30 {
     width: 30%;
 }
@@ -312,6 +313,25 @@ li::marker {
     margin-left: 100px;
 }
 
+#video {
+    width: 70%;
+    margin: auto;
+}
+
+#video video {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#look-at {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#look-at img {
+    width: 100px;
+}
+
 #breadcrumbs {
     color: #009671;
     display: flex;
@@ -532,10 +552,6 @@ td.basket-price {
         right: 50px;
     }
 
-    #look-at {
-        color: white;
-    }
-
     .section.color {
         background-size: 120% 100%;
     }
@@ -576,10 +592,6 @@ td.basket-price {
 
     #main-image {
         display: none;
-    }
-
-    #look-at {
-        color: #009671;
     }
 }
 
