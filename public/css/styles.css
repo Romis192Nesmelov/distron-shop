@@ -430,7 +430,7 @@ textarea:focus {
     box-shadow: 0 0 5px 1px rgba(0, 150, 113, 0.8) !important;
 }
 
-#map {
+iframe {
     border: 1px solid #009671;
     box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
 }

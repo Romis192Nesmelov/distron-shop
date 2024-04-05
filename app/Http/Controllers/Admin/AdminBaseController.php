@@ -35,29 +35,24 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-gear',
                 'hidden' => false,
             ],
-            'icons' => [
-                'key' => 'icons',
-                'icon' => 'icon-stack-picture',
-                'hidden' => false,
-            ],
-            'contents' => [
-                'key' => 'contents',
-                'icon' => 'icon-newspaper',
-                'hidden' => false,
-            ],
-            'questions' => [
-                'key' => 'questions',
-                'icon' => 'icon-question3',
-                'hidden' => false,
-            ],
-            'contacts' => [
-                'key' => 'contacts',
-                'icon' => 'icon-map',
-                'hidden' => false,
-            ],
             'metrics' => [
                 'key' => 'metrics',
                 'icon' => 'icon-code',
+                'hidden' => false,
+            ],
+            'images' => [
+                'key' => 'images',
+                'icon' => 'icon-stack-picture',
+                'hidden' => false,
+            ],
+//            'icons' => [
+//                'key' => 'icons',
+//                'icon' => 'icon-stack-picture',
+//                'hidden' => false,
+//            ],
+            'contents' => [
+                'key' => 'contents',
+                'icon' => 'icon-newspaper',
                 'hidden' => false,
             ],
             'types' => [
@@ -65,6 +60,11 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-battery-charging',
                 'hidden' => false,
             ],
+//            'questions' => [
+//                'key' => 'questions',
+//                'icon' => 'icon-question3',
+//                'hidden' => false,
+//            ],
             'items' => [
                 'key' => 'items',
                 'hidden' => true,
@@ -79,9 +79,9 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-magazine',
                 'hidden' => false,
             ],
-            'images' => [
-                'key' => 'images',
-                'icon' => 'icon-stack-picture',
+            'contacts' => [
+                'key' => 'contacts',
+                'icon' => 'icon-map',
                 'hidden' => false,
             ],
         ];
@@ -149,6 +149,7 @@ class AdminBaseController extends Controller
         if ($parentModel) $breadcrumbsParams['parent_id'] = $parentItem->id;
 
         if (request('id')) {
+            $this->data['metas'] = $this->metas;
             $this->data[$this->data['singular_key']] = $model->findOrFail(request('id'));
             $breadcrumbsParams['id'] = $this->data[$this->data['singular_key']]->id;
             $this->breadcrumbs[] = [
@@ -158,6 +159,7 @@ class AdminBaseController extends Controller
             ];
             return $this->showView($this->data['singular_key']);
         } else if ($slug && $slug == 'add') {
+            $this->data['metas'] = $this->metas;
             $breadcrumbsParams['slug'] = 'add';
             $this->breadcrumbs[] = [
                 'key' => $this->menu[$key]['key'],

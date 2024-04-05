@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Seo;
 use App\Models\Type;
 use Illuminate\View\View;
 
@@ -12,18 +13,23 @@ class ItemController extends BaseController
 
     public function __invoke($slug=null): View
     {
+        $this->breadcrumbs[] = [
+            'route' => route('items'),
+            'name' => trans('menu.products')
+        ];
+
         if ($slug) {
             $this->data['type'] = Type::where('slug',$slug)->select(['id','slug','name','text'])->first();
             if (!$this->data['type']) abort(404);
 
             if ($this->data['type']->id == 4) {
                 $this->breadcrumbs[] = [
-                    'route' => route('get_items',['scroll' => 'services']),
+                    'route' => route('items',['scroll' => 'services']),
                     'name' => $this->data['type']->name
                 ];
             } else {
                 $this->breadcrumbs[] = [
-                    'route' => route('get_items',['slug' => $slug]),
+                    'route' => route('items',['slug' => $slug]),
                     'name' => $this->data['type']->name
                 ];
             }
@@ -32,7 +38,7 @@ class ItemController extends BaseController
             if (request()->has('id')) {
                 $this->data['item'] = Item::findOrFail(request()->id);
                 $this->breadcrumbs[] = [
-                    'route' => route('get_items',['slug' => $slug, 'id' => $this->data['item']->id]),
+                    'route' => route('items',['slug' => $slug, 'id' => $this->data['item']->id]),
                     'name' => getItemHead($this->data['item'])
                 ];
                 $this->getSeo('item');
@@ -58,7 +64,9 @@ class ItemController extends BaseController
                 return $this->showView('type');
             }
         } else {
-            dd(111);
+            $this->data['products'] = Type::where('is_service',0)->get();
+            $this->data['seo'] = Seo::find($this->seoIds['products']);
+            return $this->showView('products');
         }
     }
 

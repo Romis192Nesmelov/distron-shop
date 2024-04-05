@@ -23,9 +23,6 @@ class AdminSettingsController extends AdminBaseController
         $settings = new SettingsController();
         $this->data['settings'] = $settings->getSettings();
 
-        $this->data['metas'] = $this->metas;
-        $this->data['seo'] = Seo::find(1);
-
         return $this->showView('settings');
     }
 
@@ -35,12 +32,9 @@ class AdminSettingsController extends AdminBaseController
     public function editSettings(Request $request): RedirectResponse
     {
         $fields = $this->validate($request, ['video' => $this->validationString]);
-        $seoFields = $this->validate($request, $this->getValidationSeo());
 
         $settings = new SettingsController();
         $settings->saveSettings($fields);
-
-        Seo::where('id',1)->update($seoFields);
 
         $this->saveCompleteMessage();
         return redirect(route('admin.settings'));

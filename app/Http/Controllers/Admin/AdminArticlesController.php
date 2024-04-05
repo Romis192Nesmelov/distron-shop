@@ -20,8 +20,7 @@ class AdminArticlesController extends AdminBaseController
 
     public function articles($slug=null): View
     {
-        $this->data['metas'] = $this->metas;
-        $this->data['seo'] = Seo::find(3);
+        $this->data['seo'] = Seo::find($this->seoIds['articles']);
         return $this->getSomething('articles', new Article(), $slug);
     }
 
@@ -31,7 +30,7 @@ class AdminArticlesController extends AdminBaseController
     public function editArticleSeo(Request $request): RedirectResponse
     {
         $seoFields = $this->validate($request, $this->getValidationSeo());
-        Seo::where('id',3)->update($seoFields);
+        Seo::where('id',$this->seoIds['articles'])->update($seoFields);
         $this->saveCompleteMessage();
         return redirect(route('admin.articles'));
     }

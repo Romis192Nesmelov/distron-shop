@@ -1,5 +1,5 @@
 <div class="panel panel-flat">
-    <x-atitle>{{ trans('admin.seo') }}</x-atitle>
+    <x-atitle>{{ $seoHead ?? trans('admin.seo') }}</x-atitle>
     <div class="panel-body">
         @include('blocks.input_block', [
             'label' => trans('admin.page_title'),

@@ -10,7 +10,7 @@
     <x-section>
         <x-row>
             <div class="col-lg-3 col-sm-12 pe-lg-4 pe-sm-0">
-                <form id="filters" method="get" action="{{ route('get_items',['slug' => $type->slug]) }}">
+                <form id="filters" method="get" action="{{ route('items',['slug' => $type->slug]) }}">
                     @foreach ($filters as $name => $params)
                         @if ($params['min'] != $params['max'])
                             @include('blocks.filter_slider_block',[
@@ -29,7 +29,7 @@
                             'icon' => 'icon-filter4',
                             'buttonText' => trans('content.filtered')
                         ])
-                        <a href="{{ route('get_items',['slug' => $type->slug]) }}">
+                        <a href="{{ route('items',['slug' => $type->slug]) }}">
                             @include('blocks.button_block', [
                                 'addClass' => 'w-100 mt-2',
                                 'primary' => true,
@@ -43,6 +43,7 @@
             <div class="items items-type-{{ $type->id }} col-lg-9 col-sm-12 row">
                 @foreach($items as $k => $item)
                     @include('blocks.type_item_block',[
+                        'href' => 'items',
                         'col' => 3,
                         'showDescription' => false
                     ])

@@ -4,13 +4,13 @@ use App\Http\Controllers\Admin\AdminArticlesController;
 use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Controllers\Admin\AdminContactsController;
 use App\Http\Controllers\Admin\AdminContentsController;
-use App\Http\Controllers\Admin\AdminIconsController;
+//use App\Http\Controllers\Admin\AdminIconsController;
 use App\Http\Controllers\Admin\AdminImagesController;
 use App\Http\Controllers\Admin\AdminItemsController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminMetricsController;
 use App\Http\Controllers\Admin\AdminOrdersController;
-use App\Http\Controllers\Admin\AdminQuestionsController;
+//use App\Http\Controllers\Admin\AdminQuestionsController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminTypesController;
 use App\Http\Controllers\Admin\AdminUsersController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,11 +40,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(BaseController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/contacts', 'contacts')->name('contacts');
     Route::get('/get-new-csrf', 'getNewCsrf')->name('get_new_csrf');
 });
 
 Route::get('/search', SearchController::class)->name('search');
 Route::get('/items/{slug?}', ItemController::class)->name('items');
+Route::get('/services/{slug?}', ServicesController::class)->name('services');
 Route::get('/articles/{slug?}', ArticlesController::class)->name('articles');
 
 Route::controller(BasketController::class)->group(function () {
@@ -95,25 +98,26 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::post('/edit-settings', 'editSettings')->name('edit_settings');
     });
 
-    Route::controller(AdminIconsController::class)->group(function () {
-        Route::get('/icons/{slug?}', 'icons')->name('icons');
-        Route::post('/edit-icon', 'editIcon')->name('edit_icon');
-        Route::post('/delete-icon', 'deleteIcon')->name('delete_icon');
-    });
+//    Route::controller(AdminIconsController::class)->group(function () {
+//        Route::get('/icons/{slug?}', 'icons')->name('icons');
+//        Route::post('/edit-icon', 'editIcon')->name('edit_icon');
+//        Route::post('/delete-icon', 'deleteIcon')->name('delete_icon');
+//    });
 
     Route::controller(AdminContentsController::class)->group(function () {
         Route::get('/contents', 'contents')->name('contents');
         Route::post('/edit-content', 'editContent')->name('edit_content');
     });
 
-    Route::controller(AdminQuestionsController::class)->group(function () {
-        Route::get('/questions/{slug?}', 'questions')->name('questions');
-        Route::post('/edit-question', 'editQuestion')->name('edit_question');
-        Route::post('/delete-question', 'deleteQuestion')->name('delete_question');
-    });
+//    Route::controller(AdminQuestionsController::class)->group(function () {
+//        Route::get('/questions/{slug?}', 'questions')->name('questions');
+//        Route::post('/edit-question', 'editQuestion')->name('edit_question');
+//        Route::post('/delete-question', 'deleteQuestion')->name('delete_question');
+//    });
 
     Route::controller(AdminContactsController::class)->group(function () {
         Route::get('/contacts', 'contacts')->name('contacts');
+        Route::post('/edit-contacts-seo', 'editContactsSeo')->name('edit_contacts_seo');
         Route::post('/edit-contact', 'editContact')->name('edit_contact');
     });
 
@@ -126,6 +130,7 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
     Route::controller(AdminTypesController::class)->group(function () {
         Route::get('/types/{slug?}', 'types')->name('types');
         Route::post('/edit-type', 'editType')->name('edit_type');
+        Route::post('/edit-products-seo', 'editProductsSeo')->name('edit_products_seo');
     });
 
     Route::controller(AdminItemsController::class)->group(function () {

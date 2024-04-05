@@ -23,7 +23,6 @@ class AdminItemsController extends AdminBaseController
     {
         $this->data['parent_key'] = 'types';
         $this->data['technologies'] = Technology::all();
-        $this->data['metas'] = $this->metas;
         return $this->getSomething('items', new Item(), $slug, new Type());
     }
 

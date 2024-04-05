@@ -27,9 +27,14 @@ class BaseController extends Controller
         $this->data['content'] = Content::find(1);
 //        $this->data['icons'] = Icon::where('active',1)->get();
 //        $this->data['faq'] = Question::where('active',1)->get();
-//        $this->data['catalogue'] = Type::where('is_service',0)->get();
-//        $this->data['services'] = Type::where('is_service',1)->first();
         return $this->showView('home');
+    }
+
+    public function contacts(): View
+    {
+        $this->data['map'] = Contact::where('id',4)->pluck('contact')->first();
+        $this->data['seo'] = Seo::find($this->seoIds['contacts']);
+        return $this->showView('contacts');
     }
 
     public function getNewCsrf(): JsonResponse
@@ -54,14 +59,14 @@ class BaseController extends Controller
             $menu[$content->slug] = ['href' => route('content',['slug' => $content->slug]), 'name' => $content->head];
         }
 
-        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
-        $menu['catalogue'] = ['href' => 'items', 'name' => trans('menu.catalogue')];
-        $menu['actions'] = ['scroll' => 'services', 'name' => trans('menu.actions')];
-        $menu['services'] = ['scroll' => 'services', 'name' => trans('menu.services')];
+//        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
+        $menu['products'] = ['href' => 'items', 'name' => trans('menu.products')];
+        $menu['services'] = ['href' => 'services', 'name' => trans('menu.services')];
+        $menu['actions'] = ['scroll' => 'actions', 'name' => trans('menu.actions')];
 
-        $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
+//        $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
-        $menu['contacts'] = ['scroll' => 'contacts', 'name' => trans('menu.contacts')];
+        $menu['contacts'] = ['href' => 'contacts', 'name' => trans('menu.contacts')];
 
         if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');
 

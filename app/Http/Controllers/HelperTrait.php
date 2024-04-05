@@ -23,6 +23,12 @@ trait HelperTrait
     public string $validationPdf = 'nullable|mimes:pdf|max:1000';
     public string $validationCsv = 'nullable|mimes:csv,txt|max:1000';
     public string $validationDoc = 'mimes:doc,pdf,docx';
+    public array $seoIds = [
+        'products' => 5,
+        'actions' => 7,
+        'articles' => 8,
+        'contacts' => 9
+    ];
 
     /**
      * @return string

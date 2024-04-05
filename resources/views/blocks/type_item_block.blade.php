@@ -1,6 +1,6 @@
 <div class="item col-lg-{{ $col }} col-md-6 col-sm-12 mb-5 d-flex flex-column justify-content-between wow animate__animated animate__fadeInUp {{ $addClass ?? '' }}" data-wow-offset="10" data-wow-delay="{{ ($k + 1) * 0.1 }}s">
     <div class="w-100 text-center">
-        <a class="href-block" href="{{ route('get_items',['slug' => $item->type->slug, 'id' => $item->id]) }}">
+        <a class="href-block" href="{{ route('items',['slug' => $item->type->slug, 'id' => $item->id]) }}">
             <div class="image mb-4" img="{{ $item->image ? asset($item->image) : asset($item->type->image) }}"></div>
             <h5 class="w-100 text-center">{{ getItemHead($item) }}</h5>
             @if ($showDescription)
@@ -10,7 +10,7 @@
         </a>
     </div>
     <div class="text-center">
-        <a class="href-block" href="{{ route('get_items',['slug' => $item->type->slug, 'id' => $item->id]) }}">
+        <a class="href-block" href="{{ route($href,['slug' => ($href == 'services' ? null : $item->type->slug), 'id' => $item->id]) }}">
             <p class="w-100 text-center fs-3">
                 <strong>@include('blocks.price_block',['price' => $item->price])</strong>
             </p>

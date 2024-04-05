@@ -13,7 +13,6 @@
                     'placeholder' => trans('admin.rutube_video'),
                     'value' => $settings['video']
                 ])
-                @include('admin.blocks.seo_block',['seo' => $seo])
                 @include('admin.blocks.save_button_block')
             </form>
         </div>

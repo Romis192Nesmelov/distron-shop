@@ -18,7 +18,6 @@ class AdminContentsController extends AdminBaseController
 
     public function contents(): View
     {
-        $this->data['metas'] = $this->metas;
         return $this->getSomething('contents', new Content());
     }
 

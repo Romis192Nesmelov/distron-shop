@@ -7,6 +7,8 @@ use Illuminate\View\View;
 
 class ArticlesController extends BaseController
 {
+    use HelperTrait;
+
     public function __invoke($slug=null): View
     {
         $this->breadcrumbs[] = [
@@ -27,7 +29,7 @@ class ArticlesController extends BaseController
             return $this->showView('article');
         } else {
             $this->data['articles'] = Article::select(['image','name','slug','short'])->paginate(8);
-            $this->data['seo'] = Seo::find(3);
+            $this->data['seo'] = Seo::find($this->seoIds['articles']);
             return $this->showView('articles');
         }
     }

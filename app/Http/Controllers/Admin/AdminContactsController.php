@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\HelperTrait;
 use App\Models\Contact;
+use App\Models\Seo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,11 +19,25 @@ class AdminContactsController extends AdminBaseController
 
     public function contacts(): View
     {
+        $this->data['seo'] = Seo::find($this->seoIds['contacts']);
+        $this->data['metas'] = $this->metas;
+        
         $this->data['types'] = [];
         for ($i=1;$i<=5;$i++) {
             $this->data['types'][] = ['val' => $i, 'descript' => trans('admin.contact_type'.$i)];
         }
         return $this->getSomething('contacts', new Contact());
+    }
+
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function editContactsSeo(Request $request): RedirectResponse
+    {
+        $seoFields = $this->validate($request, $this->getValidationSeo());
+        Seo::where('id',$this->seoIds['contacts'])->update($seoFields);
+        $this->saveCompleteMessage();
+        return redirect(route('admin.contacts'));
     }
 
     /**
