@@ -35,7 +35,7 @@ class AdminTypesController extends AdminBaseController
             $request,
             new Type(),
             ['image' => $this->validationJpgAndPng, 'name' => $this->validationString, 'text' => $this->validationText],
-            'images/types/',
+            'storage/images/types/',
             'type'
         );
         $this->saveCompleteMessage();

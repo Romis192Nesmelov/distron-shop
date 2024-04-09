@@ -80,7 +80,7 @@ span.marked {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url("../images/white_tansp_bg.png");
+    background-image: url("../../storage/app/public/images/white_tansp_bg.png");
     z-index: 3000;
     display: flex;
     align-items: center;
@@ -90,7 +90,7 @@ span.marked {
 #loader > div {
     width: 50px;
     height: 50px;
-    background-image: url("../images/preloader.gif");
+    background-image: url("../../storage/app/public/images/preloader.gif");
     background-size: 100%;
 }
 
@@ -277,7 +277,7 @@ li::marker {
     width: 100%;
     height: 530px;
     margin-top: 110px;
-    background: url("../images/waves.jpg") left top no-repeat;
+    background: url("../storage/images/waves.jpg") left top no-repeat;
 }
 
 #main-image {
@@ -345,7 +345,7 @@ li::marker {
 }
 
 .section.color1 {
-    background-image: url("../images/color_section1.jpg");
+    background-image: url("../../storage/app/public/images/color_section1.jpg");
 }
 
 .section.color1 h2 {
@@ -360,7 +360,7 @@ li::marker {
 .section.color2 {
     padding-top: 70px;
     padding-bottom: 70px;
-    background-image: url("../images/color_section2.jpg");
+    background-image: url("../../storage/app/public/images/color_section2.jpg");
 }
 
 .section.white {

@@ -35,7 +35,7 @@ class AdminImagesController extends AdminBaseController
             $request,
             new Image(),
             $validationArr,
-            'images/gallery/',
+            'storage/images/gallery/',
             'image'
         );
         $this->saveCompleteMessage();

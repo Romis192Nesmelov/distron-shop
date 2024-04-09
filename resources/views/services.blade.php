@@ -15,8 +15,8 @@
         <div class="row mb-4">
             @for ($i=1;$i<=4;$i++)
                 <div class="col-md-3 col-sm-4 wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="{{ ($i + 1) * 0.2 }}s">
-                    <a class="fancybox w-100" href="{{ asset('images/services/photo'.$i.'_full.jpg') }}">
-                        <img class="image w-100" src="{{ asset('images/services/photo'.$i.'_preview.jpg') }}" />
+                    <a class="fancybox w-100" href="{{ asset('storage/images/services/photo'.$i.'_full.jpg') }}">
+                        <img class="image w-100" src="{{ asset('storage/images/services/photo'.$i.'_preview.jpg') }}" />
                     </a>
                 </div>
             @endfor

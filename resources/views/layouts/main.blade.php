@@ -46,7 +46,7 @@
     @include('blocks.main_nav_block')
     <div id="main-collage">
         <div id="main-logo">
-            <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('images/logo.svg') }}" />
+            <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('storage/images/logo.svg') }}" />
             <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.tagline') }}</h1>
             @include('blocks.button_block',[
                 'primary' => true,
@@ -55,7 +55,7 @@
                 'buttonText' => trans('content.leave_request')
             ])
         </div>
-        <img id="main-image" src="{{ asset('images/battery.png') }}" />
+        <img id="main-image" src="{{ asset('storage/images/battery.png') }}" />
     </div>
     <x-section>
         <div id="breadcrumbs" class="ps-4 wow animate__animated animate__slideInLeft" data-wow-offset="10" data-wow-delay=".5s">
@@ -74,7 +74,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="w-100" src="{{ asset('images/distron_shim.png') }}" />
+                        <img class="w-100" src="{{ asset('storage/images/distron_shim.png') }}" />
                     </div>
                     <div class="col-md-6 ml-auto">
                         <ul class="list-unstyled">

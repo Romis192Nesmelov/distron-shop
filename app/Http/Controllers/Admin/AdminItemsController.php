@@ -62,7 +62,7 @@ class AdminItemsController extends AdminBaseController
             $request,
             new Item(),
             $validationArr,
-            'images/items/',
+            'storage/images/items/',
             'item'
         );
         $this->saveCompleteMessage();

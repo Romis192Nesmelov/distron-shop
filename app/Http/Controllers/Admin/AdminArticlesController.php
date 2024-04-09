@@ -21,6 +21,7 @@ class AdminArticlesController extends AdminBaseController
     public function articles($slug=null): View
     {
         $this->data['seo'] = Seo::find($this->seoIds['articles']);
+        $this->data['metas'] = $this->metas;
         return $this->getSomething('articles', new Article(), $slug);
     }
 
@@ -51,7 +52,7 @@ class AdminArticlesController extends AdminBaseController
             $request,
             new Article(),
             $validationArr,
-            'images/articles/',
+            'storage/images/articles/',
             'article'
         );
         $this->saveCompleteMessage();

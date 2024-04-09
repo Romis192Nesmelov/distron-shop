@@ -22,7 +22,7 @@ class IconsSeeder extends Seeder
         ];
 
         foreach ($data as $k => $item) {
-            $item['image'] = 'images/icons/icon'.($k + 1).'.svg';
+            $item['image'] = 'storage/images/icons/icon'.($k + 1).'.svg';
             $item['active'] = 1;
             Icon::create($item);
         }

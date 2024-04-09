@@ -17,7 +17,7 @@ class ItemsSeeder extends Seeder
     {
         $dataServices = [
             [
-                'image' => 'images/items/item41.jpg',
+                'image' => 'storage/images/items/item41.jpg',
                 'name' => 'Восстановление Тяговых АКБ',
                 'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
                 'price' => rand(5000,10000),
@@ -27,7 +27,7 @@ class ItemsSeeder extends Seeder
                 'type_id' => 4
             ],
             [
-                'image' => 'images/placeholder.jpg',
+                'image' => 'storage/images/placeholder.jpg',
                 'name' => 'Восстановление Телеком батарей',
                 'capacity' => rand(100,1000),
                 'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.',

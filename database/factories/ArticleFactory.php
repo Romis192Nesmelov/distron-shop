@@ -22,7 +22,7 @@ class ArticleFactory extends Factory
         }
 
         return [
-            'image' => 'images/placeholder.jpg',
+            'image' => 'storage/images/placeholder.jpg',
             'name' => fake()->text(rand(10,50)),
             'short' => fake()->text(255),
             'text' => $text

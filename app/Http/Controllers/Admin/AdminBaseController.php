@@ -223,11 +223,11 @@ class AdminBaseController extends Controller
     {
         $this->validate($request, ['id' => 'required|integer|exists:'.$model->getTable().',id']);
         $table = $model->find($request->input('id'));
-        if (isset($table->image) && $table->image && $table->image != 'images/placeholder.jpg') {
+        if (isset($table->image) && $table->image && $table->image != 'storage/images/placeholder.jpg') {
             $this->deleteFile($table->image);
         } elseif (isset($table->images)) {
             foreach ($table->images as $image) {
-                if ($image && $image != 'images/placeholder.jpg') {
+                if ($image && $image != 'storage/images/placeholder.jpg') {
                     $this->deleteFile($image->image);
                 }
             }

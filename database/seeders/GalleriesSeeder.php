@@ -17,7 +17,7 @@ class GalleriesSeeder extends Seeder
         $data = ['batteries.png','battery1.jpg','loader.jpg','two_batteries.jpg'];
 
         foreach ($data as $image) {
-            Image::create(['image' => 'images/gallery/'.$image]);
+            Image::create(['image' => 'storage/images/gallery/'.$image]);
         }
     }
 }

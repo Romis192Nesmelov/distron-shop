@@ -7,7 +7,7 @@
     @csrf
     <div class="panel panel-body login-form">
         <div class="text-center">
-            <img width="100" src="{{ asset('images/logo_black.svg') }}" />
+            <img width="100" src="{{ asset('storage/images/logo_black.svg') }}" />
             <h5 class="content-group-lg">{{ trans('auth.login_to_your_account') }} <small class="display-block">{!! trans('auth.login_head') !!}</small></h5>
         </div>
         @include('blocks.input_block',[

@@ -25,18 +25,18 @@ class AdminIconsController extends AdminBaseController
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function editIcon(Request $request): RedirectResponse
-    {
-        $this->editSomething (
-            $request,
-            new Icon(),
-            ['image' => $this->validationSvg, 'title' => $this->validationString],
-            'images/icons/',
-            'icon',
-        );
-        $this->saveCompleteMessage();
-        return redirect(route('admin.icons'));
-    }
+//    public function editIcon(Request $request): RedirectResponse
+//    {
+//        $this->editSomething (
+//            $request,
+//            new Icon(),
+//            ['image' => $this->validationSvg, 'title' => $this->validationString],
+//            'storage/images/icons/',
+//            'icon',
+//        );
+//        $this->saveCompleteMessage();
+//        return redirect(route('admin.icons'));
+//    }
 
     /**
      * @throws \Illuminate\Validation\ValidationException
