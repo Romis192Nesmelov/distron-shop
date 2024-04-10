@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Content;
-use App\Models\Icon;
 use App\Models\Metric;
-use App\Models\Question;
 use App\Models\Seo;
-use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class BaseController extends Controller
@@ -78,9 +74,9 @@ class BaseController extends Controller
                 'settings' => $settings->getSettings(),
                 'menu' => $menu,
                 'video' => [
-                    'video/distron.mp4',
-                    'video/distron.ogg',
-                    'video/distron.webm'
+                    'storage/video/distron.mp4',
+                    'storage/video/distron.ogg',
+                    'storage/video/distron.webm'
                 ],
                 'metrics' => Metric::all(),
                 'breadcrumbs' => $this->breadcrumbs,

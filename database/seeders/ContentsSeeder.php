@@ -17,10 +17,10 @@ class ContentsSeeder extends Seeder
         $data = [
             [
                 'head' => 'Возьмите под контроль расходы на АКБ!',
-                'text' => '<img class="w-50 d-none d-sm-block pull-left me-3 wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="storage/images/gallery/loader.jpg" />
+                'text' => '<img class="w-50 d-none d-sm-block pull-left me-3 wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/loader.jpg" />
         <p class="wow animate__animated animate__slideInRight">Компания <a href="/"><b>Distron</b></a> рада предложить свои услуги по ремонту и восстановлению тяговых аккумуляторов для погрузчиков, тягачей, тележек, штабелеров и другой складской техники. Наше комплексное и инновационное решение, основанное на современных технологиях и фирменной присадке, позволяет провести полный цикл ремонта аккумуляторов, образуя защитной слой на пластинах и предотвращая сульфатацию.</p>
         <h3 class="mt-3 text-left wow animate__animated animate__slideInRight">Мы предлагаем следующие этапы процесса восстановления:</h3>
-        <img class="w-25 d-none d-sm-block pull-right wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="storage/images/gallery/two_batteries.jpg" />
+        <img class="w-25 d-none d-sm-block pull-right wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/two_batteries.jpg" />
         <ul class="wow animate__animated animate__slideInRight">
             <li>Первичный осмотр и диагностика</li>
             <li>Удаление отработанного электролита</li>
@@ -33,9 +33,9 @@ class ContentsSeeder extends Seeder
             <li>Снятие рабочих характеристик и составление протокола испытания</li>
             <li>Подготовка к транспортировке и отправка потребителю</li>
         </ul>
-        <img class="w-25 d-none d-sm-block pull-left wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="storage/images/gallery/battery1.jpg" />
+        <img class="w-25 d-none d-sm-block pull-left wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/battery1.jpg" />
         <p class="wow animate__animated animate__slideInRight">Экономическая эффективность восстановления тяговых аккумуляторов очевидна. Мы предлагаем снижение затрат на 50% по сравнению с покупкой новых батарей. К тому же, компания <a href="/"><b>Distron</b></a> предоставляет гарантию на все отремонтированные аккумуляторы.</p>
-        <img class="w-50 d-none d-sm-block pull-right wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="storage/images/gallery/batteries.png" />
+        <img class="w-50 d-none d-sm-block pull-right wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/batteries.png" />
         <p class="wow animate__animated animate__slideInLeft">Сотрудничество с нами обеспечит вам существенное снижение эксплуатационных расходов, повышение эффективности использования техники и вторую жизнь аккумуляторов, способствуя экологической безопасности. Мы гарантируем быструю окупаемость и качественный результат. Пять простых шагов - и ваш аккумулятор будет как новый.</p>
         <p class="wow animate__animated animate__slideInLeft">Разработанное комплексное решение от компании <a href="/"><b>Distron</b></a> было создано с целью существенного снижения затрат на аккумуляторные батареи для складской погрузочной техники.</p>
         <p class="wow animate__animated animate__slideInLeft">Основные преимущества восстановления тяговых аккумуляторов в рамках гарантии, в т.ч. от компании BSI, заключаются в том, что вы получаете качественно отремонтированный аккумулятор с гарантией на два года. Вы получаете аккумулятор, полностью готовый к использованию, протоколом испытания, подтверждающим его работоспособность.</p>

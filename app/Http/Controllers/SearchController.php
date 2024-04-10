@@ -19,7 +19,7 @@ class SearchController extends BaseController
         ];
         $found = collect();
 
-        $foundTypes = Type::query()->searched()->get();
+        $foundTypes = Type::query()->searched()->with('items')->get();
         foreach ($foundTypes as $item) {
             $found->push([
                 'image' => $item->image,
@@ -29,7 +29,7 @@ class SearchController extends BaseController
             ]);
         }
 
-        $foundItems = Item::query()->searched()->get();
+        $foundItems = Item::query()->searched()->with(['type','technology'])->get();
         foreach ($foundItems as $item) {
             $found->push([
                 'image' => $item->image ?: $item->type->image,

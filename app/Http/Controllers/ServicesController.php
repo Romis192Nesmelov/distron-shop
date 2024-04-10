@@ -18,7 +18,7 @@ class ServicesController extends BaseController
         ];
 
         if (request()->has('id')) {
-            $this->data['item'] = Item::findOrFail(request()->id);
+            $this->data['item'] = Item::where('id',request()->id)->with(['type','technology'])->first();
             $this->breadcrumbs[] = [
                 'route' => route('services',['id' => $this->data['item']->id]),
                 'name' => getItemHead($this->data['item'])

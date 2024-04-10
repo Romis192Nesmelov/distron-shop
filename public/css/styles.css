@@ -251,7 +251,7 @@ li::marker {
 #basket {
     color: white;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 #basket i {
@@ -262,7 +262,7 @@ li::marker {
     width: 20px;
     height: 20px;
     position: absolute;
-    right: -5px;
+    right: 5px;
     font-weight: bolder;
     background: #009671;
     border-radius: 50%;

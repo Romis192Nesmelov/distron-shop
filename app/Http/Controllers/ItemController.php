@@ -36,7 +36,7 @@ class ItemController extends BaseController
 
             $this->data['filters'] = [];
             if (request()->has('id')) {
-                $this->data['item'] = Item::findOrFail(request()->id);
+                $this->data['item'] = Item::where('id',request()->id)->with(['type','technology'])->first();
                 $this->breadcrumbs[] = [
                     'route' => route('items',['slug' => $slug, 'id' => $this->data['item']->id]),
                     'name' => getItemHead($this->data['item'])
@@ -44,7 +44,12 @@ class ItemController extends BaseController
                 $this->getSeo('item');
                 return $this->showView('item');
             } else {
-                $this->data['items'] = Item::query()->where('type_id',$this->data['type']->id)->filtered()->orderBy('price')->get();
+                $this->data['items'] = Item::query()
+                    ->where('type_id',$this->data['type']->id)
+                    ->with(['type','technology'])
+                    ->filtered()
+                    ->orderBy('price')
+                    ->get();
 
                 $this->getMinMax('price',100,'₽');
 

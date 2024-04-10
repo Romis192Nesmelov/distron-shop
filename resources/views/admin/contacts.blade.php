@@ -22,5 +22,5 @@
             </form>
         </div>
     </div>
-    <script>window.dtRows = 0;</script>
+    <script>window.dtRows = 1;</script>
 @endsection

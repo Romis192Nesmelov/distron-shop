@@ -337,6 +337,7 @@
         @include('blocks.request_block')
         <div class="mt-3 d-flex justify-content-end">
             @include('blocks.button_block',[
+                'id' => null,
                 'addClass' => 'me-3',
                 'primary' => true,
                 'dataDismiss' => false,
@@ -345,6 +346,7 @@
                 'disabled' => true
             ])
             @include('blocks.button_block',[
+                'id' => null,
                 'primary' => true,
                 'addClass' => 'wow animate__animated animate__fadeIn',
                 'dataTarget' => 'request-modal',

@@ -14,7 +14,7 @@ class BasketController extends Controller
 
     public function addToBasket(AddToBasketRequest $request): JsonResponse
     {
-        $item = Item::find($request->id);
+        $item = Item::where('id',$request->id)->with(['type','technology'])->first();
         if (!Session::has('basket')) {
             Session::put('basket',[
                 $request->id => [
@@ -58,15 +58,20 @@ class BasketController extends Controller
     {
         $fields = $request->validated();
         $basket = [];
-        for ($i=0;$i<count($fields['id']);$i++) {
-            $item = Item::find($fields['id'][$i]);
-            if ($item && $fields['value'][$i]) {
-                $basket[$fields['id'][$i]] = [
-                    'item' => $item,
-                    'value' => $fields['value'][$i]
-                ];
+        $items = Item::whereIn('id',$fields['id'])->get();
+
+        foreach ($items as $item) {
+            for ($i=0;$i<count($fields['id']);$i++) {
+                if ($fields['id'][$i] == $item->id && $fields['value'][$i]) {
+                    $basket[$item->id] = [
+                        'item' => $item,
+                        'value' => $fields['value'][$i]
+                    ];
+                    break;
+                }
             }
         }
+
         if (count($basket)) {
             Session::put('basket',$basket);
             return response()->json([

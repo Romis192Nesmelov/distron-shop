@@ -14,5 +14,5 @@
         </div>
         @include('admin.blocks.add_button_block')
     </div>
-    <script>window.dtRows = 5;</script>
+    <script>window.dtRows = 6;</script>
 @endsection
