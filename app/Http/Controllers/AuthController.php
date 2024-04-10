@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Models\Seo;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -22,37 +25,47 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request): JsonResponse
     {
+        if (RateLimiter::tooManyAttempts('register:'.request('email'), $perMinute = 5))
+            return response()->json(['message' => trans('errors.to_many_attempts')],429);
+
         $credentials = $request->validated();
         $token = Str::random(30);
         $credentials['password'] = bcrypt($credentials['password']);
         $credentials['confirmation_token'] = $token;
         User::create($credentials);
         $this->sendMessage('registration', $request->email, ['token' => $token]);
+
         return response()->json(['message' => trans('auth.check_your_mail')],200);
     }
 
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
+        if (RateLimiter::tooManyAttempts('reset-password:'.$request->email, $perMinute = 5))
+            return response()->json(['message' => trans('errors.to_many_attempts')],429);
+
         if ($user = User::where('email',$request->email)->where('active',1)->first()) $message = trans('auth.user_not_found');
         else {
             $newPassword = Str::random(5);
             $user->password = bcrypt($newPassword);
-            $message = trans('auth.new_password');
             $this->sendMessage('registration', $request->email, ['newPassword' => $newPassword]);
         }
-        return response()->json(['message' => $message],200);
+
+        return response()->json(['message' => trans('auth.new_password')],200);
     }
 
     public function confirmationRegister($slug): RedirectResponse
     {
-        if (!$user = User::where('confirmation_token',$slug)->first()) session()->flash('message', trans('auth.user_not_found'));
-        elseif ($user->active) session()->flash('message', trans('auth.user_already_active'));
+        if (RateLimiter::tooManyAttempts('confirmation-register:'.$slug, $perMinute = 5)) abort(429);
+
+        if (!$user = User::where('confirmation_token',$slug)->first()) $message = trans('auth.user_not_found');
+        elseif ($user->active) $message = trans('auth.user_already_active');
         else {
             $user->active = 1;
             $user->save();
-            session()->flash('message', trans('auth.register_success'));
+            $message = trans('auth.register_success');
         }
-        return redirect(route('home'));
+
+        return redirect()->route('home')->with('message',$message);
     }
 
     public function logout(Request $request): RedirectResponse
