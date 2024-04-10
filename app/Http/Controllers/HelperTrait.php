@@ -11,7 +11,7 @@ trait HelperTrait
 {
     public string $validationPhone = 'regex:/^((\+)?(\d)(\s)?(\()?[0-9]{3}(\))?(\s)?([0-9]{3})(\-)?([0-9]{2})(\-)?([0-9]{2}))$/';
     public string $validationDate = 'regex:/^(\d{2})\/(\d{2})\/(\d{4})$/';
-    public string $validationPassword = 'required|confirmed|min:3|max:50';
+    public string $validationPassword = 'required|confirmed|min:5|max:50';
     public string $validationInteger = 'required|integer';
     public string $validationString = 'required|min:3|max:255';
     public string $validationText = 'nullable|min:5|max:50000';
@@ -68,9 +68,9 @@ trait HelperTrait
         session()->flash('message', trans('admin.save_complete'));
     }
 
-    public function sendMessage(string $template, string $mailTo, string|null $cc, array $fields, string|null $pathToFile=null): JsonResponse
+    public function sendMessage(string $template, string $mailTo, array $fields, string|null $pathToFile=null): JsonResponse
     {
-        dispatch(new SendMessage($template, $mailTo, $cc, $fields, $pathToFile));
+        dispatch(new SendMessage($template, $mailTo, null, $fields, $pathToFile));
         $message = trans('content.we_will_contact_you');
         return response()->json(['success' => true, 'message' => $message],200);
     }
