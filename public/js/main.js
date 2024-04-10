@@ -15,9 +15,9 @@ $(document).ready(function() {
     });
 
     const mainNav = $('#main-nav'),
-        searchForm = mainNav.find('form');
+        searchForm = $('#top-line form');
 
-    mainNav.find('i').click(function () {
+    searchForm.find('i').click(function () {
         searchForm.submit();
     });
 

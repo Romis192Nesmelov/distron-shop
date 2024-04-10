@@ -50,6 +50,7 @@
                 @endforeach
             </div>
         </x-row>
+        <div class="paginator">{{ $items->withQueryString()->links() }}</div>
     </x-section>
     <script>window.filters = {!! json_encode($filters) !!};</script>
 @endsection

@@ -39,7 +39,7 @@ class SearchController extends BaseController
             ]);
         }
 
-        $this->data['found'] = $found->paginate(10)->appends(['find' => request('find')]);
+        $this->data['found'] = $found->paginate(10);
         return $this->showView('search');
     }
 

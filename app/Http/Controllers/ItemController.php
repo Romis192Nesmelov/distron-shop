@@ -49,7 +49,7 @@ class ItemController extends BaseController
                     ->with(['type','technology'])
                     ->filtered()
                     ->orderBy('price')
-                    ->get();
+                    ->paginate(8);
 
                 $this->getMinMax('price',100,'₽');
 

@@ -29,7 +29,7 @@
                     </div>
                 </x-row>
             @endforeach
-            <div class="paginator">{{ $found->links() }}</div>
+            <div class="paginator">{{ $found->withQueryString()->links() }}</div>
         @endif
     </x-section>
 @endsection
