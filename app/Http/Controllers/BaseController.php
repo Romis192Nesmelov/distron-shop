@@ -17,10 +17,11 @@ class BaseController extends Controller
     protected array $data = [];
     protected array $breadcrumbs = [];
 
-    public function index(): View
+    public function index(string|null $token = null): View
     {
         $this->data['scroll'] = request('scroll');
         $this->data['content'] = Content::find(1);
+        $this->data['token'] = $token;
 //        $this->data['icons'] = Icon::where('active',1)->get();
 //        $this->data['faq'] = Question::where('active',1)->get();
         return $this->showView('home');

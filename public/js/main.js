@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    const loginModal = $('#login-modal');
+    const loginModal = $('#login-modal'),
+        setNewPasswordModal = $('#set-new-password-modal');
 
     window.tryCheckout = false;
 
@@ -14,8 +15,7 @@ $(document).ready(function() {
         'centerOnScroll': true
     });
 
-    const mainNav = $('#main-nav'),
-        searchForm = $('#top-line form');
+    const searchForm = $('#top-line form');
 
     searchForm.find('i').click(function () {
         searchForm.submit();
@@ -36,7 +36,8 @@ $(document).ready(function() {
 
     $('input[name=phone]').mask("+7(999)999-99-99");
 
-    if (window.showLogin) loginModal.modal('show');
+    if (window.showLogin && loginModal.length) loginModal.modal('show');
+    if (setNewPasswordModal.length) setNewPasswordModal.modal('show');
 
     new WOW().init();
 
@@ -197,6 +198,13 @@ const bindMainButton = (loginModal) => {
             e.preventDefault();
             loginModal.modal('hide');
             $('#reset-password-modal').modal('show');
+        });
+
+        // Click to send confirmation mail again
+        $('#send-confirmation-mail-again').click(function (e) {
+            e.preventDefault();
+            loginModal.modal('hide');
+            $('#send-confirmation-mail-modal').modal('show');
         });
 
         mainButton.click(() => {

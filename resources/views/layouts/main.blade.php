@@ -126,7 +126,7 @@
 <div id="on-top-button" data-scroll="home"><i class="icon-arrow-up12"></i></div>
 @if (auth()->guest())
     <x-modal id="login-modal" head="{{ trans('auth.login') }}">
-        <form id="login-form" method="post" action="{{ route('login') }}">
+        <form id="login-form" method="post" action="{{ route('auth.login') }}">
             @csrf
             @include('blocks.input_block',[
                 'name' => 'email',
@@ -153,6 +153,9 @@
             <div class="w-100 text-center mt-1">
                 <a href="#" id="forgot-password-href">{{ trans('auth.forgot_your_password') }}</a>
             </div>
+            <div class="w-100 text-center mt-1">
+                <a href="#" id="send-confirmation-mail-again">{{ trans('auth.send_confirmation_mail_again') }}</a>
+            </div>
             @include('blocks.buttons_pair_block',[
                 'submitDisabled' => false,
                 'submitText' => trans('auth.enter')
@@ -160,7 +163,7 @@
         </form>
     </x-modal>
     <x-modal id="register-modal" head="{{ trans('auth.register_head') }}">
-        <form id="register-form" method="post" action="{{ route('register') }}">
+        <form id="register-form" method="post" action="{{ route('auth.register') }}">
             @csrf
             @include('blocks.input_block',[
                 'name' => 'email',
@@ -181,8 +184,8 @@
             ])
         </form>
     </x-modal>
-    <x-modal id="reset-password-modal" head="{{ trans('auth.forgot_password_text') }}">
-        <form id="reset-password-form" method="post" action="{{ route('register') }}">
+    <x-modal id="send-confirmation-mail-modal" head="{{ trans('auth.send_confirmation_mail_again') }}">
+        <form id="send-confirmation-mail-form" method="post" action="{{ route('verification.send') }}">
             @csrf
             @include('blocks.input_block',[
                 'name' => 'email',
@@ -190,10 +193,16 @@
                 'placeholder' => trans('auth.enter_your_email'),
                 'ajax' => true,
             ])
-            @include('blocks.buttons_pair_block',[
-                'submitDisabled' => false,
-                'submitText' => trans('auth.get_password')
-            ])
+            <div class="mt-4 d-flex justify-content-center">
+                @include('blocks.button_block',[
+                    'disabled' => false,
+                    'addClass' => 'me-3',
+                    'primary' => true,
+                    'dataDismiss' => false,
+                    'buttonType' => 'submit',
+                    'buttonText' => trans('auth.send_confirmation_mail_again'),
+                ])
+            </div>
         </form>
     </x-modal>
 @endif

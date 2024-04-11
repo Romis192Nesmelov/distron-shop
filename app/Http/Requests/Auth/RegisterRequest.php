@@ -4,16 +4,16 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Controllers\HelperTrait;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
-    use HelperTrait;
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->guest();
     }
 
     /**
@@ -24,9 +24,19 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|unique:users,email',
-            'password' => $this->validationPassword,
+            'email' => ['required','email:dns','unique:users,email'],
+            'password' => ['required','confirmed',Password::defaults()],
             'i_agree' => 'accepted'
         ];
+    }
+
+    protected function prepareValidation()
+    {
+        $this->merge([
+            'email' => str(request('email'))
+                ->squish()
+                ->lower()
+                ->value()
+        ]);
     }
 }

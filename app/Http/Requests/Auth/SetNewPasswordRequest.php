@@ -6,7 +6,7 @@ use App\Http\Controllers\HelperTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class LoginRequest extends FormRequest
+class SetNewPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,8 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required','email:dns','exists:users,email'],
-            'password' => ['required',Password::defaults()]
+            'password' => ['required','confirmed',Password::defaults()],
+            'token' => 'required'
         ];
     }
 

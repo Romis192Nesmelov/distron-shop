@@ -1,6 +1,27 @@
 @extends('layouts.main')
 
 @section('content')
+    @if (auth()->guest() && $token)
+        <x-modal id="set-new-password-modal" head="{{ trans('auth.reset_password') }}">
+            <form id="set-new-password-form" method="post" action="{{ route('auth.set_new_password') }}">
+                @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
+                @include('blocks.input_block',[
+                    'name' => 'email',
+                    'type' => 'email',
+                    'label' => trans('auth.email'),
+                    'placeholder' => trans('auth.email'),
+                    'ajax' => true,
+                ])
+                @include('blocks.password_inputs_pair_block')
+                @include('blocks.buttons_pair_block',[
+                    'submitDisabled' => false,
+                    'submitText' => trans('auth.set_password')
+                ])
+            </form>
+        </x-modal>
+    @endif
+
 {{--    <x-section wow_delay=".1" data-scroll-destination="{{ str()->slug($content[0]->head) }}" head="{{ $content[0]->head }}">--}}
 {{--        <x-row>--}}
 {{--            <div class="col-12 col-lg-4">--}}
@@ -71,5 +92,7 @@
     @if ($scroll)
         <script>window.scrollAnchor = "{{ $scroll }}";</script>
     @endif
-    <script>window.showLogin = parseInt("{{ request()->has('login') }}");</script>
+    @if (auth()->guest())
+        <script>window.showLogin = parseInt("{{ request()->has('login') }}");</script>
+    @endif
 @endsection

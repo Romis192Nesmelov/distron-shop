@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Controllers\HelperTrait;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class ResetPasswordRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class ResetPasswordRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->guest();
     }
 
     /**
@@ -22,6 +23,18 @@ class ResetPasswordRequest extends FormRequest
      */
     public function rules(): array
     {
-        return ['email' => 'required|email|exists:users,email'];
+        return [
+            'email' => ['required','email:dns','exists:users,email']
+        ];
+    }
+
+    protected function prepareValidation()
+    {
+        $this->merge([
+            'email' => str(request('email'))
+                ->squish()
+                ->lower()
+                ->value()
+        ]);
     }
 }

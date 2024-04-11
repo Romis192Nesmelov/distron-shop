@@ -1,4 +1,4 @@
-<div class="mt-4 d-flex justify-content-end">
+<div class="mt-4 d-flex justify-content-center">
     @include('blocks.button_block',[
         'disabled' => $submitDisabled,
         'addClass' => 'me-3',

@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(BaseController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/contacts', 'contacts')->name('contacts');
+    Route::get('/set-new-password/{token}', 'index')->middleware('guest')->name('password.reset');
     Route::get('/get-new-csrf', 'getNewCsrf')->name('get_new_csrf');
 });
 
@@ -65,9 +66,12 @@ Route::controller(FeedbackController::class)->group(function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/login', 'login')->name('login');
-    Route::post('/register', 'register')->name('register');
-    Route::get('/confirmation-register/{slug}', 'confirmationRegister')->name('confirmation_register');
+    Route::post('/login', 'login')->middleware('guest')->name('auth.login');
+    Route::post('/register', 'register')->middleware('guest')->name('auth.register');
+    Route::get('/email/verify/{id}/{hash}', 'confirmationRegister')->middleware('guest')->name('verification.verify');
+    Route::post('/email/verification-notification', 'verificationNotification')->middleware(['guest', 'throttle:6,1'])->name('verification.send');
+    Route::post('/reset-password', 'resetPassword')->middleware('guest')->name('auth.reset_password');
+    Route::post('/set-new-password', 'setNewPassword')->middleware('guest')->name('auth.set_new_password');
     Route::get('/logout', 'logout')->name('logout');
 });
 
@@ -80,7 +84,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () {return view('admin.login');})->name('login');
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
 });
-
 
 Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
     Route::controller(AdminBaseController::class)->group(function () {

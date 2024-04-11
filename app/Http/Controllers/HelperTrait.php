@@ -11,7 +11,6 @@ trait HelperTrait
 {
     public string $validationPhone = 'regex:/^((\+)?(\d)(\s)?(\()?[0-9]{3}(\))?(\s)?([0-9]{3})(\-)?([0-9]{2})(\-)?([0-9]{2}))$/';
     public string $validationDate = 'regex:/^(\d{2})\/(\d{2})\/(\d{4})$/';
-    public string $validationPassword = 'required|confirmed|min:5|max:50';
     public string $validationInteger = 'required|integer';
     public string $validationString = 'required|min:3|max:255';
     public string $validationText = 'nullable|min:5|max:50000';

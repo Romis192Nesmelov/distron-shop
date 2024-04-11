@@ -1,18 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\Auth\SetNewPasswordRequest;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
-use App\Models\Seo;
-use App\Models\Type;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -29,43 +34,64 @@ class AuthController extends Controller
             return response()->json(['message' => trans('errors.to_many_attempts')],429);
 
         $credentials = $request->validated();
-        $token = Str::random(30);
         $credentials['password'] = bcrypt($credentials['password']);
-        $credentials['confirmation_token'] = $token;
-        User::create($credentials);
-        $this->sendMessage('registration', $request->email, ['token' => $token]);
+        $user = User::create($credentials);
+
+        event(new Registered($user));
+//        auth()->login($user);
 
         return response()->json(['message' => trans('auth.check_your_mail')],200);
     }
 
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
-        if (RateLimiter::tooManyAttempts('reset-password:'.$request->email, $perMinute = 5))
-            return response()->json(['message' => trans('errors.to_many_attempts')],429);
-
-        if ($user = User::where('email',$request->email)->where('active',1)->first()) $message = trans('auth.user_not_found');
-        else {
-            $newPassword = Str::random(5);
-            $user->password = bcrypt($newPassword);
-            $this->sendMessage('registration', $request->email, ['newPassword' => $newPassword]);
-        }
-
-        return response()->json(['message' => trans('auth.new_password')],200);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+        return response()->json(['message' => trans($status)], 200);
     }
 
-    public function confirmationRegister($slug): RedirectResponse
+    public function setNewPassword(SetNewPasswordRequest $request): JsonResponse
     {
-        if (RateLimiter::tooManyAttempts('confirmation-register:'.$slug, $perMinute = 5)) abort(429);
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
 
-        if (!$user = User::where('confirmation_token',$slug)->first()) $message = trans('auth.user_not_found');
+                $user->save();
+                event(new PasswordReset($user));
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) return response()->json(['message' => trans($status)], 200);
+        else return response()->json(['errors' => ['email' => [$status]]], 401);
+    }
+
+    public function confirmationRegister(int $id, string $hash): RedirectResponse
+    {
+        if (RateLimiter::tooManyAttempts('confirmation-register:'.$id, $perMinute = 5)) abort(429);
+
+        if (!$user = User::where('id',$id)->first()) $message = trans('auth.user_not_found');
         elseif ($user->active) $message = trans('auth.user_already_active');
+        else if (!hash_equals(sha1($user->getEmailForVerification()), (string)$hash)) $message = trans('auth.wrong_token');
         else {
             $user->active = 1;
+            $user->email_verified_at = Carbon::now();
             $user->save();
             $message = trans('auth.register_success');
+            auth()->login($user);
+            event(new Verified($user));
         }
+        return redirect(route('home'))->with('message',$message);
+    }
 
-        return redirect()->route('home')->with('message',$message);
+    public function verificationNotification(ResetPasswordRequest $request): JsonResponse
+    {
+        $user = User::where('email',$request->email)->first();
+        $user->sendEmailVerificationNotification();
+        return response()->json(['message' => trans('auth.confirmation_mail_sent')], 200);
     }
 
     public function logout(Request $request): RedirectResponse

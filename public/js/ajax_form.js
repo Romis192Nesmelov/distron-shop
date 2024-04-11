@@ -29,7 +29,11 @@ $(document).ready(function ($) {
         if (window.tryCheckout) basketModal.modal('show');
     });
     processingForm($('#register-form'), true,false);
+    processingForm($('#send-confirmation-mail-form'), true,false);
     processingForm($('#reset-password-form'), true,false);
+    processingForm($('#set-new-password-form'), true,false, () => {
+        $('#login-modal').modal('show');
+    });
     processingForm($('#account-form'), false, true);
     processingForm($('#add-to-basket'), false,false, (data) => {
         let basketRow = $('#basket-row-' + data.id);
