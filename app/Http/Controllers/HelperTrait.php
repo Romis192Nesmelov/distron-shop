@@ -67,9 +67,9 @@ trait HelperTrait
         session()->flash('message', trans('admin.save_complete'));
     }
 
-    public function sendMessage(string $template, string $mailTo, array $fields, string|null $pathToFile=null): JsonResponse
+    public function sendMessage(string $template, string $cc, string $mailTo, array $fields, string|null $pathToFile=null): JsonResponse
     {
-        dispatch(new SendMessage($template, $mailTo, null, $fields, $pathToFile));
+        dispatch(new SendMessage($template, $mailTo, $cc, $fields, $pathToFile));
         $message = trans('content.we_will_contact_you');
         return response()->json(['success' => true, 'message' => $message],200);
     }
