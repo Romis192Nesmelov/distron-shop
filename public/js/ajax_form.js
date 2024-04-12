@@ -83,7 +83,7 @@ $(document).ready(function ($) {
         if (!window.guest) newOrderModal.modal('show');
     });
 
-    processingForm($('#new-order'), false,true, (data) => {
+    processingForm($('#new-order'), false,true, () => {
         let basketRow = basketTable.find('tr').last().clone();
         basketTable.empty();
         basketTable.append(basketRow);

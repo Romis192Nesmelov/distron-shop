@@ -28,18 +28,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
-                ->subject('Подтвердите Ваш e-mail адрес')
-                ->line('Нажмите кнопку ниже, чтобы подтвердить свой адрес электронной почты.')
-                ->action('Подтверждение e-mail', $url);
+                ->subject(trans('auth.confirm_your_email_address'))
+                ->line(trans('auth.press_the_button_below_to_confirm_your_email'))
+                ->action(trans('auth.confirm_email'), $url);
         });
 
         ResetPassword::toMailUsing(function (User $user, string $token) {
             return (new MailMessage)
-                ->subject('Уведомление о сбросе пароля')
-                ->line('Вы получили это письмо, поскольку мы получили запрос на сброс пароля для вашей учетной записи.')
-                ->action('Сбросить пароль', route('password.reset',['token' => $token]))
-                ->line(Lang::get('Срок действия этой ссылки для сброса пароля истекает через :count минут.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-                ->line('Если вы не запрашивали сброс пароля, никаких дальнейших действий не требуется.');
+                ->subject(trans('auth.notice_about_reset_password'))
+                ->line(trans('auth.you_are_receiving_this_email_because_we_have_received_a_request_to_reset_your_account_password'))
+                ->action(trans('auth.reset_the_password'), route('password.reset',['token' => $token]))
+                ->line(trans('auth.this_password_reset_link_will_expire_in',['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+                ->line(trans('auth.if_you_did_not_request_a_password_reset_no_further_action_is_required'));
         });
     }
 }

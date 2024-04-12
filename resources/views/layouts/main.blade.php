@@ -184,6 +184,22 @@
             ])
         </form>
     </x-modal>
+    <x-modal id="reset-password-modal" head="{{ trans('auth.register_head') }}">
+        <form id="reset-password-form" method="post" action="{{ route('auth.reset_password') }}">
+            @csrf
+            @include('blocks.input_block',[
+                'name' => 'email',
+                'type' => 'email',
+                'label' => trans('auth.email'),
+                'placeholder' => trans('auth.email'),
+                'ajax' => true,
+            ])
+            @include('blocks.buttons_pair_block',[
+                'submitDisabled' => false,
+                'submitText' => trans('auth.reset_the_password')
+            ])
+        </form>
+    </x-modal>
     <x-modal id="send-confirmation-mail-modal" head="{{ trans('auth.send_confirmation_mail_again') }}">
         <form id="send-confirmation-mail-form" method="post" action="{{ route('verification.send') }}">
             @csrf
