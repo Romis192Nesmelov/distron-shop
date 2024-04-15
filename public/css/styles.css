@@ -4,7 +4,7 @@ body {
     background-color: white;
 }
 
-a, strong, th {
+a, strong, b, th {
     color: #009671;
 }
 
@@ -22,7 +22,7 @@ p, ul, ol {
 }
 
 .image {
-    width: 250px;
+    width: 220px;
     margin: auto;
     background-size: cover;
     background-position: center center;
@@ -30,6 +30,13 @@ p, ul, ol {
     border: 3px solid #009671;
 }
 
+img.border {
+    border: 3px solid #009671 !important;
+}
+
+ol li {
+    list-style-position: inside;
+}
 
 .w-30 {
     width: 30%;
@@ -61,7 +68,7 @@ span.marked {
 }
 
 .items .image {
-    width: 80%;
+    width: 70%;
 }
 
 .items.items-type-1 .item {
@@ -240,7 +247,7 @@ li::marker {
 
 #main-nav {
     width: 100%;
-    height: 40px;
+    height: 45px;
     font-weight: bolder;
     text-transform: uppercase;
     background-image: linear-gradient(90deg, #7EE068, #009671);
@@ -676,11 +683,6 @@ td.basket-price {
         height: 33px;
         font-size: 12px;
     }
-
-    .image {
-        width: 100%;
-    }
-
 }
 
 @media (max-width: 350px)  {

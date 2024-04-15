@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('image',50)->nullable();
-            $table->string('slug',50);
-            $table->string('name',50);
+            $table->string('slug');
+            $table->string('name');
             $table->string('short');
             $table->longText('text');
             $table->foreignIdFor(Seo::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
