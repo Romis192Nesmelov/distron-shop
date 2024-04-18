@@ -64,7 +64,7 @@
                     <td class="text-center">@include('blocks.price_block',['price' => $item->price])</td>
                 @else
                     <td class="text-center {{ $column == 'head' || $column == 'email' ? 'head' : '' }}">
-                        {{ $item[$column] }}
+                        {!! $item[$column] !!}
                     </td>
                 @endif
             @endforeach

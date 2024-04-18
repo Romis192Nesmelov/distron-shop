@@ -11,14 +11,17 @@ class AdminContentsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Content $content;
+
+    public function __construct(Content $content)
     {
         parent::__construct();
+        $this->content = $content;
     }
 
     public function contents(): View
     {
-        return $this->getSomething('contents', new Content());
+        return $this->getSomething($this->content);
     }
 
     /**
@@ -28,7 +31,7 @@ class AdminContentsController extends AdminBaseController
     {
         $this->editSomething (
             $request,
-            new Content(),
+            $this->content,
             ['head' => $this->validationString, 'text' => $this->validationText]
         );
         $this->saveCompleteMessage();

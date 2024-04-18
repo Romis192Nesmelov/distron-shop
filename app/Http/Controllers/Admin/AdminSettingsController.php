@@ -12,17 +12,18 @@ class AdminSettingsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public SettingsController $settings;
+
+    public function __construct(SettingsController $settings)
     {
         parent::__construct();
+        $this->settings = $settings;
     }
 
     public function settings(): View
     {
         $this->data['menu_key'] = 'settings';
-        $settings = new SettingsController();
-        $this->data['settings'] = $settings->getSettings();
-
+        $this->data['settings'] = $this->settings->getSettings();
         return $this->showView('settings');
     }
 
@@ -32,9 +33,7 @@ class AdminSettingsController extends AdminBaseController
     public function editSettings(Request $request): RedirectResponse
     {
         $fields = $this->validate($request, ['video' => $this->validationString]);
-
-        $settings = new SettingsController();
-        $settings->saveSettings($fields);
+        $this->settings->saveSettings($fields);
 
         $this->saveCompleteMessage();
         return redirect(route('admin.settings'));

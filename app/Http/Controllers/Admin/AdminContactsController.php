@@ -12,21 +12,24 @@ class AdminContactsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Contact $contact;
+
+    public function __construct(Contact $contact)
     {
         parent::__construct();
+        $this->contact = $contact;
     }
 
     public function contacts(): View
     {
         $this->data['seo'] = Seo::find($this->seoIds['contacts']);
         $this->data['metas'] = $this->metas;
-        
+
         $this->data['types'] = [];
         for ($i=1;$i<=5;$i++) {
             $this->data['types'][] = ['val' => $i, 'descript' => trans('admin.contact_type'.$i)];
         }
-        return $this->getSomething('contacts', new Contact());
+        return $this->getSomething($this->contact);
     }
 
     /**
@@ -52,7 +55,7 @@ class AdminContactsController extends AdminBaseController
 
             $this->editSomething (
             $request,
-            new Contact(),
+            $this->contact,
             ['contact' => $validationContact, 'type' => 'required|integer|min:1|max:5'],
         );
         $this->saveCompleteMessage();

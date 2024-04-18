@@ -13,16 +13,19 @@ class AdminArticlesController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Article $article;
+
+    public function __construct(Article $article)
     {
         parent::__construct();
+        $this->article = $article;
     }
 
     public function articles($slug=null): View
     {
         $this->data['seo'] = Seo::find($this->seoIds['articles']);
         $this->data['metas'] = $this->metas;
-        return $this->getSomething('articles', new Article(), $slug);
+        return $this->getSomething($this->article, $slug);
     }
 
     /**
@@ -50,7 +53,7 @@ class AdminArticlesController extends AdminBaseController
 
         $this->editSomething (
             $request,
-            new Article(),
+            $this->article,
             $validationArr,
             'storage/images/articles/',
             'article'
@@ -64,6 +67,6 @@ class AdminArticlesController extends AdminBaseController
      */
     public function deleteArticle(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Article());
+        return $this->deleteSomething($request, $this->article);
     }
 }

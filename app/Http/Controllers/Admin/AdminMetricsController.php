@@ -12,14 +12,17 @@ class AdminMetricsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Metric $metric;
+
+    public function __construct(Metric $metric)
     {
         parent::__construct();
+        $this->metric = $metric;
     }
 
     public function metrics($slug=null): View
     {
-        return $this->getSomething('metrics', new Metric(), $slug);
+        return $this->getSomething($this->metric, $slug);
     }
 
     /**
@@ -29,7 +32,7 @@ class AdminMetricsController extends AdminBaseController
     {
         $this->editSomething (
             $request,
-            new Metric(),
+            $this->metric,
             ['name' => $this->validationString, 'code' => $this->validationText],
         );
         $this->saveCompleteMessage();
@@ -41,6 +44,6 @@ class AdminMetricsController extends AdminBaseController
      */
     public function deleteMetric(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Metric());
+        return $this->deleteSomething($request, $this->metric);
     }
 }

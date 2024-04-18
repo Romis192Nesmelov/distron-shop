@@ -12,14 +12,17 @@ class AdminImagesController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Image $image;
+
+    public function __construct(Image $image)
     {
         parent::__construct();
+        $this->image = $image;
     }
 
     public function images($slug=null): View
     {
-        return $this->getSomething('images', new Image(), $slug);
+        return $this->getSomething($this->image, $slug);
     }
 
     /**
@@ -33,7 +36,7 @@ class AdminImagesController extends AdminBaseController
 
         $this->editSomething (
             $request,
-            new Image(),
+            $this->image,
             $validationArr,
             'storage/images/gallery/',
             'image'
@@ -47,6 +50,6 @@ class AdminImagesController extends AdminBaseController
      */
     public function deleteImage(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Image());
+        return $this->deleteSomething($request, $this->image);
     }
 }

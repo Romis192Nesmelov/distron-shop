@@ -12,9 +12,12 @@ class AdminTypesController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Type $type;
+
+    public function __construct(Type $type)
     {
         parent::__construct();
+        $this->type = $type;
     }
 
     public function types($slug=null): View
@@ -23,7 +26,7 @@ class AdminTypesController extends AdminBaseController
             $this->data['metas'] = $this->metas;
             $this->data['seo'] = Seo::find($this->seoIds['products']);
         }
-        return $this->getSomething('types', new Type(), $slug);
+        return $this->getSomething($this->type, $slug);
     }
 
     /**
@@ -33,7 +36,7 @@ class AdminTypesController extends AdminBaseController
     {
          $this->editSomething (
             $request,
-            new Type(),
+            $this->type,
             ['image' => $this->validationJpgAndPng, 'name' => $this->validationString, 'text' => $this->validationText],
             'storage/images/types/',
             'type'

@@ -12,14 +12,17 @@ class AdminQuestionsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Question $question;
+
+    public function __construct(Question $question)
     {
         parent::__construct();
+        $this->question = $question;
     }
 
     public function questions($slug=null): View
     {
-        return $this->getSomething('questions', new Question(), $slug);
+        return $this->getSomething($this->question, $slug);
     }
 
     /**
@@ -29,7 +32,7 @@ class AdminQuestionsController extends AdminBaseController
     {
         $this->editSomething (
             $request,
-            new Question(),
+            $this->question,
             ['question' => $this->validationString, 'answer' => $this->validationText],
         );
         $this->saveCompleteMessage();
@@ -39,8 +42,8 @@ class AdminQuestionsController extends AdminBaseController
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function deleteIcon(Request $request): JsonResponse
+    public function deleteQuestion(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Question());
+        return $this->deleteSomething($request, $this->question);
     }
 }

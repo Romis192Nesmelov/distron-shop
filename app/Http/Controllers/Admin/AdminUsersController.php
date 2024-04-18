@@ -6,15 +6,19 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class AdminUsersController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public User $user;
+
+    public function __construct(User $user)
     {
         parent::__construct();
+        $this->user = $user;
     }
 
     /**
@@ -22,7 +26,7 @@ class AdminUsersController extends AdminBaseController
      */
     public function users($slug=null): View
     {
-        return $this->getSomething('users', new User(), $slug);
+        return $this->getSomething($this->user, $slug);
     }
 
     /**
@@ -38,14 +42,14 @@ class AdminUsersController extends AdminBaseController
         if ($request->has('id')) {
             $validationArr['id'] = 'required|integer|exists:users,id';
             $validationArr['email'] .= ','.$request->input('id');
-            if ($request->input('password')) $validationArr['password'] = $this->validationPassword;
+            if ($request->input('password')) $validationArr['password'] = Password::defaults();
             $fields = $this->validate($request, $validationArr);
-            $fields = $this->getSpecialFields(new User(), $validationArr, $fields);
+            $fields = $this->getSpecialFields($this->user, $validationArr, $fields);
             $user = User::find($request->input('id'));
             if ($request->input('password')) $fields['password'] = bcrypt($fields['password']);
             $user->update($fields);
         } else {
-            $validationArr['password'] = $this->validationPassword;
+            $validationArr['password'] = Password::defaults();
             $fields = $this->validate($request, $validationArr);
             $fields['password'] = bcrypt($fields['password']);
             User::create($fields);
@@ -59,6 +63,6 @@ class AdminUsersController extends AdminBaseController
      */
     public function deleteUser(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new User());
+        return $this->deleteSomething($request, $this->user);
     }
 }

@@ -14,9 +14,12 @@ class AdminOrdersController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Order $order;
+
+    public function __construct(Order $order)
     {
         parent::__construct();
+        $this->order = $order;
     }
 
     public function orders(): View
@@ -25,7 +28,7 @@ class AdminOrdersController extends AdminBaseController
         for ($i=0;$i<=3;$i++) {
             $this->data['statuses'][] = ['val' => $i, 'descript' => trans('admin.order_status'.($i + 1))];
         }
-        return $this->getSomething('orders', new Order());
+        return $this->getSomething($this->order);
     }
 
     /**
@@ -35,7 +38,7 @@ class AdminOrdersController extends AdminBaseController
     {
         $this->editSomething (
             $request,
-            new Order(),
+            $this->order,
             ['number' => $this->validationString, 'status' => 'integer|min:0|max:3'],
         );
         $this->saveCompleteMessage();
@@ -47,6 +50,6 @@ class AdminOrdersController extends AdminBaseController
      */
     public function deleteOrder(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Order());
+        return $this->deleteSomething($request, $this->order);
     }
 }

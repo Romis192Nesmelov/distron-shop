@@ -14,16 +14,19 @@ class AdminItemsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Item $item;
+
+    public function __construct(Item $item)
     {
         parent::__construct();
+        $this->item = $item;
     }
 
     public function items($slug=null): View
     {
         $this->data['parent_key'] = 'types';
         $this->data['technologies'] = Technology::all();
-        return $this->getSomething('items', new Item(), $slug, new Type());
+        return $this->getSomething($this->item, $slug, new Type());
     }
 
     /**
@@ -60,7 +63,7 @@ class AdminItemsController extends AdminBaseController
 
         $item = $this->editSomething (
             $request,
-            new Item(),
+            $this->item,
             $validationArr,
             'storage/images/items/',
             'item'
@@ -74,6 +77,6 @@ class AdminItemsController extends AdminBaseController
      */
     public function deleteItem(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Item());
+        return $this->deleteSomething($request, $this->item);
     }
 }

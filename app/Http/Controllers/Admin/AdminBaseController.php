@@ -98,13 +98,13 @@ class AdminBaseController extends Controller
     }
 
     protected function getSomething(
-        string $key,
         Model $model,
         string|null $slug=null,
         Model|null $parentModel=null,
         string|null $parentRelation=null
     ): View
     {
+        $key = $model->getTable();
         if (request('parent_id')) {
             $parentItem = $parentModel->findOrFail(request('parent_id'));
             $this->data['parent'] = $parentModel->find(request('parent_id'));
@@ -240,9 +240,9 @@ class AdminBaseController extends Controller
 
     protected function getSpecialFields(Model $model, array $validationArr, array $fields): array
     {
-        if (in_array('active',$model->getFillable())) $fields['active'] = request('active') ? 1 : 0;
-        if (in_array('delivery',$model->getFillable())) $fields['delivery'] = request('delivery') ? 1 : 0;
-        if (in_array('is_admin',$model->getFillable())) $fields['is_admin'] = request('is_admin') ? 1 : 0;
+        foreach (['active', 'delivery', 'is_admin'] as $field) {
+            if (in_array($field, $model->getFillable())) $fields['active'] = request($field) ? 1 : 0;
+        }
         if (in_array('date',$model->getFillable()) && array_key_exists('date',$validationArr)) $fields['date'] = $this->convertTimestamp(request('date'));
         if (in_array('video',$model->getFillable()) && array_key_exists('video',$validationArr)) $fields['video'] = preg_replace('/(\swidth=\"(\d{3})\" height=\"(\d{3})\")/', '', $fields['video']);
         return $fields;

@@ -17,7 +17,7 @@
 
             <form class="form-horizontal" action="{{ route('admin.edit_contacts_seo') }}" method="post">
                 @csrf
-                @include('admin.blocks.seo_block',['seo' => $seo, 'seoHead' => trans('admin.seo_products')])
+                @include('admin.blocks.seo_block',['seo' => $seo, 'seoHead' => trans('admin.seo')])
                 @include('admin.blocks.save_button_block')
             </form>
         </div>

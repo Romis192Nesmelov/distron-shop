@@ -12,37 +12,40 @@ class AdminIconsController extends AdminBaseController
 {
     use HelperTrait;
 
-    public function __construct()
+    public Icon $icon;
+
+    public function __construct(Icon $icon)
     {
         parent::__construct();
+        $this->icon = $icon;
     }
 
     public function icons($slug=null): View
     {
-        return $this->getSomething('icons', new Icon(), $slug);
+        return $this->getSomething($this->icon, $slug);
     }
 
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
-//    public function editIcon(Request $request): RedirectResponse
-//    {
-//        $this->editSomething (
-//            $request,
-//            new Icon(),
-//            ['image' => $this->validationSvg, 'title' => $this->validationString],
-//            'storage/images/icons/',
-//            'icon',
-//        );
-//        $this->saveCompleteMessage();
-//        return redirect(route('admin.icons'));
-//    }
+    public function editIcon(Request $request): RedirectResponse
+    {
+        $this->editSomething (
+            $request,
+            $this->icon,
+            ['image' => $this->validationSvg, 'title' => $this->validationString],
+            'storage/images/icons/',
+            'icon',
+        );
+        $this->saveCompleteMessage();
+        return redirect(route('admin.icons'));
+    }
 
     /**
      * @throws \Illuminate\Validation\ValidationException
      */
     public function deleteIcon(Request $request): JsonResponse
     {
-        return $this->deleteSomething($request, new Icon());
+        return $this->deleteSomething($request, $this->icon);
     }
 }
