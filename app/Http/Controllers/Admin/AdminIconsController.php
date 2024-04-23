@@ -33,7 +33,11 @@ class AdminIconsController extends AdminBaseController
         $this->editSomething (
             $request,
             $this->icon,
-            ['image' => $this->validationSvg, 'title' => $this->validationString],
+            [
+                'image' => $this->validationSvg,
+                'alt_img' => $this->validationAltImg,
+                'title' => $this->validationString
+            ],
             'storage/images/icons/',
             'icon',
         );

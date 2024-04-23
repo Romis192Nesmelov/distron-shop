@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('icons', function (Blueprint $table) {
             $table->id();
             $table->string('image',50)->nullable();
+            $table->string('alt_img')->nullable();
             $table->string('title');
             $table->boolean('active');
             $table->timestamps();

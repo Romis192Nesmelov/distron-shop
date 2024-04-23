@@ -16,6 +16,14 @@
                                 'name' => 'image',
                                 'image' => isset($icon) ? $icon->image : ''
                             ])
+                            @include('blocks.input_block', [
+                                'label' => trans('admin.alt_image'),
+                                'name' => 'alt_img',
+                                'type' => 'text',
+                                'max' => 255,
+                                'placeholder' => trans('admin.alt_image'),
+                                'value' => isset($icon) ? $icon->alt_img : ''
+                            ])
                         </div>
                         <div class="col-md-10 col-sm-12 col-xs-12">
                             @include('blocks.input_block', [

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Content;
+use App\Models\Icon;
 use App\Models\Metric;
+use App\Models\Question;
 use App\Models\Seo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
@@ -22,8 +24,8 @@ class BaseController extends Controller
         $this->data['scroll'] = request('scroll');
         $this->data['content'] = Content::find(1);
         $this->data['token'] = $token;
-//        $this->data['icons'] = Icon::where('active',1)->get();
-//        $this->data['faq'] = Question::where('active',1)->get();
+        $this->data['icons'] = Icon::where('active',1)->get();
+        $this->data['faq'] = Question::where('active',1)->get();
         return $this->showView('home');
     }
 
@@ -56,12 +58,9 @@ class BaseController extends Controller
             $menu[$content->slug] = ['href' => route('content',['slug' => $content->slug]), 'name' => $content->head];
         }
 
-//        $menu['advantages'] = ['scroll' => 'advantages', 'name' => trans('menu.advantages')];
         $menu['products'] = ['href' => 'items', 'name' => trans('menu.products')];
         $menu['services'] = ['href' => 'services', 'name' => trans('menu.services')];
         $menu['actions'] = ['href' => '#', 'name' => trans('menu.actions')];
-
-//        $menu['faq'] = ['scroll' => 'faq', 'name' => trans('menu.faq')];
         $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
         $menu['contacts'] = ['href' => 'contacts', 'name' => trans('menu.contacts')];
 

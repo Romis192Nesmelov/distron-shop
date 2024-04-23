@@ -23,6 +23,7 @@ class IconsSeeder extends Seeder
 
         foreach ($data as $k => $item) {
             $item['image'] = 'storage/images/icons/icon'.($k + 1).'.svg';
+            $item['alt_img'] = $item['title'];
             $item['active'] = 1;
             Icon::create($item);
         }

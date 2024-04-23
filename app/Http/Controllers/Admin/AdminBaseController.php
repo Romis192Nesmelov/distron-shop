@@ -45,11 +45,11 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-stack-picture',
                 'hidden' => false,
             ],
-//            'icons' => [
-//                'key' => 'icons',
-//                'icon' => 'icon-stack-picture',
-//                'hidden' => false,
-//            ],
+            'icons' => [
+                'key' => 'icons',
+                'icon' => 'icon-stack-picture',
+                'hidden' => false,
+            ],
             'contents' => [
                 'key' => 'contents',
                 'icon' => 'icon-newspaper',
@@ -60,11 +60,11 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-battery-charging',
                 'hidden' => false,
             ],
-//            'questions' => [
-//                'key' => 'questions',
-//                'icon' => 'icon-question3',
-//                'hidden' => false,
-//            ],
+            'questions' => [
+                'key' => 'questions',
+                'icon' => 'icon-question3',
+                'hidden' => false,
+            ],
             'items' => [
                 'key' => 'items',
                 'hidden' => true,

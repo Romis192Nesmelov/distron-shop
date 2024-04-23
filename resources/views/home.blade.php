@@ -22,19 +22,24 @@
         </x-modal>
     @endif
     <x-section class="mb-5" head="{{ $content->head }}">
+        <h2 class="w-100 fs-3 mb-5 text-center wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.advantages') }}</h2>
+        <x-row>
+            @foreach($icons as $k => $icon)
+                @include('blocks.icon_block',[
+                    'col' => 3,
+                    'delay' => $k,
+                    'icon' => $icon
+                ])
+            @endforeach
+        </x-row>
+        <hr class="mt-5 mb-5">
         {!! $content->text !!}
     </x-section>
-{{--    <x-section class="icons wow animate__animated animate__fadeIn" data-scroll-destination="{{ $menu['advantages']['scroll'] }}" head="{{ $menu['advantages']['name'] }}">--}}
-{{--        <x-row>--}}
-{{--            @foreach($icons as $k => $icon)--}}
-{{--                @include('blocks.icon_block',[--}}
-{{--                    'col' => 3,--}}
-{{--                    'delay' => $k,--}}
-{{--                    'icon' => $icon--}}
-{{--                ])--}}
-{{--            @endforeach--}}
-{{--        </x-row>--}}
-{{--    </x-section>--}}
+    <x-section class="mb-5" head="{{ trans('content.faq') }}">
+        <x-row>
+            @include('blocks.faq_block')
+        </x-row>
+    </x-section>
     @if ($scroll)
         <script>window.scrollAnchor = "{{ $scroll }}";</script>
     @endif

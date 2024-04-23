@@ -10,6 +10,7 @@ class Icon extends Model
 
     protected $fillable = [
         'image',
+        'alt_img',
         'title',
         'active'
     ];

@@ -16,6 +16,9 @@ return [
     'your_email' => 'Ваш E-mail',
     'your_phone' => 'Ваш телефон',
 
+    'advantages' => 'Преимущества',
+    'faq' => 'Ответы на вопросы',
+
     'details' => 'Подробнее',
     'filtered' => 'Применить фильтр',
     'reset_filter' => 'Сбросить фильтр',

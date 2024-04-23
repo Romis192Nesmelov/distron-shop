@@ -5,12 +5,14 @@ use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Controllers\Admin\AdminContactsController;
 use App\Http\Controllers\Admin\AdminContentsController;
 //use App\Http\Controllers\Admin\AdminIconsController;
+use App\Http\Controllers\Admin\AdminIconsController;
 use App\Http\Controllers\Admin\AdminImagesController;
 use App\Http\Controllers\Admin\AdminItemsController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminMetricsController;
 use App\Http\Controllers\Admin\AdminOrdersController;
 //use App\Http\Controllers\Admin\AdminQuestionsController;
+use App\Http\Controllers\Admin\AdminQuestionsController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminTypesController;
 use App\Http\Controllers\Admin\AdminUsersController;
@@ -101,22 +103,22 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::post('/edit-settings', 'editSettings')->name('edit_settings');
     });
 
-//    Route::controller(AdminIconsController::class)->group(function () {
-//        Route::get('/icons/{slug?}', 'icons')->name('icons');
-//        Route::post('/edit-icon', 'editIcon')->name('edit_icon');
-//        Route::post('/delete-icon', 'deleteIcon')->name('delete_icon');
-//    });
+    Route::controller(AdminIconsController::class)->group(function () {
+        Route::get('/icons/{slug?}', 'icons')->name('icons');
+        Route::post('/edit-icon', 'editIcon')->name('edit_icon');
+        Route::post('/delete-icon', 'deleteIcon')->name('delete_icon');
+    });
 
     Route::controller(AdminContentsController::class)->group(function () {
         Route::get('/contents', 'contents')->name('contents');
         Route::post('/edit-content', 'editContent')->name('edit_content');
     });
 
-//    Route::controller(AdminQuestionsController::class)->group(function () {
-//        Route::get('/questions/{slug?}', 'questions')->name('questions');
-//        Route::post('/edit-question', 'editQuestion')->name('edit_question');
-//        Route::post('/delete-question', 'deleteQuestion')->name('delete_question');
-//    });
+    Route::controller(AdminQuestionsController::class)->group(function () {
+        Route::get('/questions/{slug?}', 'questions')->name('questions');
+        Route::post('/edit-question', 'editQuestion')->name('edit_question');
+        Route::post('/delete-question', 'deleteQuestion')->name('delete_question');
+    });
 
     Route::controller(AdminContactsController::class)->group(function () {
         Route::get('/contacts', 'contacts')->name('contacts');

@@ -41,7 +41,6 @@ class TypesSeeder extends Seeder
                 'name' =>'Услуги',
                 'singular' => 'Услуга',
                 'text' => '
-
 <div class="row mb-4">
     <div class="col-md-3 col-sm-4 text-center wow animate__animated animate__fadeInUp" data-wow-offset="10" data-wow-delay="0.2s">
         <a class="fancybox w-100" href="/storage/images/services/photo1_full.jpg">
