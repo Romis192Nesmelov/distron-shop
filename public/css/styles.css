@@ -1,3 +1,8 @@
+:root {
+    --main-color: #009671;
+    --second-color: #7EE068;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
@@ -5,11 +10,11 @@ body {
 }
 
 a, strong, b, th {
-    color: #009671;
+    color: var(--main-color);
 }
 
 th {
-    color: #009671 !important;
+    color: var(--main-color) !important;
 }
 
 a.href-block {
@@ -27,11 +32,11 @@ p, ul, ol {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    border: 3px solid #009671;
+    border: 3px solid var(--main-color);
 }
 
 img.border {
-    border: 3px solid #009671 !important;
+    border: 3px solid var(--main-color) !important;
 }
 
 ol li {
@@ -48,19 +53,19 @@ ol li {
 
 .pagination {
     --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(0, 65, 50, 0.25) !important;
-    --bs-pagination-active-bg: #009671 !important;
-    --bs-pagination-active-border-color: #009671 !important;
+    --bs-pagination-active-bg: var(--main-color) !important;
+    --bs-pagination-active-border-color: var(--main-color) !important;
     --bs-pagination-disabled-color: #6c757d !important;
 }
 
 .active>.page-link,
 .page-link.active {
-    background-color: #009671;
-    border-color: #009671;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .page-link {
-    color: #009671;
+    color: var(--main-color);
 }
 
 span.marked {
@@ -108,21 +113,20 @@ span.marked {
 
 a:hover,
 a:focus {
-    color: #009671;
+    color: var(--main-color);
 }
 
-h2 {
+h1 {
+    font-size: 2rem;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-
-h3 {
+h2 {
     font-size: 1.5em;
 }
 
-.search-result h3 {
-    font-size: 1.8em;
+.search-result h2 {
     text-align: left;
 }
 
@@ -130,29 +134,39 @@ h3 {
     width: 150px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #009671;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.modal-title,
+.price,
+.basket-price,
+.basket-name,
+#basket-total {
+    color: var(--main-color) !important;
 }
 
 li::marker {
-    color: #009671;
+    color: var(--main-color);
 }
 
 .btn.btn-primary {
-    background-image: linear-gradient(#7EE068, #009671);
-    border-color: #009671;
+    background-image: linear-gradient(var(--second-color), var(--main-color));
+    border-color: var(--main-color);
 }
 
 .form-check-input:checked {
-    background-color: #009671;
-    border-color: #009671;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
 }
 
 #on-top-button {
     width: 48px;
     height: 48px;
     text-align: center;
-    color: #009671;
+    color: var(--main-color);
     background-color: white;
     border-radius: 50%;
     position: fixed;
@@ -205,17 +219,17 @@ li::marker {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    background-image: linear-gradient(90deg, #7EE068, #009671);
+    background-image: linear-gradient(90deg, var(--second-color), var(--main-color));
     border-bottom: 1px solid white;
 }
 
 #top-line .contacts {
-    font-size: 14px;
+    font-size: 1rem;
     color: white;
 }
 
 #top-line .contacts a {
-    font-size: 17px;
+    font-size: 1rem;
     font-weight: bold;
     color: white;
 }
@@ -225,6 +239,7 @@ li::marker {
 }
 
 #top-line form {
+    width: 300px;
     position: relative;
     margin-right: 10px;
 }
@@ -234,7 +249,7 @@ li::marker {
     height: 38px;
     padding-right: 30px;
     border-radius: 5px;
-    border: 1px solid #009671;
+    border: 1px solid var(--main-color);
 }
 
 #top-line form i {
@@ -250,15 +265,16 @@ li::marker {
     height: 45px;
     font-weight: bolder;
     text-transform: uppercase;
-    background-image: linear-gradient(90deg, #7EE068, #009671);
+    background-image: linear-gradient(90deg, var(--second-color), var(--main-color));
     padding-left: 10px;
     z-index: 999;
 }
 
 #basket {
+    position: absolute;
     color: white;
     cursor: pointer;
-    margin-right: 15px;
+    right: 10px;
 }
 
 #basket i {
@@ -269,9 +285,10 @@ li::marker {
     width: 20px;
     height: 20px;
     position: absolute;
-    right: 5px;
+    top: -2px;
+    right: -7px;
     font-weight: bolder;
-    background: #009671;
+    background: var(--main-color);
     border-radius: 50%;
     border: 1px solid white;
     display: flex;
@@ -340,7 +357,7 @@ li::marker {
 }
 
 #breadcrumbs {
-    color: #009671;
+    color: var(--main-color);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -351,10 +368,6 @@ li::marker {
     margin: 0 10px;
 }
 
-.section.color1 {
-    background-image: url("../../storage/app/public/images/color_section1.jpg");
-}
-
 .section.color1 h2 {
     margin-bottom: 20px;
 }
@@ -362,12 +375,6 @@ li::marker {
 .section.color1 p {
     /*line-height: 1.25em;*/
     margin-bottom: .2em;
-}
-
-.section.color2 {
-    padding-top: 70px;
-    padding-bottom: 70px;
-    background-image: url("../../storage/app/public/images/color_section2.jpg");
 }
 
 .section.white {
@@ -399,9 +406,9 @@ li::marker {
 .nav-link {
     cursor: pointer;
     color: white !important;
-    font-size: 15px;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    font-size: 1rem;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
 }
 
 .dropdown-item {
@@ -447,18 +454,18 @@ h2.accordion-header {
 
 .accordion-button:not(.collapsed) {
     background-color: #d8f5d1;
-    color: #009671;
+    color: var(--main-color);
 }
 
 .accordion-button:focus,
 input:focus,
 textarea:focus {
-    border-color: #009671 !important;
+    border-color: var(--main-color) !important;
     box-shadow: 0 0 5px 1px rgba(0, 150, 113, 0.8) !important;
 }
 
 iframe {
-    border: 1px solid #009671;
+    border: 1px solid var(--main-color);
     box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -477,16 +484,16 @@ iframe {
     height: 36px;
     cursor: pointer;
     font-size: 12px;
-    color: #009671;
+    color: var(--main-color);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 3px;
-    border: 1px solid #009671;
+    border: 1px solid var(--main-color);
 }
 
 .counter:hover {
-    background: #009671;
+    background: var(--main-color);
     color: white;
 }
 
@@ -494,19 +501,18 @@ input.basket-value {
     width: 50px;
     font-size: 20px;
     font-weight: bolder;
-    color: #009671;
+    color: var(--main-color);
     text-align: center;
-    border: 1px solid #009671;
+    border: 1px solid var(--main-color);
+}
+
+.basket-item-prop {
+    color: var(--main-color);
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-}
-
-td.basket-price {
-    font-weight: bolder;
-    color: #009671 !important;
 }
 
 .site-footer {
@@ -538,17 +544,6 @@ td.basket-price {
 }
 
 @media (max-width: 1400px)  {
-    #top-line .contacts,
-    #top-line .contacts a {
-        font-size: 12px;
-    }
-
-    .nav-link {
-        font-size: 11px;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-
     #main-logo h1 {
         font-size: 1em;
     }
@@ -573,8 +568,8 @@ td.basket-price {
 }
 
 @media (max-width: 991px) {
-    #top-line .contacts {
-        width: 300px;
+    #top-line form {
+        width: calc(100% - 165px);
     }
 
     #main-collage {
@@ -587,9 +582,13 @@ td.basket-price {
     }
 
     .nav-link {
-        color: #009671 !important;
+        color: var(--main-color) !important;
         font-weight: bold;
         text-shadow: none;
+    }
+
+    #main-logo {
+        padding-top: 60px;
     }
 
     #main-logo h1 {
@@ -603,8 +602,17 @@ td.basket-price {
 }
 
 @media (max-width: 768px)  {
-    #top-line .contacts {
-        display: none;
+    #top-line {
+        height: 95px;
+    }
+
+    #top-line form {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #main-button {
+        width: 100%;
     }
 
     .section.color p:last-child {
@@ -621,18 +629,20 @@ td.basket-price {
     }
 
     #basket-total {
-        font-size: 16px;
+        text-align: center;
     }
 }
 
 @media (max-width: 500px)  {
-    #top-line form,
     #main-logo h1 {
-        display: none;
+        margin-top: 10px;
+        padding-left: 0;
+        text-align: center;
     }
 
     #main-logo {
         width: 85%;
+        text-align: center;
     }
 
     #main-logo img.logo {
@@ -644,7 +654,7 @@ td.basket-price {
     }
 
     #main-logo .btn.btn-primary {
-        margin-left: 30%;
+        margin-left: 0;
     }
 
     .section.contacts table {
@@ -667,11 +677,6 @@ td.basket-price {
         height: 550px;
     }
 
-    td.basket-name,
-    td.basket-price {
-        font-size: .8rem;
-    }
-
     .counter {
         width: 20px;
         height: 20px;
@@ -689,11 +694,14 @@ td.basket-price {
     #main-collage {
         height: 500px;
     }
+
+    .basket-item-prop {
+        display: none;
+    }
 }
 
-@media (max-width: 325px)  {
-    #main-logo h1 {
-        font-size: .8em;
-        padding-left: 85px;
+@media (max-width: 300px)  {
+    .basket-price {
+        display: none;
     }
 }

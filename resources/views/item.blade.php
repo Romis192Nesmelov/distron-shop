@@ -7,14 +7,14 @@
                 @include('blocks.item_image_block',['id' => 'item-image', 'addClass' => 'w-100'])
             </div>
             <div class="col-lg-9 col-md-6 col-sm-12 wow animate__animated animate__slideInRight" data-wow-offset="10">
-                <h2 class="text-left">{{ getItemHead($item) }}</h2>
+                <h1 class="text-left">{{ getItemHead($item) }}</h1>
                 <p>{{ $item->description }}</p>
                 @if (getItemProps($item))
                     <p>{!! getItemProps($item) !!}</p>
                 @endif
-                <h1 class="price text-left mt-3 mb-3">
+                <div class="price fs-3 fw-bold text-left mt-3 mb-3">
                     @include('blocks.price_block',['price' => $item->price])
-                </h1>
+                </div>
                 @if ($item->file)
                     <p class="mb-4">
                         <a href="{{ asset($item->file) }}" {{ $item->description_file ? 'title='.$item->description_file : '' }} target="_blank">{{ $item->description_file ? $item->description_file : pathinfo($item->file)['basename'] }}</a>
@@ -34,16 +34,16 @@
             @csrf
             <input type="hidden" name="id" value="{{ $item->id }}">
             @include('blocks.item_image_block')
-            <h3 class="mb-1">{{ getItemHead($item) }}</h3>
+            <h1 class="mb-1">{{ getItemHead($item) }}</h1>
             <p class="text-center">{{ $item->description }}</p>
             @if (getItemProps($item))
                 <p class="text-center">{!! getItemProps($item) !!}</p>
             @endif
-            <h1 class="text-center basket-price">
+            <div class="fs-3 fw-bold text-center basket-price">
                 @include('blocks.price_block',[
                     'price' => session()->has('basket') && isset(session()->get('basket')[$item->id]) ? (int)session()->get('basket')[$item->id]['value'] * $item->price : $item->price
                 ])
-            </h1>
+            </div>
             @include('blocks.basket_counter_block', [
                 'name' => 'value',
                 'min' => 1,

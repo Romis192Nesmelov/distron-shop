@@ -20,12 +20,28 @@
                         </div>
                         <div class="col-md-9 col-sm-12 col-xs-12">
                             @include('blocks.input_block', [
+                                'label' => 'URI',
+                                'name' => 'slug',
+                                'type' => 'text',
+                                'max' => 100,
+                                'placeholder' => 'URI',
+                                'value' => isset($type) ? $type->slug : ''
+                            ])
+                            @include('blocks.input_block', [
                                 'label' => trans('admin.name'),
                                 'name' => 'name',
                                 'type' => 'text',
                                 'max' => 50,
                                 'placeholder' => trans('admin.name'),
                                 'value' => isset($type) ? $type->name : ''
+                            ])
+                            @include('blocks.input_block', [
+                                'label' => trans('admin.singular'),
+                                'name' => 'singular',
+                                'type' => 'text',
+                                'max' => 50,
+                                'placeholder' => trans('admin.singular'),
+                                'value' => isset($type) ? $type->singular : ''
                             ])
                             @include('blocks.textarea_block',[
                                 'label' => trans('admin.text'),

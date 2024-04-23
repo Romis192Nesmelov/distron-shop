@@ -1,14 +1,14 @@
 <div id="top-block">
-    <div id="top-line">
-        <div class="d-flex justify-content-between align-items-center">
+    <div class="row m-0" id="top-line">
+        <div class="col-lg-6 col-md-6 d-none d-md-flex justify-content-between align-items-center">
             <div class="contacts wow animate__animated animate__fadeIn" data-wow-delay=".3s">
                 <span>{!! view('blocks.phone_block',['phone' => $contacts[1]->contact])->render() !!}</span>
                 <span>{!! view('blocks.email_block',['email' => $contacts[2]->contact])->render() !!}</span>
                 <span><nobr>{{ str_replace('<br>',' ',$contacts[0]->contact) }}</nobr></span>
             </div>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
-            <form method="GET" action="{{ route('search') }}" class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">
+        <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column flex-md-row justify-content-end align-items-center">
+            <form method="GET" action="{{ route('search') }}" class="pt-1 pb-1 wow animate__animated animate__fadeIn" data-wow-delay=".3s">
                 <input type="text" name="find" placeholder="{{ trans('content.search') }}" value="{{ request('find') }}">
                 <i class="icon-search4"></i>
             </form>

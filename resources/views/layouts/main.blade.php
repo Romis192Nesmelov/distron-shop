@@ -295,7 +295,7 @@
             @endif
         </table>
         <hr>
-        <div class="d-flex justify-content-between align-items-center pt-2">
+        <div class="d-flex flex-column flex-column-reverse flex-md-row justify-content-between align-items-center pt-2">
             @include('blocks.button_block', [
                 'id' => null,
                 'buttonType' => 'submit',
@@ -303,7 +303,7 @@
                 'icon' => 'icon-checkmark4',
                 'buttonText' => trans('content.checkout')
             ])
-            <h3 id="basket-total" class="mb-0">{{ trans('content.total') }}<nobr><span>@include('blocks.price_block',['price' => $basketTotal])</span></nobr></h3>
+            <div class="fw-bold fs-4 mb-0" id="basket-total">{{ trans('content.total') }}<nobr>@include('blocks.price_block',['price' => $basketTotal])</nobr></div>
         </div>
     </form>
 </x-modal>

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('image',50)->nullable();
+            $table->string('alt_img')->nullable();
             $table->string('slug');
             $table->string('name');
             $table->string('short');

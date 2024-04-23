@@ -19,7 +19,7 @@ class ContentsSeeder extends Seeder
                 'head' => 'Возьмите под контроль расходы на АКБ!',
                 'text' => '<img class="w-50 d-none d-sm-block pull-left me-3 wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/loader.jpg" />
         <p class="wow animate__animated animate__slideInRight">Компания <a href="/"><b>Distron</b></a> рада предложить свои услуги по ремонту и восстановлению тяговых аккумуляторов для погрузчиков, тягачей, тележек, штабелеров и другой складской техники. Наше комплексное и инновационное решение, основанное на современных технологиях и фирменной присадке, позволяет провести полный цикл ремонта аккумуляторов, образуя защитной слой на пластинах и предотвращая сульфатацию.</p>
-        <h3 class="mt-3 text-left wow animate__animated animate__slideInRight">Мы предлагаем следующие этапы процесса восстановления:</h3>
+        <h2 class="mt-3 text-left wow animate__animated animate__slideInRight">Мы предлагаем следующие этапы процесса восстановления:</h2>
         <img class="w-25 d-none d-sm-block pull-right wow animate__animated animate__fadeIn" data-wow-delay="0.5s" src="/storage/images/gallery/two_batteries.jpg" />
         <ul class="wow animate__animated animate__slideInRight">
             <li>Первичный осмотр и диагностика</li>

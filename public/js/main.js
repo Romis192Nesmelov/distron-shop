@@ -159,7 +159,7 @@ const windowScroll = () => {
             if (!win.scrollTop()) {
                 resetColorHrefsMenu();
                 window.menuScrollFlag = false;
-            } else if ($(this).offset().top <= win.scrollTop()+200 && scrollData) {
+            } else if ($(this).offset().top <= win.scrollTop() + 200 && scrollData) {
                 window.menuScrollFlag = false;
                 resetColorHrefsMenu();
                 $('a[data-scroll=' + scrollData + ']').parents('li.nav-item').addClass('active');
@@ -278,7 +278,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
 
     if (inputVal) {
         input.val(inputVal);
-        price.html(tolocalstring(window.price * inputVal));
+        price.html(toLocalString(window.price * inputVal));
     } else if (basketTable.find('tr').length) {
         input.parents('tr').remove();
         cirNumber--;
@@ -291,7 +291,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
         total += currentVal * currentPrice;
     });
 
-    if (total) basketTotal.html(total);
+    if (total) basketTotal.html(toLocalString(total));
     else {
         basketCir.addClass('d-none').html(0);
         $('#checkout').addClass('d-none');
@@ -299,7 +299,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
     }
 }
 
-const tolocalstring = (string) => {
+const toLocalString = (string) => {
     return string.toLocaleString().replace(/\,/g, ' ');
 }
 

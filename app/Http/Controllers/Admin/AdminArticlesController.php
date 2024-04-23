@@ -44,17 +44,17 @@ class AdminArticlesController extends AdminBaseController
      */
     public function editArticle(Request $request): RedirectResponse
     {
-        $validationArr = [
-            'image' => $this->validationJpgAndPng,
-            'name' => 'nullable|max:50',
-            'short' => $this->validationString,
-            'text' => $this->validationLongText
-        ];
-
         $this->editSomething (
             $request,
             $this->article,
-            $validationArr,
+            [
+                'image' => $this->validationJpgAndPng,
+                'alt_img' => $this->validationAltImg,
+                'name' => $this->validationString,
+                'slug' => 'nullable|max:255',
+                'short' => $this->validationString,
+                'text' => $this->validationLongText
+            ],
             'storage/images/articles/',
             'article'
         );

@@ -2,7 +2,7 @@
     <a class="href-block" href="{{ route($href,['slug' => ($href == 'services' ? null : $item->type->slug), 'id' => $item->id]) }}">
         <div class="w-100 text-center">
             <div class="image mb-4" img="{{ $item->image ? asset($item->image) : asset($item->type->image) }}"></div>
-            <h5 class="w-100 text-center">{{ getItemHead($item) }}</h5>
+            <div class="fs-5 fw-bold w-100 text-center">{{ getItemHead($item) }}</div>
             @if ($showDescription)
                 <p class="text-center">{{ $item->description }}</p>
             @endif

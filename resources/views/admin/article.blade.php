@@ -16,8 +16,24 @@
                                 'name' => 'image',
                                 'image' => isset($article) ? $article->image : ''
                             ])
+                            @include('blocks.input_block', [
+                                'label' => trans('admin.alt_image'),
+                                'name' => 'alt_img',
+                                'type' => 'text',
+                                'max' => 255,
+                                'placeholder' => trans('admin.alt_image'),
+                                'value' => isset($article) ? $article->alt_img : ''
+                            ])
                         </div>
                         <div class="col-md-9 col-sm-12 col-xs-12">
+                            @include('blocks.input_block', [
+                                'label' => 'URI',
+                                'name' => 'slug',
+                                'type' => 'text',
+                                'max' => 100,
+                                'placeholder' => 'URI',
+                                'value' => isset($article) ? $article->slug : ''
+                            ])
                             @include('blocks.input_block', [
                                 'label' => trans('admin.name'),
                                 'name' => 'name',

@@ -14,6 +14,7 @@ class Article extends Model
 
     protected $fillable = [
         'image',
+        'alt_img',
         'slug',
         'name',
         'short',

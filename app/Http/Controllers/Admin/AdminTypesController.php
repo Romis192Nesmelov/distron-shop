@@ -37,7 +37,13 @@ class AdminTypesController extends AdminBaseController
          $this->editSomething (
             $request,
             $this->type,
-            ['image' => $this->validationJpgAndPng, 'name' => $this->validationString, 'text' => $this->validationText],
+            [
+                'image' => $this->validationJpgAndPng,
+                'slug' => 'nullable|max:50',
+                'name' => $this->validationName,
+                'singular' => $this->validationName,
+                'text' => $this->validationText
+            ],
             'storage/images/types/',
             'type'
         );

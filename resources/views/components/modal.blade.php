@@ -15,7 +15,7 @@
             @if (!$no_header)
                 <div class="modal-header">
                     @if ($head)
-                        <h5 class="modal-title fs-5 text-center w-100">{{ $head }}</h5>
+                        <div class="modal-title fs-5 text-center w-100">{{ $head }}</div>
                     @endif
                     <button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="{{ trans('content.close') }}"></button>
                 </div>
