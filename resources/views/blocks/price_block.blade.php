@@ -1,1 +1,1 @@
-<span>{{ number_format($price, 0, ',', ' ') }}</span>₽
+<span>{{ number_format($price, 1, ',', ' ') }}</span>₽

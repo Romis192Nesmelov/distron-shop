@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('image',50)->nullable();
             $table->string('name',50)->nullable();
-            $table->string('description');
-            $table->integer('price');
+            $table->string('description')->nullable();
+            $table->double('price');
             $table->foreignIdFor(Type::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->smallInteger('capacity')->nullable();
