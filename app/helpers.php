@@ -24,7 +24,6 @@ function getItemProps($item): string
     } else if ($item->type_id == 2) {
         $props .= trans('content.plates_val',['val' => $item['plates']]).'<br>';
         $props .= trans('content.dimensions',['dimensions' => $item->length.'x'.$item->width.'x'.$item->height]).'<br>';
-        if ($item->description) $props .= '<p>'.mb_substr(strip_tags($item->description),0,50,'UTF-8').( mb_strlen(strip_tags($item->description), 'UTF-8') > 50 ? '…' : '').'</p>';
     } else if ($item->type_id == 3) {
         foreach (['section','length','rated_current'] as $prop) {
             if ($item[$prop]) $props .= trans('content.'.$prop.'_val',['val' => $item[$prop]]).'<br>';
@@ -32,6 +31,6 @@ function getItemProps($item): string
     } else {
         if ($item['capacity']) $props .= trans('content.capacity_val',['val' => $item['capacity']]).'<br>';
     }
-
+    if ($item->description) $props .= '<p class="lh-sm">'.mb_substr(strip_tags($item->description),0,50,'UTF-8').( mb_strlen(strip_tags($item->description), 'UTF-8') > 50 ? '…' : '').'</p>';
     return $props ? substr($props, 0, -4) : '';
 }
