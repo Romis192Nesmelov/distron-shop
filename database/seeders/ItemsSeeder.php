@@ -81,7 +81,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'Переходник',
                 'description' => 'Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.',
                 'rated_current' => 50,
-                'price' => 142.5,
+                'price' => 145,
                 'type_id' => 3,
             ],
             [
