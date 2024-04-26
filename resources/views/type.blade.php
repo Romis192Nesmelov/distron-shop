@@ -44,8 +44,7 @@
                 @foreach($items as $k => $item)
                     @include('blocks.type_item_block',[
                         'href' => 'items',
-                        'col' => 3,
-                        'showDescription' => false
+                        'col' => 3
                     ])
                 @endforeach
             </div>

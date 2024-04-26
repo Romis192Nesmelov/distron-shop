@@ -31,6 +31,5 @@ function getItemProps($item): string
     } else {
         if ($item['capacity']) $props .= trans('content.capacity_val',['val' => $item['capacity']]).'<br>';
     }
-    if ($item->description) $props .= '<p class="lh-sm">'.mb_substr(strip_tags($item->description),0,50,'UTF-8').( mb_strlen(strip_tags($item->description), 'UTF-8') > 50 ? '…' : '').'</p>';
     return $props ? substr($props, 0, -4) : '';
 }
