@@ -40,7 +40,7 @@
                                 'label' => trans('admin.description'),
                                 'name' => 'description',
                                 'type' => 'text',
-                                'max' => 255,
+                                'max' => 5000,
                                 'placeholder' => trans('admin.description'),
                                 'value' => isset($item) ? $item->description : '',
                                 'simple' => true
