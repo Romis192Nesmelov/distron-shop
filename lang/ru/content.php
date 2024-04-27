@@ -62,7 +62,7 @@ return [
     'capacity_val' => '<span class="basket-item-prop fw-bold">Емкость:</span> :val<span>Ah</span>',
     'voltage_val' => '<span class="basket-item-prop fw-bold">Напряжение:</span> :val<span>В</span>',
     'plates_val' => '<span class="basket-item-prop fw-bold">Количество пластин:</span><br> :val<span>шт.</span>',
-    'section_val' => '<span class="basket-item-prop fw-bold">Сечение кабеля:</span> :val<span>мм.</span>',
+    'section_val' => '<span class="basket-item-prop fw-bold">Сечение кабеля:</span> :val<span>мм².</span>',
     'length_val' => '<span class="basket-item-prop fw-bold">Длина:<span> :val</span>мм.</span>',
     'rated_current_val' => '<span class="basket-item-prop fw-bold">Номинальный ток:</span> :val<span>Амп</span>',
     'dimensions' => '<span class="basket-item-prop fw-bold">Размеры:</span><br>:dimensions мм',

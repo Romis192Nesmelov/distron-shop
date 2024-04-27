@@ -100,6 +100,34 @@ class ItemsSeeder extends Seeder
                 'price' => 1214,
                 'type_id' => 3,
             ],
+            [
+                'image' => 'storage/images/items/item11.jpg',
+                'name' => 'Комплект концевых отводов',
+                'section' => 25,
+                'price' => 2550,
+                'type_id' => 3,
+            ],
+            [
+                'image' => 'storage/images/items/item12.jpg',
+                'name' => 'Комплект концевых отводов',
+                'section' => 35,
+                'price' => 3200,
+                'type_id' => 3,
+            ],
+            [
+                'image' => 'storage/images/items/item13.jpg',
+                'name' => 'Комплект концевых отводов',
+                'section' => 50,
+                'price' => 3850,
+                'type_id' => 3,
+            ],
+            [
+                'image' => 'storage/images/items/item14.jpg',
+                'name' => 'Комплект концевых отводов',
+                'section' => 70,
+                'price' => 4700,
+                'type_id' => 3,
+            ],
         ];
 
         foreach ($dataServices as $item) {
