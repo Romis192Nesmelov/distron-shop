@@ -19,7 +19,7 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item1.jpg',
                 'name' => 'Восстановление Тяговых АКБ',
-                'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
+                'description' => '<p>Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.</p>',
                 'price' => rand(5000,10000),
                 'capacity' => rand(100,1000),
                 'description_file' => 'Цены на услуги по восстановлению АКБ',
@@ -30,7 +30,7 @@ class ItemsSeeder extends Seeder
                 'image' => 'storage/images/placeholder.jpg',
                 'name' => 'Восстановление Телеком батарей',
                 'capacity' => rand(100,1000),
-                'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.',
+                'description' => '<p>Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.</p>',
                 'price' => rand(5000,10000),
                 'type_id' => 4
             ],
@@ -72,14 +72,14 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item7.jpg',
                 'name' => 'Болт крепления м10',
-                'description' => 'Для тяговых АКБ',
+                'description' => '<p>Для тяговых АКБ</p>',
                 'price' => 65,
                 'type_id' => 3,
             ],
             [
                 'image' => 'storage/images/items/item8.jpg',
                 'name' => 'Переходник',
-                'description' => 'Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.',
+                'description' => '<p>Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.</p>',
                 'rated_current' => 50,
                 'price' => 145,
                 'type_id' => 3,
@@ -87,7 +87,7 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item9.jpg',
                 'name' => 'Переходник',
-                'description' => 'Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.',
+                'description' => '<p>Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.</p>',
                 'rated_current' => 175,
                 'price' => 481,
                 'type_id' => 3,
@@ -95,7 +95,7 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item10.jpg',
                 'name' => 'Переходник',
-                'description' => 'Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.',
+                'description' => '<p>Используются для подключения АКБ к эл.сети как самой техники, так и к зарядному устройству.</p>',
                 'rated_current' => 350,
                 'price' => 1214,
                 'type_id' => 3,
@@ -141,7 +141,7 @@ class ItemsSeeder extends Seeder
         $voltage = [24, 48, 80];
         for ($i=0;$i<20;$i++) {
             Item::create([
-                'description' => 'Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.',
+                'description' => '<p>Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.</p>',
                 'type_id' => 1,
                 'price' => rand(10000,50000),
                 'capacity' => rand(100,1000),
@@ -153,7 +153,7 @@ class ItemsSeeder extends Seeder
         for ($i=2;$i<=6;$i++) {
             Item::create([
                 'name' => 'Ячейка АКБ',
-                'description' => 'Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis.',
+                'description' => '<p>Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis.</p>',
                 'price' => rand(1000,3000),
                 'length' => rand(45,190),
                 'width' => rand(100,200),

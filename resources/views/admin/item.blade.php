@@ -43,7 +43,7 @@
                                 'max' => 5000,
                                 'placeholder' => trans('admin.description'),
                                 'value' => isset($item) ? $item->description : '',
-                                'simple' => true
+                                'simple' => false
                             ])
 
                             @if ($parent->id == 1)

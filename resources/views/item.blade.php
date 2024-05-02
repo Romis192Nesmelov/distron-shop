@@ -8,7 +8,7 @@
             </div>
             <div class="col-lg-9 col-md-6 col-sm-12 wow animate__animated animate__slideInRight" data-wow-offset="10">
                 <h1 class="text-left">{{ getItemHead($item) }}</h1>
-                <p>{{ $item->description }}</p>
+                {!! $item->description !!}
                 @if (getItemProps($item))
                     <p>{!! getItemProps($item) !!}</p>
                 @endif
