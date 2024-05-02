@@ -19,7 +19,10 @@ class ItemController extends BaseController
         ];
 
         if ($slug) {
-            $this->data['type'] = Type::where('slug',$slug)->select(['id','slug','name','text'])->first();
+            $this->data['type'] =
+                Type::where('slug',$slug)
+                    ->select(['id','slug','name','text','seo_id'])
+                    ->first();
             if (!$this->data['type']) abort(404);
 
             if ($this->data['type']->id == 4) {
@@ -46,7 +49,7 @@ class ItemController extends BaseController
             } else {
                 $this->data['items'] = Item::query()
                     ->where('type_id',$this->data['type']->id)
-                    ->with(['type','technology'])
+                    ->with(['type','technology','seo'])
                     ->filtered()
                     ->orderBy('price')
                     ->paginate(8);
