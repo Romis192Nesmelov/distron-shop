@@ -27,7 +27,7 @@ class ItemsSeeder extends Seeder
                 'type_id' => 4
             ],
             [
-                'image' => 'storage/images/placeholder.jpg',
+                'image' => 'storage/images/items/item2.jpg',
                 'name' => 'Восстановление Телеком батарей',
                 'capacity' => rand(100,1000),
                 'description' => '<p>Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis in sed magna. Mauris pellentesque mattis bibendum. Etiam ut nibh non dolor aliquet.</p>',
@@ -128,6 +128,30 @@ class ItemsSeeder extends Seeder
                 'price' => 4700,
                 'type_id' => 3,
             ],
+            [
+                'image' => 'storage/images/items/item15.jpg',
+                'description' => '<p>Аккумуляторная батарея состоит из элементов 2PzS 230. Производитель ВАЗ-Импульс</p>',
+                'type_id' => 1,
+                'price' => 103500,
+                'capacity' => 230,
+                'voltage' => 24,
+                'length' => 45,
+                'width' => 198,
+                'height' => 587,
+                'technology_id' => 1
+            ],
+            [
+                'image' => 'storage/images/items/item16.jpg',
+                'description' => '<p>Аккумуляторная батарея состоит из элементов 3PzS 315</p>',
+                'type_id' => 1,
+                'price' => 144500,
+                'capacity' => 315,
+                'voltage' => 24,
+                'length' => 65,
+                'width' => 198,
+                'height' => 534,
+                'technology_id' => 1
+            ],
         ];
 
         foreach ($dataServices as $item) {
@@ -136,18 +160,6 @@ class ItemsSeeder extends Seeder
 
         foreach ($dataAccessories as $item) {
             Item::create($item);
-        }
-
-        $voltage = [24, 48, 80];
-        for ($i=0;$i<20;$i++) {
-            Item::create([
-                'description' => '<p>Quisque ultrices varius dui, at bibendum eros vulputate nec. Praesent pretium nisl at turpis ornare egestas. Sed non suscipit nunc. Donec condimentum vehicula turpis, vel suscipit diam. Duis posuere at.</p>',
-                'type_id' => 1,
-                'price' => rand(10000,50000),
-                'capacity' => rand(100,1000),
-                'voltage' => $voltage[rand(0,2)],
-                'technology_id' => rand(1,3),
-            ]);
         }
 
         for ($i=2;$i<=6;$i++) {
