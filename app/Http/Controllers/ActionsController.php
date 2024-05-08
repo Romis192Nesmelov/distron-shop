@@ -18,15 +18,23 @@ class ActionsController extends BaseController
 
         if (request('id')) {
             $this->data['action'] = Action::findOrFail(request('id'));
-            $this->data['actions'] = Action::where('id','!=',request('id'))->select(['image','alt_img','name'])->paginate(8);
+            $this->data['actions'] = Action::query()
+                ->where('id','!=',request('id'))
+                ->select(['id','image','alt_img','name'])
+                ->orderBy('created_at','desc')
+                ->paginate(8);
 
             $this->breadcrumbs[] = [
-                'route' => route('action',['id' => request('id')]),
+                'route' => route('actions',['id' => request('id')]),
                 'name' => $this->data['action']->name
             ];
         } else {
             $this->data['action'] = Action::where('active',1)->first();
-            $this->data['actions'] = Action::where('active',0)->select(['image','alt_img','name'])->paginate(8);
+            $this->data['actions'] = Action::query()
+                ->where('active',0)
+                ->select(['id','image','alt_img','name'])
+                ->orderBy('created_at','desc')
+                ->paginate(8);
         }
 
         $this->getSeo('action');
