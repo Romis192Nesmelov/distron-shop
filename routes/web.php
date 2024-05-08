@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminOrdersController;
 //use App\Http\Controllers\Admin\AdminQuestionsController;
 use App\Http\Controllers\Admin\AdminQuestionsController;
 use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\AdminSiteMapController;
 use App\Http\Controllers\Admin\AdminTypesController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\ArticlesController;
@@ -161,6 +162,11 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::get('/images/{slug?}', 'images')->name('images');
         Route::post('/edit-image', 'editImage')->name('edit_image');
         Route::post('/delete-image', 'deleteImage')->name('delete_image');
+    });
+
+    Route::controller(AdminSiteMapController::class)->group(function () {
+        Route::get('/sitemap', 'siteMap')->name('sitemap');
+        Route::post('/generate-site-map', 'generateSiteMap')->name('generate_site_map');
     });
 });
 Route::get('/{slug?}', ContentController::class)->name('content');

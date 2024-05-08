@@ -167,4 +167,7 @@ return [
     'add_image' => 'Добавить картинку',
     'adding_image' => 'Добавление картинки',
     'do_you_really_want_delete_this_image' => 'Вы действительно хотите удалить эту картинку?',
+
+    'create_sitemap_xml' => 'Создать sitemap.xml',
+    'generation_complete' => 'Генерация произведена!'
 ];

@@ -62,7 +62,7 @@ class BaseController extends Controller
         $menu['services'] = ['href' => route('services'), 'name' => trans('menu.services')];
         $menu['actions'] = ['href' => '#', 'name' => trans('menu.actions')];
         $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
-        $menu['contacts'] = ['href' => 'contacts', 'name' => trans('menu.contacts')];
+        $menu['contacts'] = ['href' => route('contacts'), 'name' => trans('menu.contacts')];
 
         if (Session::has('basket') && !count(Session::get('basket'))) Session::forget('basket');
 

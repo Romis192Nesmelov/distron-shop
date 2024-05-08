@@ -208,3 +208,34 @@ iframe {
     width: 100%;
     height: 300px;
 }
+
+.site-map-root-tag,
+.site-map-url-tag,
+.site-map-tag {
+    margin-left: 20px;
+    color: #990000;
+}
+
+.site-map-root-tag,
+.site-map-tag span.bkt {
+    margin-left: 0;
+}
+
+.site-map-root-tag span.bkt,
+.site-map-url-tag span.bkt,
+.site-map-tag span.bkt {
+    color: #003bff;
+}
+
+.site-map-root-tag span.red {
+    color: red;
+}
+
+.site-map-tag span.value {
+    color: black;
+    font-weight: bold;
+}
+
+.site-map-tag {
+    margin-left: 40px;
+}

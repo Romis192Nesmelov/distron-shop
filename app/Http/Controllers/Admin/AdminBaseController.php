@@ -84,6 +84,11 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-map',
                 'hidden' => false,
             ],
+//            'sitemap' => [
+//                'key' => 'sitemap',
+//                'icon' => 'icon-map4',
+//                'hidden' => false,
+//            ],
         ];
         $this->breadcrumbs[] = $this->menu['home'];
     }
