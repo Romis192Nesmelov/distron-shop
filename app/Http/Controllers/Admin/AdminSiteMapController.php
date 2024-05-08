@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Models\Action;
 use App\Models\Article;
 use App\Models\Content;
 use App\Models\Type;
@@ -59,6 +60,13 @@ class AdminSiteMapController extends AdminBaseController
         $services = Type::where('is_service',1)->with('items')->first();
         foreach ($services->items as $item) {
             $this->addChildUrl(route('services',['id' => $item->id]), time(),0.5);
+        }
+
+        // Adding actions
+        $this->addChildUrl(route('actions'), time(),1);
+        $actions = Action::where('active',0)->select('id')->get();
+        foreach ($actions as $action) {
+            $this->addChildUrl(route('actions',['id' => $action->id]), time(),0.5);
         }
 
         // Adding articles

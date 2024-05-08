@@ -20,6 +20,7 @@ class ActionsController extends BaseController
             $this->data['action'] = Action::findOrFail(request('id'));
             $this->data['actions'] = Action::query()
                 ->where('id','!=',request('id'))
+                ->where('active',0)
                 ->select(['id','image','alt_img','name'])
                 ->orderBy('created_at','desc')
                 ->paginate(8);
