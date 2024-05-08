@@ -42,7 +42,7 @@ class AdminBaseController extends Controller
             ],
             'images' => [
                 'key' => 'images',
-                'icon' => 'icon-stack-picture',
+                'icon' => 'icon-images2',
                 'hidden' => false,
             ],
             'icons' => [
@@ -53,6 +53,11 @@ class AdminBaseController extends Controller
             'contents' => [
                 'key' => 'contents',
                 'icon' => 'icon-newspaper',
+                'hidden' => false,
+            ],
+            'actions' => [
+                'key' => 'actions',
+                'icon' => 'icon-rocket',
                 'hidden' => false,
             ],
             'types' => [

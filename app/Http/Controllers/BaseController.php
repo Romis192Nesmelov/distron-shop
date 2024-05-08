@@ -60,7 +60,7 @@ class BaseController extends Controller
 
         $menu['products'] = ['href' => route('items'), 'name' => trans('menu.products')];
         $menu['services'] = ['href' => route('services'), 'name' => trans('menu.services')];
-        $menu['actions'] = ['href' => '#', 'name' => trans('menu.actions')];
+        $menu['actions']  = ['href' => route('actions'), 'name' => trans('menu.actions')];
         $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
         $menu['contacts'] = ['href' => route('contacts'), 'name' => trans('menu.contacts')];
 

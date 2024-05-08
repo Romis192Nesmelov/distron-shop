@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /storage/app/public/video
+/storage/app/public/images/actions
 /storage/*.key
 /vendor
 .env

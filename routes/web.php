@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActionsController;
+use App\Http\Controllers\Admin\AdminActionsController;
 use App\Http\Controllers\Admin\AdminArticlesController;
 use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Controllers\Admin\AdminContactsController;
@@ -51,6 +53,7 @@ Route::controller(BaseController::class)->group(function () {
 Route::get('/search', SearchController::class)->name('search');
 Route::get('/items/{slug?}', ItemController::class)->name('items');
 Route::get('/services/{slug?}', ServicesController::class)->name('services');
+Route::get('/actions/{slug?}', ActionsController::class)->name('actions');
 Route::get('/articles/{slug?}', ArticlesController::class)->name('articles');
 
 Route::controller(BasketController::class)->group(function () {
@@ -113,6 +116,12 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
     Route::controller(AdminContentsController::class)->group(function () {
         Route::get('/contents', 'contents')->name('contents');
         Route::post('/edit-content', 'editContent')->name('edit_content');
+    });
+
+    Route::controller(AdminActionsController::class)->group(function () {
+        Route::get('/actions/{slug?}', 'actions')->name('actions');
+        Route::post('/edit-action', 'editAction')->name('edit_action');
+        Route::post('/delete-action', 'deleteActions')->name('delete_action');
     });
 
     Route::controller(AdminQuestionsController::class)->group(function () {

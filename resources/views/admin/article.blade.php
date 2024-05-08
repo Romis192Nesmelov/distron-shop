@@ -35,7 +35,7 @@
                                 'value' => isset($article) ? $article->slug : ''
                             ])
                             @include('blocks.input_block', [
-                                'label' => trans('admin.name'),
+                                'label' => trans('admin.simple_name'),
                                 'name' => 'name',
                                 'type' => 'text',
                                 'max' => 50,

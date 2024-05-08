@@ -82,6 +82,7 @@ return [
     'alt_image' => 'Аттрибут Alt картинки',
     'head' => 'Заголовок',
     'name' => 'Наименование (ед.ч.)',
+    'simple_name' => 'Название',
     'singular' => 'Наименование (мн.ч.)',
     'edit_content' => 'Редактирование контента',
 
@@ -155,6 +156,12 @@ return [
     'delivery' => 'Доставка',
     'delivery_address' => 'Доставка по адресу: :address',
     'pickup' => 'Самовывоз',
+
+    'action' => 'Акция',
+    'edit_action' => 'Редактирование акции',
+    'add_action' => 'Добавить акцию',
+    'adding_action' => 'Добавление актион',
+    'do_you_really_want_delete_this_action' => 'Вы действительно хотите удалить эту акцию?',
 
     'article' => 'Статья',
     'short' => 'Вступление',
