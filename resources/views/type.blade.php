@@ -3,7 +3,7 @@
 @section('content')
     <x-section wow_delay=".1" head="{{ $type->name }}">
         <x-row>
-            {!! $type->text !!}
+            @include('blocks.content_block',['text' => $type->text])
         </x-row>
     </x-section>
     <hr>

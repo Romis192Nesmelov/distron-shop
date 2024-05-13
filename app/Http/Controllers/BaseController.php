@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
+use App\Models\Action;
 use App\Models\Contact;
 use App\Models\Content;
 use App\Models\Icon;
@@ -60,7 +61,7 @@ class BaseController extends Controller
 
         $menu['products'] = ['href' => route('items'), 'name' => trans('menu.products')];
         $menu['services'] = ['href' => route('services'), 'name' => trans('menu.services')];
-        $menu['actions']  = ['href' => route('actions'), 'name' => trans('menu.actions')];
+        if (Action::query()->count()) $menu['actions']  = ['href' => route('actions'), 'name' => trans('menu.actions')];
         $menu['articles'] = ['href' => route('articles'), 'name' => trans('menu.articles')];
         $menu['contacts'] = ['href' => route('contacts'), 'name' => trans('menu.contacts')];
 
