@@ -251,7 +251,7 @@ class AdminBaseController extends Controller
     protected function getSpecialFields(Model $model, array $validationArr, array $fields): array
     {
         foreach (['active', 'delivery', 'is_admin'] as $field) {
-            if (in_array($field, $model->getFillable())) $fields['active'] = request($field) ? 1 : 0;
+            if (in_array($field, $model->getFillable())) $fields[$field] = request($field) ? 1 : 0;
         }
         if (in_array('date',$model->getFillable()) && array_key_exists('date',$validationArr)) $fields['date'] = $this->convertTimestamp(request('date'));
         if (in_array('video',$model->getFillable()) && array_key_exists('video',$validationArr)) $fields['video'] = preg_replace('/(\swidth=\"(\d{3})\" height=\"(\d{3})\")/', '', $fields['video']);

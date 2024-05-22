@@ -72,7 +72,11 @@ class ItemController extends BaseController
                 return $this->showView('type');
             }
         } else {
-            $this->data['products'] = Type::where('is_service',0)->get();
+            $products = Type::where('is_service',0)->with('items')->get();
+            foreach ($products as $product) {
+                if ($product->items->count()) $this->data['products'][] = $product;
+            }
+
             $this->data['seo'] = Seo::find($this->seoIds['products']);
             return $this->showView('products');
         }

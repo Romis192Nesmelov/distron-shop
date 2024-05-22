@@ -159,18 +159,5 @@ class ItemsSeeder extends Seeder
         foreach ($dataAccessories as $item) {
             Item::create($item);
         }
-
-        for ($i=2;$i<=6;$i++) {
-            Item::create([
-                'name' => 'Ячейка АКБ',
-                'description' => '<p>Pellentesque nec pellentesque dui. In porttitor faucibus urna eget auctor. Fusce id nibh at ligula dapibus mattis.</p>',
-                'price' => rand(1000,3000),
-                'length' => rand(45,190),
-                'width' => rand(100,200),
-                'height' => rand(300,750),
-                'type_id' => 2,
-                'plates' => $i
-            ]);
-        }
     }
 }

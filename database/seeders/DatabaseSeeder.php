@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TechnologiesSeeder::class);
         $this->call(ItemsSeeder::class);
         $this->call(ArticlesSeeder::class);
-        Action::factory(10)->create();
+//        Action::factory(10)->create();
 //        Article::factory(10)->create();
 //        $this->call(MetricsSeeder::class);
     }

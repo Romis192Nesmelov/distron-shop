@@ -52,11 +52,12 @@ class BaseController extends Controller
     protected function showView($view): View
     {
         $settings = new SettingsController();
-        $contents = Content::where('id','!=',1)->select(['slug','head'])->get();
+        $contents = Content::where('id','!=',1)->get();
 
         $menu = [];
         foreach ($contents as $content) {
-            $menu[$content->slug] = ['href' => route('content',['slug' => $content->slug]), 'name' => $content->head];
+            if ($content->text)
+                $menu[$content->slug] = ['href' => route('content',['slug' => $content->slug]), 'name' => $content->head];
         }
 
         $menu['products'] = ['href' => route('items'), 'name' => trans('menu.products')];
