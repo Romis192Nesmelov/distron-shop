@@ -110,44 +110,22 @@ class AdminBaseController extends Controller
     protected function getSomething(
         Model $model,
         string|null $slug=null,
-        Model|null $parentModel=null,
-        string|null $parentRelation=null
+        Model|null $parentModel=null
     ): View
     {
         $key = $model->getTable();
         if (request('parent_id')) {
-            $parentItem = $parentModel->findOrFail(request('parent_id'));
-            $this->data['parent'] = $parentModel->find(request('parent_id'));
-
-            if ($parentRelation) {
-                $this->data['menu_key'] = $this->data['parent_key'];
-                $this->data['current_sub_item'] = $parentItem[$parentRelation]->id;
-                $this->breadcrumbs[] = [
-                    'key' => $this->menu[$this->data['parent_key']]['key'],
-                    'name' => trans('admin_menu.'.$this->data['parent_key']),
-                ];
-                $this->breadcrumbs[] = [
-                    'key' => $this->menu[$this->data['parent_key']]['key'],
-                    'params' => ['id' => $parentItem[$parentRelation]->id],
-                    'name' => $parentItem[$parentRelation]->name ?? $parentItem[$parentRelation]->head,
-                ];
-                $this->breadcrumbs[] = [
-                    'key' => $this->menu[$this->data['near_parent_key']]['key'],
-                    'params' => ['id' => $parentItem->id, 'parent_id' => $parentItem[$parentRelation]->id],
-                    'name' => $parentItem->name ?? $parentItem->head,
-                ];
-            } else {
-                $this->data['menu_key'] = $this->data['parent_key'];
-                $this->breadcrumbs[] = [
-                    'key' => $this->menu[$this->data['parent_key']]['key'],
-                    'name' => trans('admin_menu.'.$this->data['parent_key']),
-                ];
-                $this->breadcrumbs[] = [
-                    'key' => $this->menu[$this->data['parent_key']]['key'],
-                    'params' => ['id' => $parentItem->id],
-                    'name' => $parentItem->name ?? $parentItem->head,
-                ];
-            }
+            $this->data['parent'] = $parentModel->query()->where('id',request('parent_id'))->select(['name'])->first();
+            $this->data['menu_key'] = $this->data['parent_key'];
+            $this->breadcrumbs[] = [
+                'key' => $this->menu[$this->data['parent_key']]['key'],
+                'name' => trans('admin_menu.'.$this->data['parent_key']),
+            ];
+            $this->breadcrumbs[] = [
+                'key' => $this->menu[$this->data['parent_key']]['key'],
+                'params' => ['id' => request('parent_id')],
+                'name' => $this->data['parent']->name,
+            ];
         } else if (!$this->menu[$key]['hidden']) {
             $this->data['menu_key'] = $key;
             $this->breadcrumbs[] = $this->menu[$key];
@@ -156,7 +134,7 @@ class AdminBaseController extends Controller
         $this->getSingularKey($key);
 
         $breadcrumbsParams = [];
-        if ($parentModel) $breadcrumbsParams['parent_id'] = $parentItem->id;
+        if ($parentModel) $breadcrumbsParams['parent_id'] = request('parent_id');
 
         if (request('id')) {
             $this->data['metas'] = $this->metas;
