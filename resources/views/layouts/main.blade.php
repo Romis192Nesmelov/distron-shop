@@ -78,9 +78,9 @@
                     </div>
                     <div class="col-md-6 ml-auto">
                         <ul class="list-unstyled">
-                            @foreach($menu as $menuItemKey => $menuItem)
-                                @include('blocks.nav-item_block', $menuItem)
-                            @endforeach
+{{--                            @foreach($menu as $menuItemKey => $menuItem)--}}
+{{--                                @include('blocks.nav-item_block')--}}
+{{--                            @endforeach--}}
                         </ul>
                     </div>
                 </div>

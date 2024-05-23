@@ -17,6 +17,7 @@ class ItemController extends BaseController
             'route' => route('items'),
             'name' => trans('menu.products')
         ];
+        $this->data['active'] = 'products';
 
         if ($slug) {
             $this->data['type'] =
@@ -24,18 +25,11 @@ class ItemController extends BaseController
                     ->select(['id','slug','name','text','seo_id'])
                     ->first();
             if (!$this->data['type']) abort(404);
-
-            if ($this->data['type']->id == 4) {
-                $this->breadcrumbs[] = [
-                    'route' => route('items',['scroll' => 'services']),
-                    'name' => $this->data['type']->name
-                ];
-            } else {
-                $this->breadcrumbs[] = [
-                    'route' => route('items',['slug' => $slug]),
-                    'name' => $this->data['type']->name
-                ];
-            }
+            
+            $this->breadcrumbs[] = [
+                'route' => route('items',['slug' => $slug]),
+                'name' => $this->data['type']->name
+            ];
 
             $this->data['filters'] = [];
             if (request()->has('id')) {

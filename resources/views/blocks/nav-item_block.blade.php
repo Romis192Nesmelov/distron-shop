@@ -1,6 +1,6 @@
 <li
     {{ isset($id) && $id ? 'id='.$id : '' }}
-    class="nav-item {{ isset($active) && $active ? 'active' : '' }}
+    class="nav-item {{ isset($active) && $active == $menuItemKey ? 'active' : '' }}
     {{ isset($addClass) && $addClass ? $addClass : '' }}
     {{ isset($dropdown) && is_array($dropdown) ? 'dropdown' : '' }}"
 
@@ -13,6 +13,6 @@
             @endforeach
         </div>
     @else
-        <a class="nav-link" {{ isset($href) ? 'href='.$href : (request()->path() == '/' ? 'data-scroll='.$scroll : 'href=/?scroll='.$scroll) }}>{!! $name !!}</a>
+        <a class="nav-link" href="{{ $menuItem['href'] }}">{!! $menuItem['name'] !!}</a>
     @endif
 </li>

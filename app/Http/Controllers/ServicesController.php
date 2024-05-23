@@ -16,6 +16,7 @@ class ServicesController extends BaseController
             'route' => route('services'),
             'name' => trans('menu.services')
         ];
+        $this->data['active'] = 'services';
 
         if (request()->has('id')) {
             $this->data['item'] = Item::where('id',request()->id)->with(['type','technology'])->first();

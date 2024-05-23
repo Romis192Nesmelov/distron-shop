@@ -112,23 +112,23 @@ $(document).ready(function() {
     // let uriParams = getQueryParams(window.location.search);
     // if (uriParams.scroll) gotoScroll(uriParams.scroll);
 
-    window.menuScrollFlag = false;
-    $('a[data-scroll], div[data-scroll]').click(function (e) {
-        e.preventDefault();
-        if (!window.menuScrollFlag) {
-            gotoScroll($(this).attr('data-scroll'));
-        }
-    });
+    // window.menuScrollFlag = false;
+    // $('a[data-scroll], div[data-scroll]').click(function (e) {
+    //     e.preventDefault();
+    //     if (!window.menuScrollFlag) {
+    //         gotoScroll($(this).attr('data-scroll'));
+    //     }
+    // });
 
     // Scroll controls
-    setTimeout(function () {
-        windowScroll();
-    }, 1000);
-
-    if (window.scrollAnchor) {
-        window.menuScrollFlag = true;
-        gotoScroll(window.scrollAnchor);
-    }
+    // setTimeout(function () {
+    //     windowScroll();
+    // }, 1000);
+    //
+    // if (window.scrollAnchor) {
+    //     window.menuScrollFlag = true;
+    //     gotoScroll(window.scrollAnchor);
+    // }
 
     bindMainButton(loginModal);
     if (window.showMessage) $('#message-modal').modal('show');

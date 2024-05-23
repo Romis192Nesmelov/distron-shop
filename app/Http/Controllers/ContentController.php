@@ -18,6 +18,8 @@ class ContentController extends BaseController
             'route' => route('content',['slug' => $slug]),
             'name' => $this->data['content']->head
         ];
+        $this->data['active'] = $slug;
+
         $this->getSeo('content');
 
         return $this->showView('content');

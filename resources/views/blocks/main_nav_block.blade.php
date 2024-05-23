@@ -37,11 +37,11 @@
         <div class="collapse navbar-collapse wow animate__animated animate__fadeIn" id="main-nav-bar">
             <ul class="navbar-nav mr-auto">
                 @include('blocks.nav-item_block', [
-                    'name' => '<i class="icon-home2"></i>',
-                    'scroll' => 'home'
+                    'menuItemKey' => 'home',
+                    'menuItem' => ['href' => route('home'), 'name' => '<i class="icon-home2"></i>'],
                 ])
                 @foreach($menu as $menuItemKey => $menuItem)
-                    @include('blocks.nav-item_block', $menuItem)
+                    @include('blocks.nav-item_block')
                 @endforeach
     {{--            @include('blocks._nav-item_block', [--}}
     {{--                'name' => trans('menu.language').' <i class="icon-earth"></i>',--}}

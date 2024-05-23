@@ -15,6 +15,7 @@ class ArticlesController extends BaseController
             'route' => route('articles'),
             'name' => trans('menu.articles')
         ];
+        $this->data['active'] = 'articles';
 
         if ($slug) {
             $this->data['article'] = Article::where('slug',$slug)->first();

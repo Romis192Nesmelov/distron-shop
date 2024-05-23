@@ -398,9 +398,9 @@ li::marker {
     color: white;
 }
 
-.nav-item.active,
+.nav-item.active a,
 .nav-link:hover {
-    color: #2ebd9a !important;
+    color: #39a187 !important;
 }
 
 .nav-link {

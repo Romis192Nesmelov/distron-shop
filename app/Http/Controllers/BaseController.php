@@ -23,6 +23,7 @@ class BaseController extends Controller
     public function index(string|null $token = null): View
     {
         $this->data['scroll'] = request('scroll');
+        $this->data['active'] = 'home';
         $this->data['content'] = Content::find(1);
         $this->data['token'] = $token;
         $this->data['icons'] = Icon::where('active',1)->get();
@@ -32,6 +33,12 @@ class BaseController extends Controller
 
     public function contacts(): View
     {
+        $this->breadcrumbs[] = [
+            'route' => route('contacts'),
+            'name' => trans('menu.contacts')
+        ];
+        $this->data['active'] = 'contacts';
+
         $this->data['map'] = Contact::where('id',4)->pluck('contact')->first();
         $this->data['seo'] = Seo::find($this->seoIds['contacts']);
         return $this->showView('contacts');
