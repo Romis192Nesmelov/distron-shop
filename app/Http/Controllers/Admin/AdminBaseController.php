@@ -115,7 +115,7 @@ class AdminBaseController extends Controller
     {
         $key = $model->getTable();
         if (request('parent_id')) {
-            $this->data['parent'] = $parentModel->query()->where('id',request('parent_id'))->select(['name'])->first();
+            $this->data['parent'] = $parentModel->query()->where('id',request('parent_id'))->select(['id','name'])->first();
             $this->data['menu_key'] = $this->data['parent_key'];
             $this->breadcrumbs[] = [
                 'key' => $this->menu[$this->data['parent_key']]['key'],
