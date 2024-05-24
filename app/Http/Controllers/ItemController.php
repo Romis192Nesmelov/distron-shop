@@ -25,7 +25,7 @@ class ItemController extends BaseController
                     ->select(['id','slug','name','text','seo_id'])
                     ->first();
             if (!$this->data['type']) abort(404);
-            
+
             $this->breadcrumbs[] = [
                 'route' => route('items',['slug' => $slug]),
                 'name' => $this->data['type']->name
