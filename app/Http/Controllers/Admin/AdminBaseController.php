@@ -199,7 +199,7 @@ class AdminBaseController extends Controller
             }
         }
 
-        $this->processingFiles($request, $model, 'image', $pathToImages, $imageName.$model->id);
+        $this->processingFiles($request, $model, 'image', $pathToImages, $imageName);
         $this->saveCompleteMessage();
         return $model;
     }

@@ -5,6 +5,12 @@
 /public/storage
 /storage/app/public/video
 /storage/app/public/images/actions
+/storage/app/public/images/articles
+/storage/app/public/images/gallery
+/storage/app/public/images/icons
+/storage/app/public/images/items
+/storage/app/public/images/services
+/storage/app/public/images/types
 /storage/*.key
 /vendor
 .env
