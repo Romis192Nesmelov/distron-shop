@@ -1,13 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <x-section wow_delay=".1" head="{{ $type->name }}">
-        <x-row>
-            @include('blocks.content_block',['text' => $type->text])
-        </x-row>
-    </x-section>
-    <hr>
-    <x-section>
+    <x-section head="{{ $type->name }}">
         <x-row>
             <div class="col-lg-3 col-sm-12 pe-lg-4 pe-sm-0">
                 @if (count($filters))
@@ -52,6 +46,12 @@
             </div>
         </x-row>
         <div class="paginator">{{ $items->withQueryString()->links() }}</div>
+    </x-section>
+    <hr>
+    <x-section wow_delay=".1">
+        <x-row>
+            @include('blocks.content_block',['text' => $type->text])
+        </x-row>
     </x-section>
     <script>window.filters = {!! json_encode($filters) !!};</script>
 @endsection

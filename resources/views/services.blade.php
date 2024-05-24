@@ -12,6 +12,7 @@
                 ])
             @endforeach
         </x-row>
+        <hr>
         {!! $services->text !!}
     </x-section>
 @endsection
