@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -8,8 +9,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Item extends Model
 {
+    use Sluggable;
+
     protected $fillable = [
         'image',
+        'slug',
         'name',
         'description',
         'price',
@@ -32,6 +36,15 @@ class Item extends Model
 
         'seo_id',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function type(): BelongsTo
     {

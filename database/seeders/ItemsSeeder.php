@@ -129,6 +129,7 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item15.jpg',
                 'description' => '<p>Аккумуляторная батарея состоит из элементов 2PzS 230. Производитель ВАЗ-Импульс</p>',
+                'name' => 'Свинцовая АКБ 230Ah',
                 'type_id' => 1,
                 'price' => 103500,
                 'capacity' => 230,
@@ -141,6 +142,7 @@ class ItemsSeeder extends Seeder
             [
                 'image' => 'storage/images/items/item16.jpg',
                 'description' => '<p>Аккумуляторная батарея состоит из элементов 3PzS 315</p>',
+                'name' => 'Свинцовая АКБ 315Ah',
                 'type_id' => 1,
                 'price' => 144500,
                 'capacity' => 315,

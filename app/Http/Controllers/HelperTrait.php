@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 trait HelperTrait
 {
-    public string $validationPhone = 'regex:/^((\+)?(\d)(\s)?(\()?[0-9]{3}(\))?(\s)?([0-9]{3})(\-)?([0-9]{2})(\-)?([0-9]{2}))$/';
+    public string $validationPhone = 'required|regex:/^((\+)?(\d)(\s)?(\()?[0-9]{3}(\))?(\s)?([0-9]{3})(\-)?([0-9]{2})(\-)?([0-9]{2}))$/';
     public string $validationDate = 'regex:/^(\d{2})\/(\d{2})\/(\d{4})$/';
     public string $validationInteger = 'required|integer';
     public string $validationAltImg = 'nullable|max:255';
@@ -69,7 +69,7 @@ trait HelperTrait
         session()->flash('message', trans('admin.save_complete'));
     }
 
-    public function sendMessage(string $template, string $cc, string $mailTo, array $fields, string|null $pathToFile=null): JsonResponse
+    public function sendMessage(string $template, string $mailTo, string|null $cc, array $fields, string|null $pathToFile=null): JsonResponse
     {
         dispatch(new SendMessage($template, $mailTo, $cc, $fields, $pathToFile));
         $message = trans('content.we_will_contact_you');

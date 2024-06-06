@@ -45,18 +45,22 @@
 <body>
 <div id="main" data-scroll-destination="home">
     @include('blocks.main_nav_block')
-    <div id="main-collage">
+    <div id="{{ request()->path() == '/' ? 'main-collage' : 'waves'}}">
         <div id="main-logo">
             <img class="logo wow animate__animated animate__fadeIn" data-wow-delay=".2s" src="{{ asset('storage/images/logo.svg') }}" />
-            <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.tagline') }}</h1>
-            @include('blocks.button_block',[
-                'primary' => true,
-                'addClass' => 'wow animate__animated animate__fadeIn',
-                'dataTarget' => 'feedback-modal',
-                'buttonText' => trans('content.leave_request')
-            ])
+            @if (request()->path() == '/')
+                <h1 class="wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.tagline') }}</h1>
+            @endif
+            <div>
+                @include('blocks.button_block',[
+                    'primary' => true,
+                    'addClass' => 'wow animate__animated animate__fadeIn',
+                    'dataTarget' => 'feedback-modal',
+                    'buttonText' => trans('content.leave_request')
+                ])
+            </div>
         </div>
-        <img id="main-image" src="{{ asset('storage/images/battery.png') }}" />
+        <img id="{{ request()->path() == '/' ? 'main-image' : 'main-image-small'}}" src="{{ asset('storage/images/battery.png') }}" />
     </div>
     <x-section>
         <div id="breadcrumbs" class="ps-4 wow animate__animated animate__slideInLeft" data-wow-offset="10" data-wow-delay=".5s">
@@ -92,7 +96,6 @@
                     <form id="form-feedback-short" action="{{ route('feedback_short') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
-                            @include('blocks.error_block',['name' => 'phone'])
                             <input class="form-control rounded-0 border-secondary text-white bg-transparent" placeholder="+7(___)___-__-__" name="phone">
                             <div class="input-group-append">
                                 @include('blocks.button_block',[
@@ -105,11 +108,14 @@
                                 ])
                             </div>
                         </div>
-                        @include('blocks.checkbox_block',[
-                            'checked' => false,
-                            'name' => 'i_agree',
-                            'label' => trans('content.i_agree'),
-                        ])
+                        @include('blocks.error_block',['name' => 'phone'])
+                        <div class="mt-3">
+                            @include('blocks.checkbox_block',[
+                                'checked' => false,
+                                'name' => 'i_agree',
+                                'label' => trans('content.i_agree'),
+                            ])
+                        </div>
                     </form>
                 </div>
             </div>
@@ -375,8 +381,8 @@
                 'id' => null,
                 'primary' => true,
                 'addClass' => 'wow animate__animated animate__fadeIn',
-                'dataTarget' => 'request-modal',
-                'buttonText' => trans('content.leave_request')
+                'dataDismiss' => true,
+                'buttonText' => trans('content.close')
             ])
         </div>
     </form>

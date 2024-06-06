@@ -51,7 +51,7 @@ Route::controller(BaseController::class)->group(function () {
 });
 
 Route::get('/search', SearchController::class)->name('search');
-Route::get('/items/{slug?}', ItemController::class)->name('items');
+Route::get('/items/{slug?}/{item_slug?}', ItemController::class)->name('items');
 Route::get('/services/{slug?}', ServicesController::class)->name('services');
 Route::get('/actions/{slug?}', ActionsController::class)->name('actions');
 Route::get('/articles/{slug?}', ArticlesController::class)->name('articles');

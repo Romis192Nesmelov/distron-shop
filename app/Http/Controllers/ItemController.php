@@ -11,7 +11,7 @@ class ItemController extends BaseController
 {
     use HelperTrait;
 
-    public function __invoke($slug=null): View
+    public function __invoke($slug=null, $item_slug=null): View
     {
         $this->breadcrumbs[] = [
             'route' => route('items'),
@@ -21,7 +21,8 @@ class ItemController extends BaseController
 
         if ($slug) {
             $this->data['type'] =
-                Type::where('slug',$slug)
+                Type::query()
+                    ->where('slug',$slug)
                     ->select(['id','slug','name','text','seo_id'])
                     ->first();
             if (!$this->data['type']) abort(404);
@@ -32,8 +33,15 @@ class ItemController extends BaseController
             ];
 
             $this->data['filters'] = [];
-            if (request()->has('id')) {
-                $this->data['item'] = Item::where('id',request()->id)->with(['type','technology'])->first();
+            if ($item_slug || request()->has('id')) {
+                $query = Item::query();
+
+                if ($item_slug) $query = $query->where('slug',$item_slug);
+                else $query = $query->where('id',request()->id);
+
+                $this->data['item'] = $query->with(['type','technology'])->first();
+                if ($this->data['item']->slug && request()->has('id')) abort(404);
+
                 $this->breadcrumbs[] = [
                     'route' => route('items',['slug' => $slug, 'id' => $this->data['item']->id]),
                     'name' => getItemHead($this->data['item'])
@@ -66,7 +74,7 @@ class ItemController extends BaseController
                 return $this->showView('type');
             }
         } else {
-            $products = Type::where('is_service',0)->with('items')->get();
+            $products = Type::query()->where('is_service',0)->with('items')->get();
             foreach ($products as $product) {
                 if ($product->items->count()) $this->data['products'][] = $product;
             }
