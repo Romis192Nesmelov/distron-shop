@@ -23,7 +23,7 @@
                                 'label' => 'URI',
                                 'name' => 'slug',
                                 'type' => 'text',
-                                'max' => 100,
+                                'max' => 50,
                                 'placeholder' => 'URI',
                                 'value' => isset($type) ? $type->slug : ''
                             ])

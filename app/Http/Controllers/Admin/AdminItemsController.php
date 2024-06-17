@@ -36,6 +36,7 @@ class AdminItemsController extends AdminBaseController
     {
         $validationArr = [
             'image' => $this->validationJpgAndPng,
+            'slug' => 'nullable|max:50',
             'name' => 'nullable|max:50',
             'description' => $this->validationText,
             'price' => $this->validationInteger,

@@ -29,6 +29,14 @@
                                 'value' => isset($item) ? $item->price : ''
                             ])
                             @include('blocks.input_block', [
+                                'label' => 'URI',
+                                'name' => 'slug',
+                                'type' => 'text',
+                                'max' => 50,
+                                'placeholder' => 'URI',
+                                'value' => isset($item) ? $item->slug : ''
+                            ])
+                            @include('blocks.input_block', [
                                 'label' => trans('admin.name'),
                                 'name' => 'name',
                                 'type' => 'text',
