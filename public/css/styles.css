@@ -587,6 +587,10 @@ input[type="number"]::-webkit-inner-spin-button {
         height: 600px;
     }
 
+    #main-image-small {
+        display: none;
+    }
+
     .navbar-collapse {
         padding: 15px;
         background-color: white;
