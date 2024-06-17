@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class AdminBaseController extends Controller
 {
@@ -176,6 +177,7 @@ class AdminBaseController extends Controller
             $validationArr['id'] = 'required|integer|exists:'.$model->getTable().',id';
             if ($imageName) $validationArr['image'] = 'nullable|'.$validationArr['image'];
             $fields = $this->validate($request, $validationArr);
+            $fields = $this->getSlug($fields);
             $seoFields = $this->getSeo($request, $model);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->find($request->input('id'));
@@ -184,6 +186,7 @@ class AdminBaseController extends Controller
         } else {
             if ($imageName) $validationArr['image'] = 'required|'.$validationArr['image'];
             $fields = $this->validate($request, $validationArr);
+            $fields = $this->getSlug($fields);
             $seoFields = $this->getSeo($request, $model);
             $fields = $this->getSpecialFields($model, $validationArr, $fields);
             $model = $model->create($fields);
@@ -285,7 +288,7 @@ class AdminBaseController extends Controller
         }
     }
 
-    protected function showView($view): View
+    protected function showView(string $view): View
     {
         return view('admin.'.$view, array_merge(
             $this->data,
@@ -294,5 +297,11 @@ class AdminBaseController extends Controller
                 'menu' => $this->menu
             ]
         ));
+    }
+
+    private function getSlug(array $fields): array
+    {
+        if (isset($fields['slug']) && $fields['slug']) $fields['slug'] = Str::slug($fields['slug']);
+        return $fields;
     }
 }

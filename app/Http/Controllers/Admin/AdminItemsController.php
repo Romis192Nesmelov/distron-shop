@@ -43,7 +43,6 @@ class AdminItemsController extends AdminBaseController
             'type_id' => 'required|integer|exists:types,id',
         ];
 
-
         if ($request->type_id == 1) {
             $validationArr['capacity'] = 'required|integer|min:1|max:1000';
             $validationArr['voltage'] = 'required|integer|min:10|max:100';
