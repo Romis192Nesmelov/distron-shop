@@ -18,12 +18,13 @@ class ServicesController extends BaseController
         ];
         $this->data['active'] = 'services';
 
-        if (request()->has('id')) {
-            $this->data['item'] = Item::where('id',request()->id)->with(['type','technology'])->first();
+        if ($slug || request()->has('id')) {
+            $this->getItemByIdOrSlug($slug);
             $this->breadcrumbs[] = [
                 'route' => route('services',['id' => $this->data['item']->id]),
                 'name' => getItemHead($this->data['item'])
             ];
+
             $this->getSeo('item');
             return $this->showView('item');
         } else {

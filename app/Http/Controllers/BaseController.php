@@ -5,6 +5,7 @@ use App\Models\Action;
 use App\Models\Contact;
 use App\Models\Content;
 use App\Models\Icon;
+use App\Models\Item;
 use App\Models\Metric;
 use App\Models\Question;
 use App\Models\Seo;
@@ -93,6 +94,17 @@ class BaseController extends Controller
                 'contacts' => Contact::where('id','<',4)->get()
             ])
         );
+    }
+
+    protected function getItemByIdOrSlug($slug): void
+    {
+        $query = Item::query();
+
+        if ($slug) $query = $query->where('slug',$slug);
+        else $query = $query->where('id',request()->id);
+
+        $this->data['item'] = $query->with(['type','technology'])->first();
+        if ($this->data['item']->slug && request()->has('id')) abort(404);
     }
 
     protected function getSeo($name): void

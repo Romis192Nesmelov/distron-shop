@@ -34,14 +34,7 @@ class ItemController extends BaseController
 
             $this->data['filters'] = [];
             if ($item_slug || request()->has('id')) {
-                $query = Item::query();
-
-                if ($item_slug) $query = $query->where('slug',$item_slug);
-                else $query = $query->where('id',request()->id);
-
-                $this->data['item'] = $query->with(['type','technology'])->first();
-                if ($this->data['item']->slug && request()->has('id')) abort(404);
-
+                $this->getItemByIdOrSlug($item_slug);
                 $this->breadcrumbs[] = [
                     'route' => route('items',['slug' => $slug, 'id' => $this->data['item']->id]),
                     'name' => getItemHead($this->data['item'])
