@@ -8,6 +8,7 @@ return [
     'address' => 'Адрес',
     'map' => 'Карта',
     'search' => 'Поиск',
+    'price_form' => 'от <span>:price</span>₽',
     'search_result' => 'Результаты поиска по запросу «:string»',
     'found_nothing' => 'Ничего не найдено!',
     'tagline' => 'Новая жизнь Вашего аккумулятора',
