@@ -65,8 +65,8 @@ return [
     'text' => 'Текст',
     'status' => 'Статус',
     'rutube_video' => 'Видео на RUTUBE',
-
     'last_edit' => 'Последняя редакция',
+
     'edit_icon' => 'Редактирование иконки',
     'icon' => 'Иконка',
     'head_icon' => 'Заголовок иконки',
@@ -77,6 +77,15 @@ return [
     'add_icon' => 'Добавить иконку',
     'adding_icon' => 'Добавление иконки',
     'do_you_really_want_delete_this_icon' => 'Вы действительно хотите удалить эту иконку?',
+
+    'edit_diploma' => 'Редактирование диплома',
+    'diploma' => 'Диплом',
+    'diploma_status' => 'Статус диплома',
+    'diploma_is_active' => 'Диплом активна',
+    'diploma_not_active' => 'Диплом не активна',
+    'add_diploma' => 'Добавить диплом',
+    'adding_diploma' => 'Добавление диплома',
+    'do_you_really_want_delete_this_diploma' => 'Вы действительно хотите удалить этот диплом?',
 
     'image' => 'Картинка',
     'alt_image' => 'Аттрибут Alt картинки',

@@ -17,6 +17,8 @@ return [
     'your_email' => 'Ваш E-mail',
     'your_phone' => 'Ваш телефон',
 
+    'events' => 'Мероприятия',
+
     'advantages' => 'Преимущества',
     'faq' => 'Ответы на вопросы',
 

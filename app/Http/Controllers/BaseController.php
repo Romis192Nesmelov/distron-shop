@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Action;
 use App\Models\Contact;
 use App\Models\Content;
+use App\Models\Diploma;
 use App\Models\Icon;
 use App\Models\Item;
 use App\Models\Metric;
@@ -26,8 +27,9 @@ class BaseController extends Controller
         $this->data['active'] = 'home';
         $this->data['content'] = Content::find(1);
         $this->data['token'] = $token;
-        $this->data['icons'] = Icon::where('active',1)->get();
-        $this->data['faq'] = Question::where('active',1)->get();
+        $this->data['icons'] = Icon::query()->where('active',1)->get();
+        $this->data['diplomas'] = Diploma::query()->where('active',1)->get();
+        $this->data['faq'] = Question::query()->where('active',1)->get();
         return $this->showView('home');
     }
 

@@ -35,6 +35,23 @@
         <hr class="mt-5 mb-5">
         {!! $content->text !!}
     </x-section>
+
+    @if (count($diplomas))
+        <hr class="mt-3 mb-3">
+        <x-section class="mb-5" head="{{ trans('content.events') }}">
+            <div class="row d-flex justify-content-center">
+                @foreach($diplomas as $k => $diploma)
+                    @include('blocks.diploma_block',[
+                        'col' => 2,
+                        'delay' => $k,
+                        'diploma' => $diploma
+                    ])
+                @endforeach
+            </div>
+        </x-section>
+    @endif
+
+    <hr class="mt-3 mb-3">
     <x-section class="mb-5" head="{{ trans('content.faq') }}">
         <x-row>
             @include('blocks.faq_block')

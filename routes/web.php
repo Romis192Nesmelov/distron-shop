@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminBaseController;
 use App\Http\Controllers\Admin\AdminContactsController;
 use App\Http\Controllers\Admin\AdminContentsController;
 //use App\Http\Controllers\Admin\AdminIconsController;
+use App\Http\Controllers\Admin\AdminDiplomasController;
 use App\Http\Controllers\Admin\AdminIconsController;
 use App\Http\Controllers\Admin\AdminImagesController;
 use App\Http\Controllers\Admin\AdminItemsController;
@@ -111,6 +112,12 @@ Route::prefix('admin')->middleware(['admin'])->name('admin.')->group(function ()
         Route::get('/icons/{slug?}', 'icons')->name('icons');
         Route::post('/edit-icon', 'editIcon')->name('edit_icon');
         Route::post('/delete-icon', 'deleteIcon')->name('delete_icon');
+    });
+
+    Route::controller(AdminDiplomasController::class)->group(function () {
+        Route::get('/diplomas/{slug?}', 'diplomas')->name('diplomas');
+        Route::post('/edit-diploma', 'editDiploma')->name('edit_diploma');
+        Route::post('/delete-diploma', 'deleteDiploma')->name('delete_diploma');
     });
 
     Route::controller(AdminContentsController::class)->group(function () {

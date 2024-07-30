@@ -51,6 +51,11 @@ class AdminBaseController extends Controller
                 'icon' => 'icon-stack-picture',
                 'hidden' => false,
             ],
+            'diplomas' => [
+                'key' => 'diplomas',
+                'icon' => 'icon-certificate',
+                'hidden' => false,
+            ],
             'contents' => [
                 'key' => 'contents',
                 'icon' => 'icon-newspaper',

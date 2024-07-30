@@ -430,6 +430,15 @@ li::marker {
     width: 50%;
 }
 
+.diploma {
+
+}
+
+.diploma img {
+    width: 100%;
+    border: 3px solid var(--main-color);
+}
+
 h2.accordion-header {
     margin-bottom: 0;
 }
