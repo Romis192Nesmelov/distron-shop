@@ -2,6 +2,10 @@
 /*    height: 700px !important;*/
 /*}*/
 
+.home-block {
+    height: 318px;
+}
+
 .text-warning-700, .text-danger-800 {
     font-weight: bolder;
 }
