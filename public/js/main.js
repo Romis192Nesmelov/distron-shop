@@ -278,7 +278,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
 
     if (inputVal) {
         input.val(inputVal);
-        price.html(toLocalString(window.price * inputVal));
+        price.html(window.toLocalString(window.price * inputVal));
     } else if (basketTable.find('tr').length) {
         input.parents('tr').remove();
         cirNumber--;
@@ -291,7 +291,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
         total += currentVal * currentPrice;
     });
 
-    if (total) basketTotal.html(toLocalString(total));
+    if (total) basketTotal.html(window.toLocalString(total));
     else {
         basketCir.addClass('d-none').html(0);
         $('#checkout').addClass('d-none');
@@ -299,7 +299,7 @@ const calculateBasket = (input, inputVal, parentContainer) => {
     }
 }
 
-const toLocalString = (string) => {
+window.toLocalString = (string) => {
     return string.toLocaleString().replace(/\,/g, ' ');
 }
 

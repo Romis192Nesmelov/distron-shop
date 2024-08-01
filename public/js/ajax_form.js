@@ -63,7 +63,7 @@ $(document).ready(function ($) {
         basketRow.find('input.basket-value').val(data.value);
         basketRow.find('.basket-price span').html(data.price);
         basketCir.html(basketTable.find('tr').length);
-        basketTotal.html(tolocalstring(data.total));
+        basketTotal.html(window.toLocalString(data.total));
     });
 
     processingForm(basketCheckout, false,true, (data) => {
@@ -72,7 +72,7 @@ $(document).ready(function ($) {
         });
         if (basketTable.find('tr').length) {
             basketCir.html(basketTable.find('tr').length);
-            basketTotal.html(tolocalstring(data.total));
+            basketTotal.html(window.toLocalString(data.total));
         } else {
             noProducts.removeClass('d-none');
             basketCheckout.addClass('d-none');

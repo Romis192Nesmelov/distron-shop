@@ -41,6 +41,7 @@ return [
     'leave_request' => 'Оставить заявку',
     'message_from' => 'Сообщение с сайта ',
     'save_complete' => 'Сохранение произведено!',
+    'save' => 'Сохранить',
     'basket' => 'Корзина',
     'add_to_basket' => 'В корзину!',
     'item_successfully_added_to_basket' => 'Товар успешно добавлен в корзину!',

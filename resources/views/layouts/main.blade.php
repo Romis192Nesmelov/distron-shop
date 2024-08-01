@@ -274,7 +274,7 @@
         ])
         @include('blocks.buttons_pair_block',[
             'submitDisabled' => true,
-            'submitText' => trans('auth.register')
+            'submitText' => trans('content.save')
         ])
     </form>
 </x-modal>
