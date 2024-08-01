@@ -240,8 +240,14 @@ iframe {
     margin-left: 40px;
 }
 
-@media (max-width: 1520px)  {
+@media (max-width: 1515px)  {
     .hidden-small-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 1270px)  {
+    .hidden-small {
         display: none;
     }
 }
