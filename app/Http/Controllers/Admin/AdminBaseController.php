@@ -116,7 +116,8 @@ class AdminBaseController extends Controller
     protected function getSomething(
         Model $model,
         string|null $slug=null,
-        Model|null $parentModel=null
+        Model|null $parentModel=null,
+        string|null $with=null
     ): View
     {
         $key = $model->getTable();
@@ -162,7 +163,7 @@ class AdminBaseController extends Controller
             ];
             return $this->showView($this->data['singular_key']);
         } else {
-            $this->data[$key] = $model->all();
+            $this->data[$key] = $with ? $model->with($with)->get() : $model->all();
             return $this->showView($key);
         }
     }

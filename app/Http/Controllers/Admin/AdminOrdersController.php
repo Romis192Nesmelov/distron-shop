@@ -28,7 +28,7 @@ class AdminOrdersController extends AdminBaseController
         for ($i=0;$i<=3;$i++) {
             $this->data['statuses'][] = ['val' => $i, 'descript' => trans('admin.order_status'.($i + 1))];
         }
-        return $this->getSomething($this->order);
+        return $this->getSomething($this->order,null, null, 'user');
     }
 
     /**
