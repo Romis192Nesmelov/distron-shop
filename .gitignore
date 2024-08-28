@@ -26,3 +26,4 @@ yarn-error.log
 /.idea
 /.vscode
 /public/sitemap.xml
+app/Http/Kernel.php
