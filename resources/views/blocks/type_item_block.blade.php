@@ -4,7 +4,7 @@
             <div class="image mb-4" img="{{ $item->image ? asset($item->image) : asset($item->type->image) }}"></div>
             <div class="fs-5 fw-bold w-100 text-center">{{ getItemHead($item) }}</div>
             <p class="w-100 text-center lh-sm mb-2">{!! getItemProps($item) !!}</p>
-            <!-- <p class="text-center lh-sm"><small>{{ mb_substr(strip_tags($item->description),0,60,'UTF-8').( mb_strlen(strip_tags($item->description), 'UTF-8') > 50 ? '…' : '') }}</small></p> -->
+{{--            <p class="text-center lh-sm"><small>{{ mb_substr(strip_tags($item->description),0,60,'UTF-8').( mb_strlen(strip_tags($item->description), 'UTF-8') > 50 ? '…' : '') }}</small></p> --}}
         </x-item_href>
     </div>
     <div class="text-center">

@@ -43,6 +43,19 @@ class ItemController extends BaseController
                 return $this->showView('item');
             } else {
                 $this->data['items'] = Item::query()
+                    ->select([
+                        'image',
+                        'slug',
+                        'name',
+                        'price',
+                        'type_id',
+                        'capacity',
+                        'voltage',
+                        'length',
+                        'width',
+                        'height',
+                        'rated_current'
+                    ])
                     ->where('type_id',$this->data['type']->id)
                     ->with(['type','technology','seo'])
                     ->filtered()
