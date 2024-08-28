@@ -123,7 +123,7 @@
         <div class="row pt-5 mt-5 text-center">
             <div class="col-md-12">
                 <div class="pt-5">
-                    <p class="small">Copyright ©{{ date('Y') }} Distron Technology</p>
+                    <p class="small">Copyright ©2011-{{ date('Y') }} Distron Technology</p>
                 </div>
             </div>
         </div>
