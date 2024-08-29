@@ -18,7 +18,7 @@ class ArticlesController extends BaseController
         $this->data['active'] = 'articles';
 
         if ($slug) {
-            $this->data['article'] = Article::where('slug',$slug)->first();
+            $this->data['article'] = Article::query()->where('slug',$slug)->first();
             if (!$this->data['article']) abort(404);
 
             $this->breadcrumbs[] = [
@@ -29,7 +29,7 @@ class ArticlesController extends BaseController
 
             return $this->showView('article');
         } else {
-            $this->data['articles'] = Article::select(['image','name','slug','short'])->paginate(8);
+            $this->data['articles'] = Article::query()->select(['image','name','slug','short'])->paginate(8);
             $this->data['seo'] = Seo::find($this->seoIds['articles']);
             return $this->showView('articles');
         }

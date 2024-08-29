@@ -10,6 +10,7 @@ use App\Models\Item;
 use App\Models\Metric;
 use App\Models\Question;
 use App\Models\Seo;
+use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
@@ -25,9 +26,32 @@ class BaseController extends Controller
     {
         $this->data['scroll'] = request('scroll');
         $this->data['active'] = 'home';
-        $this->data['content'] = Content::find(1);
+        $this->data['content'] = Content::query()->whereIn('id',[1,4])->select(['head','text'])->get();
         $this->data['token'] = $token;
         $this->data['icons'] = Icon::query()->where('active',1)->get();
+        $this->data['services_head'] = Type::query()->where('id',4)->pluck('name')->first();
+        $this->data['services'] = Item::query()->whereIn('id',[1,21])->select(['image','slug','name','price'])->get();
+        $this->data['products'] = Type::query()->where('is_service',0)->select(['slug','image','name'])->get();
+        $this->data['items'] = Item::query()
+            ->where('type_id','!=',4)
+            ->select([
+                'image',
+                'slug',
+                'name',
+                'price',
+                'type_id',
+                'capacity',
+                'voltage',
+                'length',
+                'width',
+                'height',
+                'rated_current'
+            ])
+            ->with(['type','technology','seo'])
+            ->orderBy('price')
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
         $this->data['diplomas'] = Diploma::query()->where('active',1)->get();
         $this->data['faq'] = Question::query()->where('active',1)->get();
         return $this->showView('home');

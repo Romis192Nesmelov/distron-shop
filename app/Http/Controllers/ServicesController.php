@@ -28,7 +28,7 @@ class ServicesController extends BaseController
             $this->getSeo('item');
             return $this->showView('item');
         } else {
-            $this->data['services'] = Type::where('is_service',1)->first();
+            $this->data['services'] = Type::query()->where('is_service',1)->with('items')->first();
             return $this->showView('services');
         }
     }

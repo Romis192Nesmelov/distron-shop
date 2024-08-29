@@ -11,7 +11,7 @@ class ContentController extends BaseController
 
     public function __invoke($slug): View
     {
-        $this->data['content'] = Content::where('slug',$slug)->first();
+        $this->data['content'] = Content::query()->where('slug',$slug)->first();
         if (!$this->data['content']) abort(404);
 
         $this->breadcrumbs[] = [

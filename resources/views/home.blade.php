@@ -21,7 +21,7 @@
             </form>
         </x-modal>
     @endif
-    <x-section class="mb-5" head="{{ $content->head }}">
+    <x-section class="mb-5" head="{{ $content[0]->head }}">
         <h2 class="w-100 fs-3 mb-5 text-center wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.advantages') }}</h2>
         <x-row>
             @foreach($icons as $k => $icon)
@@ -32,8 +32,39 @@
                 ])
             @endforeach
         </x-row>
+
         <hr class="mt-5 mb-5">
-        {!! $content->text !!}
+        <h2 class="w-100 fs-3 mb-5 text-center wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ $content[1]->head }}</h2>
+        {!! $content[1]->text !!}
+
+        <hr class="mt-5 mb-5">
+        <h2 class="w-100 fs-3 mb-5 text-center wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ $services_head }}</h2>
+        <x-row class="d-flex justify-content-center">
+            @foreach($services as $k => $item)
+                @include('blocks.type_item_block',[
+                    'href' => 'services',
+                    'col' => 4,
+                    'addClass' => 'ms-lg-3 me-lg-3',
+                    'showDescription' => true
+                ])
+            @endforeach
+        </x-row>
+
+        <hr class="mt-5 mb-5">
+        <h2 class="w-100 fs-3 mb-5 text-center wow animate__animated animate__fadeIn" data-wow-delay=".3s">{{ trans('content.spare_parts_for_warehouse_equipment') }}</h2>
+        @include('blocks.products_block')
+        <hr class="mt-5 mb-5">
+        {!! $content[0]->text !!}
+
+        <hr class="mt-5 mb-5">
+        <div class="items row">
+            @foreach($items as $k => $item)
+                @include('blocks.type_item_block',[
+                    'href' => 'items',
+                    'col' => 3
+                ])
+            @endforeach
+        </div>
     </x-section>
 
     @if (count($diplomas))

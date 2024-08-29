@@ -76,6 +76,8 @@ return [
 
     'actions_archive' => 'Архив акций',
 
+    'spare_parts_for_warehouse_equipment' => 'Запчасти для складской техники',
+
 //    'home_block_head' => 'Возьмите под контроль расходы на АКБ!',
 //    'home_block_sub_head' => 'Регенерация <nobr>ТЯГОВЫХ АКБ</nobr> ЭКОНОМИТ БОЛЕЕ 60% ВАШИХ ДЕНЕГ!',
 
