@@ -72,8 +72,8 @@ class Item extends Model
         $technologyIds = Technology::query()->where('name', 'LIKE', "%{$searched}%")->pluck('id')->toArray();
 
         $query->when($searched, function (Builder $query) use ($searched, $technologyIds) {
-            foreach (['name','description','capacity'] as $name) {
-                $query = $query->where($name, 'LIKE', "%{$searched}%");
+            foreach (['name','description','capacity'] as $k => $name) {
+                $query = !$k ? $query->where($name, 'LIKE', "%{$searched}%") : $query->orWhere($name, 'LIKE', "%{$searched}%");
             }
             $query->orWhereIn('id', $technologyIds);
         });

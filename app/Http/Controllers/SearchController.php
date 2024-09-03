@@ -34,7 +34,7 @@ class SearchController extends BaseController
             $found->push([
                 'image' => $item->image ?: $item->type->image,
                 'head' => $this->markFound(getItemHead($item)),
-                'description' => $this->markFound($item->description),
+                'description' => $item->description ? $this->markFound($item->description) : null,
                 'href' => route('items',['slug' => $item->type->slug, 'id' => $item->id])
             ]);
         }
