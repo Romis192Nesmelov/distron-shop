@@ -31,11 +31,15 @@ class SearchController extends BaseController
 
         $foundItems = Item::query()->searched()->with(['type','technology'])->get();
         foreach ($foundItems as $item) {
+            $href = $item->type->slug ?
+                route('items',['slug' => $item->type->slug, 'item_slug' => $item->slug]) :
+                route('items',['slug' => $item->type->slug, 'id' => $item->id]);
+
             $found->push([
                 'image' => $item->image ?: $item->type->image,
                 'head' => $this->markFound(getItemHead($item)),
                 'description' => $item->description ? $this->markFound($item->description) : null,
-                'href' => route('items',['slug' => $item->type->slug, 'id' => $item->id])
+                'href' => $href
             ]);
         }
 

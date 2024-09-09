@@ -35,7 +35,7 @@
             <input type="hidden" name="id" value="{{ $item->id }}">
             @include('blocks.item_image_block')
             <h1 class="mb-1">{{ getItemHead($item) }}</h1>
-            <p class="text-center">{{ $item->description }}</p>
+            <p class="text-center">{!! $item->description !!}</p>
             @if (getItemProps($item))
                 <p class="text-center">{!! getItemProps($item) !!}</p>
             @endif
